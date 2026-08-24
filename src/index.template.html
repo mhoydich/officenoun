@@ -22,10 +22,11 @@
         <div class="portrait">
           <img
             class="noun"
-            src="/noun.svg"
-            alt="A pixel Noun with a laptop for a head, sitting at a desk."
+            src="/nouns/laptop.svg"
+            alt="An office Noun with a laptop head and pencil pocket, sitting at a desk."
             width="320"
             height="320"
+            data-office-noun
           >
           <div class="desk" aria-hidden="true"></div>
         </div>
@@ -52,6 +53,33 @@
         const startUtc = Date.UTC(start[0], start[1] - 1, start[2]);
         const day = Math.max(1, Math.floor((todayUtc - startUtc) / 86400000) + 1);
         line.textContent = `Day ${day} at the office.`;
+
+        const noun = document.querySelector("[data-office-noun]");
+        const roster = [
+          ["laptop", "a laptop head and pencil pocket"],
+          ["calculator", "a calculator head and black tie"],
+          ["calendar", "a calendar head and office ID"],
+          ["coffee", "a coffee bean head and red tie"],
+          ["phone", "a cordless phone head and black shirt"],
+          ["mailbox", "a mailbox head and purple tie"],
+          ["mouse", "a computer mouse head and black tie"],
+          ["mug", "a coffee mug head and pencil pocket"],
+          ["pencil", "a pencil head and office ID"],
+          ["stapler", "a stapler head and black tie"]
+        ];
+        let previous = -1;
+        try {
+          const saved = localStorage.getItem("office-noun-index");
+          if (saved !== null) previous = Number(saved);
+        } catch {}
+        let next = Math.floor(Math.random() * roster.length);
+        if (next === previous) next = (next + 1 + Math.floor(Math.random() * (roster.length - 1))) % roster.length;
+        const [name, description] = roster[next];
+        noun.src = `/nouns/${name}.svg`;
+        noun.alt = `An office Noun with ${description}, sitting at a desk.`;
+        try {
+          localStorage.setItem("office-noun-index", String(next));
+        } catch {}
       })();
     </script>
   </body>
