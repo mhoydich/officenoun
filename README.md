@@ -19,7 +19,7 @@ npm run build
 npm run serve
 ```
 
-Open <http://localhost:8788>.
+Open <http://localhost:8788>. After building, `index.html` also opens directly in Chrome without a local server; `src/index.template.html` is the unrendered source template.
 
 ## Deploy with Cloudflare Pages + GitHub
 

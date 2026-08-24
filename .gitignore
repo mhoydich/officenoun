@@ -1,4 +1,5 @@
 .DS_Store
 dist/
+index.html
 node_modules/
 .wrangler/

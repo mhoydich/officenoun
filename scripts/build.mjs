@@ -186,16 +186,20 @@ const daybook = entries.length
   : "";
 
 const template = await readFile(path.join(root, "src/index.template.html"), "utf8");
-const html = template
-  .replace("{{START_DATE}}", config.startDate)
-  .replace("{{DAY_NUMBER}}", String(dayNumber(config.startDate, todayInTimeZone(config.timeZone))))
-  .replace("{{REPO_URL}}", escapeHtml(config.repoUrl))
-  .replace("{{X_URL}}", escapeHtml(config.xUrl))
-  .replace("{{DAYBOOK}}", daybook);
+const renderPage = (assetPrefix) =>
+  template
+    .replaceAll("{{ASSET_PREFIX}}", assetPrefix)
+    .replaceAll("{{START_DATE}}", config.startDate)
+    .replaceAll("{{TIME_ZONE}}", config.timeZone)
+    .replaceAll("{{DAY_NUMBER}}", String(dayNumber(config.startDate, todayInTimeZone(config.timeZone))))
+    .replaceAll("{{REPO_URL}}", escapeHtml(config.repoUrl))
+    .replaceAll("{{X_URL}}", escapeHtml(config.xUrl))
+    .replaceAll("{{DAYBOOK}}", daybook);
 
 await rm(distDir, { force: true, recursive: true });
 await mkdir(distDir, { recursive: true });
 await cp(publicDir, distDir, { recursive: true });
-await writeFile(path.join(distDir, "index.html"), html);
+await writeFile(path.join(root, "index.html"), renderPage("./public"));
+await writeFile(path.join(distDir, "index.html"), renderPage("."));
 
-console.log(`Built ${files.length} daybook ${files.length === 1 ? "entry" : "entries"} into dist/index.html`);
+console.log(`Built ${files.length} daybook ${files.length === 1 ? "entry" : "entries"} into index.html and dist/index.html`);
