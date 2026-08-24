@@ -107,33 +107,49 @@ a:focus-visible {
 }
 
 .noun-gallery {
-  padding: clamp(3.5rem, 8vw, 6rem) 1.25rem;
+  padding: 2rem 1.25rem 2.4rem;
   background: var(--paper);
 }
 
 .gallery-inner {
-  width: min(100%, 880px);
+  width: min(100%, 960px);
   margin: 0 auto;
 }
 
 .gallery-title {
-  margin: 0 0 2rem;
-  font-size: clamp(1rem, 2.4vw, 1.2rem);
-  letter-spacing: -0.02em;
-  text-align: center;
+  margin: 0 0 0.8rem;
+  color: var(--muted-ink);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
-  gap: 1rem;
+  display: flex;
+  gap: 0.65rem;
+  padding: 0.65rem 0 0.8rem;
+  overflow-x: auto;
+  border-top: 4px solid var(--ink);
+  border-bottom: 4px solid var(--ink);
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: inline proximity;
+  scrollbar-color: var(--muted-ink) transparent;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gallery-grid:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
 }
 
 .gallery-card {
+  flex: 0 0 clamp(92px, 12vw, 116px);
   margin: 0;
   overflow: hidden;
   background: var(--cool);
   border: 1px solid var(--paper-line);
+  scroll-snap-align: start;
 }
 
 .gallery-card[aria-current="date"] {
@@ -270,10 +286,6 @@ footer {
 
   .portrait {
     width: min(84vw, 360px);
-  }
-
-  .gallery-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
