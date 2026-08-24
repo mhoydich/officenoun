@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#d5d7e1">
+    <meta name="description" content="A Noun keeps a daybook at the office.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Office Noun">
+    <meta property="og:description" content="A Noun keeps a daybook at the office.">
+    <meta property="og:url" content="https://officenoun.xyz/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Office Noun">
+    <meta name="twitter:description" content="A Noun keeps a daybook at the office.">
+    <title>Office Noun</title>
+    <link rel="icon" href="/noun.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main>
+      <header class="office">
+        <div class="portrait">
+          <img
+            class="noun"
+            src="/noun.svg"
+            alt="A pixel Noun with a laptop for a head, sitting at a desk."
+            width="320"
+            height="320"
+          >
+          <div class="desk" aria-hidden="true"></div>
+        </div>
+        <p class="day-count" data-day-count data-start-date="{{START_DATE}}">Day {{DAY_NUMBER}} at the office.</p>
+      </header>
+
+      <section class="daybook" aria-label="Daybook">
+{{ENTRIES}}
+      </section>
+    </main>
+
+    <footer>
+      <a href="{{REPO_URL}}">CC0 — copy the format.</a>
+      <span aria-hidden="true">·</span>
+      <a href="{{X_URL}}">x.com/officenoun</a>
+    </footer>
+
+    <script>
+      (() => {
+        const line = document.querySelector("[data-day-count]");
+        const start = line.dataset.startDate.split("-").map(Number);
+        const now = new Date();
+        const todayUtc = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+        const startUtc = Date.UTC(start[0], start[1] - 1, start[2]);
+        const day = Math.max(1, Math.floor((todayUtc - startUtc) / 86400000) + 1);
+        line.textContent = `Day ${day} at the office.`;
+      })();
+    </script>
+  </body>
+</html>
