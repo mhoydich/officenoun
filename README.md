@@ -6,7 +6,7 @@ A one-page, CC0 daybook for [officenoun.xyz](https://officenoun.xyz). Plain HTML
 
 1. Add `readouts/YYYY-MM-DD.md`.
 2. Write normal Markdown. The filename becomes the date heading.
-3. Commit and push. Cloudflare Pages rebuilds the site automatically.
+3. Commit and push. GitHub Pages rebuilds the site automatically.
 
 Files are sorted newest-first. The daily office characters live in `public/nouns/`; the roster and accessible descriptions are in `src/index.template.html`. Everyone sees the same Noun for a given office day, and the character advances with the day counter. The gallery keeps one card for every office day, newest-first. Change the first office day in `site.config.json`; that date displays as Day 1. The small inline script keeps the character, gallery, and day number current between builds.
 
@@ -21,34 +21,25 @@ npm run serve
 
 Open <http://localhost:8788>. After building, `index.html` also opens directly in Chrome without a local server; `src/index.template.html` is the unrendered source template.
 
-## Deploy with Cloudflare Pages + GitHub
+## Deploy with GitHub Pages
 
-1. Push this repository to GitHub.
-2. In Cloudflare, open **Workers & Pages → Create → Pages → Connect to Git** and select the repository.
-3. Use production branch `main`, build command `npm run build`, and output directory `dist`. No framework preset or environment variables are needed.
-4. Deploy. Future pushes create automatic deployments; other branches get preview deployments.
+The workflow in `.github/workflows/pages.yml` builds `dist/` and deploys it whenever `main` changes. It can also be run manually from the repository's Actions tab.
 
-`wrangler.jsonc` records the Pages project name and build output in source control.
+In **Settings → Pages**, set the publishing source to **GitHub Actions** and set the custom domain to `officenoun.xyz`.
 
-## Point officenoun.xyz at Pages
+## Point officenoun.xyz at GitHub Pages
 
-The apex domain must be an active zone in the same Cloudflare account as the Pages project.
+Keep the domain on Namecheap DNS. Add the custom domain in GitHub before changing DNS, then replace the Namecheap parking record with these records:
 
-1. If the domain is not already on Cloudflare DNS, add it as a zone and replace the registrar nameservers with the two account-specific nameservers Cloudflare assigns.
-2. In the Pages project, open **Custom domains → Set up a domain** and add `officenoun.xyz` before changing DNS.
-3. Cloudflare will create this proxied, flattened apex record:
+| Type | Name | Value |
+| --- | --- | --- |
+| A | `@` | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+| CNAME | `www` | `mhoydich.github.io` |
 
-| Type | Name | Target | Proxy |
-| --- | --- | --- | --- |
-| CNAME | `@` | `officenoun.pages.dev` | Proxied |
-
-For optional `www`, first add `www.officenoun.xyz` under Pages custom domains, then use:
-
-| Type | Name | Target | Proxy |
-| --- | --- | --- | --- |
-| CNAME | `www` | `officenoun.pages.dev` | Proxied |
-
-Do not add an A or AAAA record for the Pages site, and do not create the CNAME without first associating the hostname in Pages.
+Keep the existing MX and SPF records if Namecheap email forwarding is in use. GitHub provisions HTTPS after the DNS records resolve; enable **Enforce HTTPS** in the Pages settings when it becomes available.
 
 ## License
 
