@@ -158,7 +158,6 @@ if (!/^\d{4}-\d{2}-\d{2}$/.test(config.startDate)) throw new Error("site.config.
 const files = (await readdir(readoutsDir))
   .filter((file) => /^\d{4}-\d{2}-\d{2}\.md$/.test(file))
   .sort((a, b) => b.localeCompare(a));
-if (!files.length) throw new Error("Add at least one YYYY-MM-DD.md file to readouts/");
 
 const entries = await Promise.all(
   files.map(async (file) => {
@@ -178,13 +177,21 @@ const entries = await Promise.all(
   })
 );
 
+const daybook = entries.length
+  ? [
+      '      <section class="daybook" aria-label="Daybook">',
+      entries.join("\n\n"),
+      "      </section>"
+    ].join("\n")
+  : "";
+
 const template = await readFile(path.join(root, "src/index.template.html"), "utf8");
 const html = template
   .replace("{{START_DATE}}", config.startDate)
   .replace("{{DAY_NUMBER}}", String(dayNumber(config.startDate, todayInTimeZone(config.timeZone))))
   .replace("{{REPO_URL}}", escapeHtml(config.repoUrl))
   .replace("{{X_URL}}", escapeHtml(config.xUrl))
-  .replace("{{ENTRIES}}", entries.join("\n\n"));
+  .replace("{{DAYBOOK}}", daybook);
 
 await rm(distDir, { force: true, recursive: true });
 await mkdir(distDir, { recursive: true });
