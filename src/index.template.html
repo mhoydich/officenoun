@@ -65,19 +65,9 @@
           ["pencil", "a pencil head and office ID"],
           ["stapler", "a stapler head and black tie"]
         ];
-        let previous = -1;
-        try {
-          const saved = localStorage.getItem("office-noun-index");
-          if (saved !== null) previous = Number(saved);
-        } catch {}
-        let next = Math.floor(Math.random() * roster.length);
-        if (next === previous) next = (next + 1 + Math.floor(Math.random() * (roster.length - 1))) % roster.length;
-        const [name, description] = roster[next];
+        const [name, description] = roster[(day - 1) % roster.length];
         noun.src = `/nouns/${name}.svg`;
         noun.alt = `An office Noun with ${description}, sitting at a desk.`;
-        try {
-          localStorage.setItem("office-noun-index", String(next));
-        } catch {}
       })();
     </script>
   </body>
