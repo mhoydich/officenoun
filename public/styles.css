@@ -106,6 +106,61 @@ a:focus-visible {
   text-align: center;
 }
 
+.noun-gallery {
+  padding: clamp(3.5rem, 8vw, 6rem) 1.25rem;
+  background: var(--paper);
+}
+
+.gallery-inner {
+  width: min(100%, 880px);
+  margin: 0 auto;
+}
+
+.gallery-title {
+  margin: 0 0 2rem;
+  font-size: clamp(1rem, 2.4vw, 1.2rem);
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+  gap: 1rem;
+}
+
+.gallery-card {
+  margin: 0;
+  overflow: hidden;
+  background: var(--cool);
+  border: 1px solid var(--paper-line);
+}
+
+.gallery-card[aria-current="date"] {
+  border-color: var(--ink);
+}
+
+.gallery-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.gallery-card figcaption {
+  padding: 0.65rem 0.75rem;
+  background: var(--paper);
+  border-top: 1px solid var(--paper-line);
+  color: var(--muted-ink);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .daybook {
   min-height: 40svh;
   padding: clamp(4rem, 10vw, 7.5rem) max(1.25rem, calc((100vw - 640px) / 2));
@@ -215,6 +270,10 @@ footer {
 
   .portrait {
     width: min(84vw, 360px);
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

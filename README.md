@@ -8,7 +8,7 @@ A one-page, CC0 daybook for [officenoun.xyz](https://officenoun.xyz). Plain HTML
 2. Write normal Markdown. The filename becomes the date heading.
 3. Commit and push. Cloudflare Pages rebuilds the site automatically.
 
-Files are sorted newest-first. The daily office characters live in `public/nouns/`; the roster and accessible descriptions are in `src/index.template.html`. Everyone sees the same Noun for a given office day, and the character advances with the day counter. Change the first office day in `site.config.json`; that date displays as Day 1. The small inline script keeps both the character and day number current between builds.
+Files are sorted newest-first. The daily office characters live in `public/nouns/`; the roster and accessible descriptions are in `src/index.template.html`. Everyone sees the same Noun for a given office day, and the character advances with the day counter. The gallery keeps one card for every office day, newest-first. Change the first office day in `site.config.json`; that date displays as Day 1. The small inline script keeps the character, gallery, and day number current between builds.
 
 ## Build locally
 

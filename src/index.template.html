@@ -22,8 +22,8 @@
         <div class="portrait">
           <img
             class="noun"
-            src="{{ASSET_PREFIX}}/nouns/stapler.svg"
-            alt="An office Noun with a stapler head and black tie, sitting at a desk."
+            src="{{ASSET_PREFIX}}/nouns/calendar.svg"
+            alt="An office Noun with a calendar head and office ID, sitting at a desk."
             width="320"
             height="320"
             data-office-noun
@@ -32,6 +32,13 @@
         </div>
         <p class="day-count" data-day-count data-start-date="{{START_DATE}}" data-time-zone="{{TIME_ZONE}}">Day {{DAY_NUMBER}} at the office.</p>
       </header>
+
+      <section class="noun-gallery" aria-labelledby="gallery-title">
+        <div class="gallery-inner">
+          <h2 class="gallery-title" id="gallery-title">The office so far.</h2>
+          <div class="gallery-grid" data-noun-gallery></div>
+        </div>
+      </section>
 
 {{DAYBOOK}}
     </main>
@@ -60,9 +67,9 @@
 
         const noun = document.querySelector("[data-office-noun]");
         const roster = [
-          ["stapler", "a stapler head and black tie"],
-          ["calculator", "a calculator head and black tie"],
           ["calendar", "a calendar head and office ID"],
+          ["calculator", "a calculator head and black tie"],
+          ["stapler", "a stapler head and black tie"],
           ["coffee", "a coffee bean head and red tie"],
           ["phone", "a cordless phone head and black shirt"],
           ["mailbox", "a mailbox head and purple tie"],
@@ -74,6 +81,27 @@
         const [name, description] = roster[(day - 1) % roster.length];
         noun.src = `{{ASSET_PREFIX}}/nouns/${name}.svg`;
         noun.alt = `An office Noun with ${description}, sitting at a desk.`;
+
+        const gallery = document.querySelector("[data-noun-gallery]");
+        for (let officeDay = day; officeDay >= 1; officeDay -= 1) {
+          const [galleryName, galleryDescription] = roster[(officeDay - 1) % roster.length];
+          const card = document.createElement("figure");
+          card.className = "gallery-card";
+          if (officeDay === day) card.setAttribute("aria-current", "date");
+
+          const image = document.createElement("img");
+          image.src = `{{ASSET_PREFIX}}/nouns/${galleryName}.svg`;
+          image.alt = `Office Noun for Day ${officeDay}: ${galleryDescription}.`;
+          image.loading = officeDay === day ? "eager" : "lazy";
+          image.width = 192;
+          image.height = 192;
+
+          const caption = document.createElement("figcaption");
+          caption.textContent = `Day ${officeDay}`;
+
+          card.append(image, caption);
+          gallery.append(card);
+        }
       })();
     </script>
   </body>
