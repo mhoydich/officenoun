@@ -211,6 +211,35 @@ const sitemap = [
   ""
 ].join("\n");
 
+// The daily cast. Shared by the build (prerendered Noun + gallery, so crawlers
+// and no-JS readers see real content) and the inline script (keeps it current).
+const roster = [
+  ["calendar", "a calendar head and office ID"],
+  ["calculator", "a calculator head and black tie"],
+  ["stapler", "a stapler head and black tie"],
+  ["coffee", "a coffee bean head and red tie"],
+  ["phone", "a cordless phone head and black shirt"],
+  ["mailbox", "a mailbox head and purple tie"],
+  ["mouse", "a computer mouse head and black tie"],
+  ["mug", "a coffee mug head and pencil pocket"],
+  ["pencil", "a pencil head and office ID"],
+  ["laptop", "a laptop head and pencil pocket"]
+];
+const buildDay = dayNumber(config.startDate, todayInTimeZone(config.timeZone));
+const [nounName, nounDescription] = roster[(buildDay - 1) % roster.length];
+const renderGallery = (assetPrefix) => {
+  const cards = [];
+  for (let officeDay = buildDay; officeDay >= 1; officeDay -= 1) {
+    const [name, description] = roster[(officeDay - 1) % roster.length];
+    cards.push(
+      `            <figure class="gallery-card"${officeDay === buildDay ? ' aria-current="date"' : ""}>` +
+        `<img src="${assetPrefix}/nouns/${name}.svg" alt="Office Noun for Day ${officeDay}: ${escapeHtml(description)}." loading="${officeDay === buildDay ? "eager" : "lazy"}" width="192" height="192">` +
+        `<figcaption>Day ${officeDay}</figcaption></figure>`
+    );
+  }
+  return cards.join("\n");
+};
+
 const template = await readFile(path.join(root, "src/index.template.html"), "utf8");
 const renderPage = (assetPrefix) =>
   template
@@ -219,7 +248,11 @@ const renderPage = (assetPrefix) =>
     .replaceAll("{{JSON_LD}}", jsonLd)
     .replaceAll("{{START_DATE}}", config.startDate)
     .replaceAll("{{TIME_ZONE}}", config.timeZone)
-    .replaceAll("{{DAY_NUMBER}}", String(dayNumber(config.startDate, todayInTimeZone(config.timeZone))))
+    .replaceAll("{{DAY_NUMBER}}", String(buildDay))
+    .replaceAll("{{NOUN_NAME}}", nounName)
+    .replaceAll("{{NOUN_DESCRIPTION}}", escapeHtml(nounDescription))
+    .replaceAll("{{ROSTER_JSON}}", JSON.stringify(roster).replaceAll("<", "\\u003c"))
+    .replaceAll("{{GALLERY}}", renderGallery(assetPrefix))
     .replaceAll("{{REPO_URL}}", escapeHtml(config.repoUrl))
     .replaceAll("{{X_URL}}", escapeHtml(config.xUrl))
     .replaceAll("{{DAYBOOK}}", daybook);
