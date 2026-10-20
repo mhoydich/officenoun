@@ -185,10 +185,38 @@ const daybook = entries.length
     ].join("\n")
   : "";
 
+const siteUrl = String(config.siteUrl ?? "").replace(/\/+$/, "");
+if (!/^https:\/\/[^/\s]+$/.test(siteUrl)) throw new Error("site.config.json siteUrl must be an https origin");
+
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteUrl}/#website`,
+  name: "Office Noun",
+  url: `${siteUrl}/`,
+  description: "A Noun keeps a daybook at the office.",
+  inLanguage: "en",
+  license: "https://creativecommons.org/publicdomain/zero/1.0/",
+  sameAs: [config.xUrl, config.repoUrl]
+}).replaceAll("<", "\\u003c");
+
+const sitemap = [
+  '<?xml version="1.0" encoding="UTF-8"?>',
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+  "  <url>",
+  `    <loc>${escapeHtml(siteUrl)}/</loc>`,
+  ...(files.length ? [`    <lastmod>${files[0].slice(0, 10)}</lastmod>`] : []),
+  "  </url>",
+  "</urlset>",
+  ""
+].join("\n");
+
 const template = await readFile(path.join(root, "src/index.template.html"), "utf8");
 const renderPage = (assetPrefix) =>
   template
     .replaceAll("{{ASSET_PREFIX}}", assetPrefix)
+    .replaceAll("{{SITE_URL}}", escapeHtml(siteUrl))
+    .replaceAll("{{JSON_LD}}", jsonLd)
     .replaceAll("{{START_DATE}}", config.startDate)
     .replaceAll("{{TIME_ZONE}}", config.timeZone)
     .replaceAll("{{DAY_NUMBER}}", String(dayNumber(config.startDate, todayInTimeZone(config.timeZone))))
@@ -199,6 +227,7 @@ const renderPage = (assetPrefix) =>
 await rm(distDir, { force: true, recursive: true });
 await mkdir(distDir, { recursive: true });
 await cp(publicDir, distDir, { recursive: true });
+await writeFile(path.join(distDir, "sitemap.xml"), sitemap);
 await writeFile(path.join(root, "index.html"), renderPage("./public"));
 await writeFile(path.join(distDir, "index.html"), renderPage("."));
 
