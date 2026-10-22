@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#d5d7e1">
     <meta name="description" content="A Noun keeps a daybook at the office.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="{{SITE_URL}}/">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Office Noun">
+    <meta property="og:locale" content="en_US">
     <meta property="og:title" content="Office Noun">
     <meta property="og:description" content="A Noun keeps a daybook at the office.">
-    <meta property="og:url" content="https://officenoun.xyz/">
+    <meta property="og:url" content="{{SITE_URL}}/">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Office Noun">
     <meta name="twitter:description" content="A Noun keeps a daybook at the office.">
+    <link rel="alternate" type="text/plain" href="{{SITE_URL}}/llms.txt" title="Office Noun LLM summary">
+    <script type="application/ld+json">{{JSON_LD}}</script>
     <title>Office Noun</title>
     <link rel="icon" href="{{ASSET_PREFIX}}/noun.svg" type="image/svg+xml">
     <link rel="stylesheet" href="{{ASSET_PREFIX}}/styles.css">
@@ -19,11 +25,12 @@
   <body>
     <main>
       <header class="office">
+        <h1 class="sr-only">Office Noun</h1>
         <div class="portrait">
           <img
             class="noun"
-            src="{{ASSET_PREFIX}}/nouns/calendar.svg"
-            alt="An office Noun with a calendar head and office ID, sitting at a desk."
+            src="{{ASSET_PREFIX}}/nouns/{{NOUN_NAME}}.svg"
+            alt="An office Noun with {{NOUN_DESCRIPTION}}, sitting at a desk."
             width="320"
             height="320"
             data-office-noun
@@ -36,7 +43,9 @@
       <section class="noun-gallery" aria-labelledby="gallery-title">
         <div class="gallery-inner">
           <h2 class="gallery-title" id="gallery-title">The office so far.</h2>
-          <div class="gallery-grid" data-noun-gallery aria-label="Daily Office Noun filmstrip" tabindex="0"></div>
+          <div class="gallery-grid" data-noun-gallery aria-label="Daily Office Noun filmstrip" tabindex="0">
+{{GALLERY}}
+          </div>
         </div>
       </section>
 
@@ -47,6 +56,8 @@
       <a href="{{REPO_URL}}">CC0 — copy the format.</a>
       <span aria-hidden="true">·</span>
       <a href="{{X_URL}}">x.com/officenoun</a>
+      <span aria-hidden="true">·</span>
+      <span class="sister-sites">Also by Mike Hoydich: <a href="https://pointcast.xyz/" rel="me">PointCast</a>, <a href="https://www.industrynext.xyz/" rel="me">Industry Next</a></span>
     </footer>
 
     <script>
@@ -66,23 +77,13 @@
         line.textContent = `Day ${day} at the office.`;
 
         const noun = document.querySelector("[data-office-noun]");
-        const roster = [
-          ["calendar", "a calendar head and office ID"],
-          ["calculator", "a calculator head and black tie"],
-          ["stapler", "a stapler head and black tie"],
-          ["coffee", "a coffee bean head and red tie"],
-          ["phone", "a cordless phone head and black shirt"],
-          ["mailbox", "a mailbox head and purple tie"],
-          ["mouse", "a computer mouse head and black tie"],
-          ["mug", "a coffee mug head and pencil pocket"],
-          ["pencil", "a pencil head and office ID"],
-          ["laptop", "a laptop head and pencil pocket"]
-        ];
+        const roster = {{ROSTER_JSON}};
         const [name, description] = roster[(day - 1) % roster.length];
         noun.src = `{{ASSET_PREFIX}}/nouns/${name}.svg`;
         noun.alt = `An office Noun with ${description}, sitting at a desk.`;
 
         const gallery = document.querySelector("[data-noun-gallery]");
+        gallery.replaceChildren(); // the build prerenders the gallery; rebuild it for the visitor's own day
         for (let officeDay = day; officeDay >= 1; officeDay -= 1) {
           const [galleryName, galleryDescription] = roster[(officeDay - 1) % roster.length];
           const card = document.createElement("figure");

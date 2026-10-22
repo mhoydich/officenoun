@@ -185,13 +185,74 @@ const daybook = entries.length
     ].join("\n")
   : "";
 
+const siteUrl = String(config.siteUrl ?? "").replace(/\/+$/, "");
+if (!/^https:\/\/[^/\s]+$/.test(siteUrl)) throw new Error("site.config.json siteUrl must be an https origin");
+
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteUrl}/#website`,
+  name: "Office Noun",
+  url: `${siteUrl}/`,
+  description: "A Noun keeps a daybook at the office.",
+  inLanguage: "en",
+  license: "https://creativecommons.org/publicdomain/zero/1.0/",
+  sameAs: [config.xUrl, config.repoUrl]
+}).replaceAll("<", "\\u003c");
+
+const sitemap = [
+  '<?xml version="1.0" encoding="UTF-8"?>',
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+  "  <url>",
+  `    <loc>${escapeHtml(siteUrl)}/</loc>`,
+  ...(files.length ? [`    <lastmod>${files[0].slice(0, 10)}</lastmod>`] : []),
+  "  </url>",
+  "</urlset>",
+  ""
+].join("\n");
+
+// The daily cast. Shared by the build (prerendered Noun + gallery, so crawlers
+// and no-JS readers see real content) and the inline script (keeps it current).
+const roster = [
+  ["calendar", "a calendar head and office ID"],
+  ["calculator", "a calculator head and black tie"],
+  ["stapler", "a stapler head and black tie"],
+  ["coffee", "a coffee bean head and red tie"],
+  ["phone", "a cordless phone head and black shirt"],
+  ["mailbox", "a mailbox head and purple tie"],
+  ["mouse", "a computer mouse head and black tie"],
+  ["mug", "a coffee mug head and pencil pocket"],
+  ["pencil", "a pencil head and office ID"],
+  ["laptop", "a laptop head and pencil pocket"]
+];
+const buildDay = dayNumber(config.startDate, todayInTimeZone(config.timeZone));
+const [nounName, nounDescription] = roster[(buildDay - 1) % roster.length];
+const renderGallery = (assetPrefix) => {
+  const cards = [];
+  for (let officeDay = buildDay; officeDay >= 1; officeDay -= 1) {
+    const [name, description] = roster[(officeDay - 1) % roster.length];
+    cards.push(
+      `            <figure class="gallery-card"${officeDay === buildDay ? ' aria-current="date"' : ""}>` +
+        `<img src="${assetPrefix}/nouns/${name}.svg" alt="Office Noun for Day ${officeDay}: ${escapeHtml(description)}." loading="${officeDay === buildDay ? "eager" : "lazy"}" width="192" height="192">` +
+        `<figcaption>Day ${officeDay}</figcaption></figure>`
+    );
+  }
+  return cards.join("\n");
+};
+
 const template = await readFile(path.join(root, "src/index.template.html"), "utf8");
 const renderPage = (assetPrefix) =>
   template
     .replaceAll("{{ASSET_PREFIX}}", assetPrefix)
+    .replaceAll("{{SITE_URL}}", escapeHtml(siteUrl))
+    .replaceAll("{{JSON_LD}}", jsonLd)
     .replaceAll("{{START_DATE}}", config.startDate)
     .replaceAll("{{TIME_ZONE}}", config.timeZone)
-    .replaceAll("{{DAY_NUMBER}}", String(dayNumber(config.startDate, todayInTimeZone(config.timeZone))))
+    .replaceAll("{{DAY_NUMBER}}", String(buildDay))
+    .replaceAll("{{NOUN_NAME}}", nounName)
+    .replaceAll("{{NOUN_DESCRIPTION}}", escapeHtml(nounDescription))
+    .replaceAll("{{ROSTER_JSON}}", JSON.stringify(roster).replaceAll("<", "\\u003c"))
+    .replaceAll("{{GALLERY}}", renderGallery(assetPrefix))
     .replaceAll("{{REPO_URL}}", escapeHtml(config.repoUrl))
     .replaceAll("{{X_URL}}", escapeHtml(config.xUrl))
     .replaceAll("{{DAYBOOK}}", daybook);
@@ -199,6 +260,7 @@ const renderPage = (assetPrefix) =>
 await rm(distDir, { force: true, recursive: true });
 await mkdir(distDir, { recursive: true });
 await cp(publicDir, distDir, { recursive: true });
+await writeFile(path.join(distDir, "sitemap.xml"), sitemap);
 await writeFile(path.join(root, "index.html"), renderPage("./public"));
 await writeFile(path.join(distDir, "index.html"), renderPage("."));
 

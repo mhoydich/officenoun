@@ -1,0 +1,8 @@
+# Office Noun
+
+> A one-page, CC0 daybook at https://officenoun.xyz. A Noun keeps a daybook at the office: plain HTML and CSS generated from dated Markdown files.
+
+- [Office Noun](https://officenoun.xyz/): the daybook, newest entry first, plus a gallery of the daily office Noun characters (one per office day, shared by everyone for that day).
+- [Source and license](https://github.com/mhoydich/officenoun): CC0. Copy the format. Readouts are Markdown files named `readouts/YYYY-MM-DD.md`.
+- [X](https://x.com/officenoun): Office Noun on X.
+- [Sitemap](https://officenoun.xyz/sitemap.xml)
