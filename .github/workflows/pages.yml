@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  schedule:
+    # Just after midnight Pacific, so the static day, card and today.svg roll over.
+    - cron: "10 8 * * *"
   workflow_dispatch:
 
 permissions:
@@ -29,6 +32,10 @@ jobs:
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
+
+      - name: Refresh the wallet snapshot
+        run: npm run snapshot
+        continue-on-error: true
 
       - name: Build the site
         run: npm run build

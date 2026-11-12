@@ -1,0 +1,253 @@
+/* tezos desk kit. CC0. everything is scoped under .tezos-desk.
+   themable: --td-ink --td-muted --td-paper --td-line --td-accent --td-font */
+.tezos-desk {
+  --_ink: var(--td-ink, #17171b);
+  --_muted: var(--td-muted, #575965);
+  --_paper: var(--td-paper, #f7f3e9);
+  --_line: var(--td-line, rgba(23, 23, 27, 0.16));
+  --_accent: var(--td-accent, #e9265c);
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+  color: var(--_ink);
+  background: var(--_paper);
+  font-family: var(--td-font, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.tezos-desk *,
+.tezos-desk *::before,
+.tezos-desk *::after {
+  box-sizing: border-box;
+}
+
+.tezos-desk .td-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.tezos-desk .td-address-line {
+  margin: 0.1rem 0 1rem;
+  color: var(--_muted);
+  font-size: 0.8rem;
+}
+
+.tezos-desk a {
+  color: inherit;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+
+.tezos-desk a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.tezos-desk a:focus-visible {
+  outline: 3px solid var(--_ink);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px var(--_paper);
+}
+
+.tezos-desk .td-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+  padding: 0.6rem 0;
+  border-top: 2px solid var(--_ink);
+  border-bottom: 1px solid var(--_line);
+}
+
+.tezos-desk .td-stat {
+  display: flex;
+  flex-direction: column-reverse;
+  min-width: 0;
+}
+
+.tezos-desk .td-stat-value {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.tezos-desk .td-stat-label {
+  color: var(--_muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.tezos-desk .td-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tezos-desk .td-item {
+  min-width: 0;
+  margin: 0;
+}
+
+.tezos-desk .td-card {
+  display: block;
+  height: 100%;
+  min-width: 0;
+  padding: 0.3rem;
+  color: inherit;
+  background: var(--_paper);
+  border: 1px solid var(--_line);
+  text-decoration: none;
+}
+
+.tezos-desk a.td-card:hover {
+  border-color: var(--_ink);
+}
+
+.tezos-desk .td-frame {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--_line);
+}
+
+.tezos-desk .td-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tezos-desk .td-name,
+.tezos-desk .td-meta {
+  display: block;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.tezos-desk .td-name {
+  margin-top: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.tezos-desk .td-meta {
+  margin-top: 0.1rem;
+  color: var(--_muted);
+  font-size: 0.68rem;
+  line-height: 1.3;
+}
+
+.tezos-desk .td-status {
+  margin: 0.9rem 0 0;
+  color: var(--_muted);
+  font-size: 0.78rem;
+}
+
+@media (min-width: 640px) {
+  .tezos-desk .td-stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .tezos-desk .td-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .tezos-desk .td-name {
+    font-size: 0.8rem;
+  }
+
+  .tezos-desk .td-meta {
+    font-size: 0.72rem;
+  }
+}
+
+/* the door: connect a wallet and sign in. scoped under .tezos-door, same custom properties. */
+.tezos-door {
+  --_ink: var(--td-ink, #17171b);
+  --_muted: var(--td-muted, #575965);
+  --_paper: var(--td-paper, #f7f3e9);
+  --_line: var(--td-line, rgba(23, 23, 27, 0.16));
+  --_accent: var(--td-accent, #e9265c);
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+  color: var(--_ink);
+  background: var(--_paper);
+  font-family: var(--td-font, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.tezos-door *,
+.tezos-door *::before,
+.tezos-door *::after {
+  box-sizing: border-box;
+}
+
+/* every state reserves the same rows, so nothing moves when the state changes. */
+.tezos-door .td-door-status {
+  min-height: 3em;
+  margin: 0 0 0.5rem;
+  overflow-wrap: anywhere;
+}
+
+.tezos-door .td-door-address {
+  font-weight: 700;
+}
+
+.tezos-door .td-door-actions {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  min-height: 44px;
+}
+
+.tezos-door .td-door-button {
+  flex: 0 1 auto;
+  min-width: 44px;
+  min-height: 44px;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  color: var(--_paper);
+  background: var(--_ink);
+  border: 2px solid var(--_ink);
+  border-radius: 0;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.tezos-door .td-door-button.td-door-quiet {
+  color: var(--_ink);
+  background: transparent;
+}
+
+.tezos-door .td-door-button:hover {
+  background: var(--_muted);
+  border-color: var(--_muted);
+  color: var(--_paper);
+}
+
+.tezos-door .td-door-button:focus-visible {
+  outline: 3px solid var(--_ink);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px var(--_paper);
+}
+
+.tezos-door .td-door-note {
+  margin: 0.75rem 0 0;
+  color: var(--_muted);
+  font-size: 0.78rem;
+}

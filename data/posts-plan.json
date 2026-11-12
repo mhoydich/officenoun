@@ -1,0 +1,42 @@
+[
+  {
+    "time": "05:50",
+    "text": "day 81. calendar head. black noggles.",
+    "kind": "daily noun"
+  },
+  {
+    "time": "07:30",
+    "text": "roll call. ten heads.",
+    "kind": "roll call"
+  },
+  {
+    "time": "08:45",
+    "text": "full staff.",
+    "kind": "scene"
+  },
+  {
+    "time": "09:10",
+    "text": "gm. giveaway no. 2.",
+    "kind": "giveaway (from the collector)"
+  },
+  {
+    "time": "10:30",
+    "text": "the desk before anyone got in.",
+    "kind": "generated"
+  },
+  {
+    "time": "12:00",
+    "text": "afternoon. everyone is busy.",
+    "kind": "motion"
+  },
+  {
+    "time": "14:00",
+    "text": "all present.",
+    "kind": "scene"
+  },
+  {
+    "time": "15:30",
+    "text": "cleared.",
+    "kind": "sign-off"
+  }
+]
