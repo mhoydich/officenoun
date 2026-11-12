@@ -190,3 +190,24 @@
     justify-self: start;
   }
 }
+
+/* desk and charter pages */
+.office-dao .desk-facts {
+  margin: 0 0 1rem;
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr);
+  gap: 0.2rem 0.75rem;
+}
+
+.office-dao .desk-facts dt {
+  color: var(--od-muted);
+}
+
+.office-dao .desk-facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.office-dao .charter-desks li {
+  margin: 0 0 0.4rem;
+}
