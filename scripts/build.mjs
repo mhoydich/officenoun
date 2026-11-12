@@ -2,6 +2,7 @@ import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { createCanvas, svgToGrid } from "./png.mjs";
+import { renderCharterPage, renderDeskPage } from "./desk-pages.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const readoutsDir = path.join(root, "readouts");
@@ -435,6 +436,13 @@ await writeFile(
     .replaceAll("{{MINT_REQUESTS}}", () => mintHtml)
     .replaceAll("{{NAV_EXTRA}}", navExtra)
 );
+
+// ---- /desk/ and /charter/: rendered from config.desk and config.charter by scripts/desk-pages.mjs ----
+for (const [name, render, block] of [["desk", renderDeskPage, config.desk], ["charter", renderCharterPage, config.charter]]) {
+  const pageTemplate = await readFile(path.join(root, `src/${name}.template.html`), "utf8");
+  await mkdir(path.join(publicDir, name), { recursive: true });
+  await writeFile(path.join(publicDir, `${name}/index.html`), render(pageTemplate, block ?? {}, navExtra));
+}
 
 if (dashboardTemplate !== null) {
   await mkdir(path.join(publicDir, "dashboard"), { recursive: true });
