@@ -7,36 +7,53 @@
     <meta name="description" content="A Noun keeps a daybook at the office.">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Office Noun">
-    <meta property="og:description" content="A Noun keeps a daybook at the office.">
-    <meta property="og:url" content="https://officenoun.xyz/">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:description" content="Day {{DAY_NUMBER}} at the office.">
+    <meta property="og:url" content="{{SITE_URL}}/">
+    <meta property="og:image" content="{{SITE_URL}}/card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="{{HERO_ALT}}">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Office Noun">
-    <meta name="twitter:description" content="A Noun keeps a daybook at the office.">
+    <meta name="twitter:description" content="Day {{DAY_NUMBER}} at the office.">
+    <meta name="twitter:image" content="{{SITE_URL}}/card.png">
     <title>Office Noun</title>
     <link rel="icon" href="{{ASSET_PREFIX}}/noun.svg" type="image/svg+xml">
     <link rel="stylesheet" href="{{ASSET_PREFIX}}/styles.css">
+    <link rel="stylesheet" href="{{ASSET_PREFIX}}/kit/tezos-desk.css">
   </head>
   <body>
     <main>
       <header class="office">
+        <h1 class="office-title">another day at the office</h1>
         <div class="portrait">
           <img
             class="noun"
-            src="{{ASSET_PREFIX}}/nouns/calendar.svg"
-            alt="An office Noun with a calendar head and office ID, sitting at a desk."
+            src="{{ASSET_PREFIX}}/today.svg"
+            alt="{{HERO_ALT}}"
             width="320"
             height="320"
             data-office-noun
           >
           <div class="desk" aria-hidden="true"></div>
         </div>
-        <p class="day-count" data-day-count data-start-date="{{START_DATE}}" data-time-zone="{{TIME_ZONE}}">Day {{DAY_NUMBER}} at the office.</p>
+        <p class="day-count" data-day-count data-build-day="{{DAY_NUMBER}}" data-start-date="{{START_DATE}}" data-time-zone="{{TIME_ZONE}}">Day {{DAY_NUMBER}} at the office.</p>
+        <p class="trait-line" data-trait-line>{{TRAIT_LINE}}</p>
       </header>
 
       <section class="noun-gallery" aria-labelledby="gallery-title">
         <div class="gallery-inner">
           <h2 class="gallery-title" id="gallery-title">The office so far.</h2>
-          <div class="gallery-grid" data-noun-gallery aria-label="Daily Office Noun filmstrip" tabindex="0"></div>
+          <div class="gallery-grid" data-noun-gallery data-entries="{{ENTRY_DATES}}" aria-label="Daily Office Noun filmstrip" tabindex="0"></div>
+        </div>
+      </section>
+
+      <section class="wallet" aria-labelledby="wallet-title">
+        <div class="wallet-inner">
+          <h2 class="gallery-title" id="wallet-title">the wallet.</h2>
+          <div data-tezos-desk data-wallet="{{WALLET}}" data-title="the collector" data-limit="12" data-snapshot="desk-snapshot"></div>
+          <script type="application/json" id="desk-snapshot">{{SNAPSHOT}}</script>
+          <p class="wallet-lots">{{LOTS_LINE}}</p>
         </div>
       </section>
 
@@ -47,51 +64,54 @@
       <a href="{{REPO_URL}}">CC0 — copy the format.</a>
       <span aria-hidden="true">·</span>
       <a href="{{X_URL}}">x.com/officenoun</a>
+      <span aria-hidden="true">·</span>
+      <a href="{{KIT_HREF}}">tezos desk kit</a>
+      <span aria-hidden="true">·</span>
+      <a href="{{TODAY_HREF}}">today</a>
+      <span aria-hidden="true">·</span>
+      <a href="{{ORG_HREF}}">org chart</a>
+      <span aria-hidden="true">·</span>
+      <a href="{{DAO_HREF}}">the office dao</a>{{DASHBOARD_LINK}}
     </footer>
 
+    <script src="{{ASSET_PREFIX}}/office-traits.js"></script>
+    <script src="{{ASSET_PREFIX}}/office-noun.js"></script>
+    <script src="{{ASSET_PREFIX}}/kit/tezos-desk.js"></script>
     <script>
       (() => {
+        const prefix = "{{ASSET_PREFIX}}";
         const line = document.querySelector("[data-day-count]");
-        const start = line.dataset.startDate.split("-").map(Number);
-        const parts = new Intl.DateTimeFormat("en-CA", {
-          day: "2-digit",
-          month: "2-digit",
-          timeZone: line.dataset.timeZone,
-          year: "numeric"
-        }).formatToParts(new Date());
-        const part = (type) => Number(parts.find((item) => item.type === type).value);
-        const todayUtc = Date.UTC(part("year"), part("month") - 1, part("day"));
-        const startUtc = Date.UTC(start[0], start[1] - 1, start[2]);
-        const day = Math.max(1, Math.floor((todayUtc - startUtc) / 86400000) + 1);
-        line.textContent = `Day ${day} at the office.`;
-
-        const noun = document.querySelector("[data-office-noun]");
-        const roster = [
-          ["calendar", "a calendar head and office ID"],
-          ["calculator", "a calculator head and black tie"],
-          ["stapler", "a stapler head and black tie"],
-          ["coffee", "a coffee bean head and red tie"],
-          ["phone", "a cordless phone head and black shirt"],
-          ["mailbox", "a mailbox head and purple tie"],
-          ["mouse", "a computer mouse head and black tie"],
-          ["mug", "a coffee mug head and pencil pocket"],
-          ["pencil", "a pencil head and office ID"],
-          ["laptop", "a laptop head and pencil pocket"]
-        ];
-        const [name, description] = roster[(day - 1) % roster.length];
-        noun.src = `{{ASSET_PREFIX}}/nouns/${name}.svg`;
-        noun.alt = `An office Noun with ${description}, sitting at a desk.`;
-
+        const hero = document.querySelector("[data-office-noun]");
         const gallery = document.querySelector("[data-noun-gallery]");
+        const entries = new Set(JSON.parse(gallery.dataset.entries));
+        const start = line.dataset.startDate.split("-").map(Number);
+
+        const day = OfficeNoun.dayNumber(line.dataset.startDate, line.dataset.timeZone);
+        const today = OfficeNoun.forDay(day);
+        line.textContent = `Day ${day} at the office.`;
+        document.querySelector("[data-trait-line]").textContent = today.traitLine;
+        hero.alt = `An office Noun with ${today.description}, sitting at a desk.`;
+        // The build already put today's Noun in the page; only swap it if the day has rolled over since.
+        if (day !== Number(line.dataset.buildDay)) hero.src = OfficeNoun.src(today, prefix);
+
+        // Generated Nouns are data URIs, so build them only as cards scroll into view.
+        const observer = "IntersectionObserver" in window
+          ? new IntersectionObserver((seen) => seen.forEach((item) => {
+              if (!item.isIntersecting) return;
+              item.target.src = OfficeNoun.src(OfficeNoun.forDay(Number(item.target.dataset.day)), prefix);
+              observer.unobserve(item.target);
+            }), { root: gallery, rootMargin: "0px 400px" })
+          : null;
+
         for (let officeDay = day; officeDay >= 1; officeDay -= 1) {
-          const [galleryName, galleryDescription] = roster[(officeDay - 1) % roster.length];
+          const noun = OfficeNoun.forDay(officeDay);
+          const date = new Date(Date.UTC(start[0], start[1] - 1, start[2] + officeDay - 1)).toISOString().slice(0, 10);
           const card = document.createElement("figure");
           card.className = "gallery-card";
           if (officeDay === day) card.setAttribute("aria-current", "date");
 
           const image = document.createElement("img");
-          image.src = `{{ASSET_PREFIX}}/nouns/${galleryName}.svg`;
-          image.alt = `Office Noun for Day ${officeDay}: ${galleryDescription}.`;
+          image.alt = `Office Noun for Day ${officeDay}: ${noun.description}.`;
           image.loading = officeDay === day ? "eager" : "lazy";
           image.width = 192;
           image.height = 192;
@@ -99,8 +119,26 @@
           const caption = document.createElement("figcaption");
           caption.textContent = `Day ${officeDay}`;
 
-          card.append(image, caption);
+          let frame = card;
+          if (entries.has(date)) {
+            frame = document.createElement("a");
+            frame.href = `#d-${date}`;
+            const dot = document.createElement("span");
+            dot.className = "entry-dot";
+            dot.setAttribute("aria-hidden", "true");
+            const label = document.createElement("span");
+            label.className = "visually-hidden";
+            label.textContent = " has a daybook entry";
+            caption.append(" ", dot, label);
+            card.append(frame);
+          }
+          frame.append(image, caption);
+
+          const deferred = observer && !noun.canon && officeDay !== day;
+          if (deferred) image.dataset.day = officeDay;
+          else image.src = OfficeNoun.src(noun, prefix);
           gallery.append(card);
+          if (deferred) observer.observe(image);
         }
       })();
     </script>

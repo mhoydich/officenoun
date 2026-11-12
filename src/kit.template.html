@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#d5d7e1">
+    <meta name="description" content="A small CC0 widget that shows a Tezos wallet's latest mints.">
+    <title>tezos desk kit</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="tezos desk kit">
+<meta property="og:description" content="a small tezos kit any site can paste in.">
+<meta property="og:url" content="https://officenoun.xyz/kit/">
+<meta property="og:image" content="https://officenoun.xyz/card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://officenoun.xyz/card.png">
+    <link rel="icon" href="../noun.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="tezos-desk.css">
+  </head>
+  <body>
+    <main class="kit-page">
+      <h1>tezos desk kit</h1>
+      <p>one script and one stylesheet. point it at a tezos address and it shows the balance, the counts, and the latest mints, each linked to its objkt page. no dependencies, no build step. it renders a snapshot first if you give it one, then asks the chain.</p>
+
+      <h2>install</h2>
+<pre><code>&lt;link rel="stylesheet" href="https://officenoun.xyz/kit/tezos-desk.css"&gt;
+&lt;script src="https://officenoun.xyz/kit/tezos-desk.js"&gt;&lt;/script&gt;
+&lt;div data-tezos-desk data-wallet="{{WALLET}}"&gt;&lt;/div&gt;</code></pre>
+
+      <h2>options</h2>
+      <ul>
+        <li><code>data-wallet</code> required. a tz1 to tz4 address.</li>
+        <li><code>data-title</code> heading. default "the wallet".</li>
+        <li><code>data-limit</code> how many mints to show. default 12, from 1 to 48.</li>
+        <li><code>data-snapshot</code> id of a <code>&lt;script type="application/json"&gt;</code> holding a fallback snapshot.</li>
+        <li><code>data-api</code> indexer base url. default https://api.tzkt.io.</li>
+        <li><code>data-images</code> set to "ipfs" to show only ipfs images. other cards get the placeholder.</li>
+      </ul>
+
+      <h2>theming</h2>
+      <p>set these on the element or any parent. all are optional.</p>
+      <ul>
+        <li><code>--td-ink</code> text and rules.</li>
+        <li><code>--td-muted</code> labels and small print.</li>
+        <li><code>--td-paper</code> card background.</li>
+        <li><code>--td-line</code> borders and empty image boxes.</li>
+        <li><code>--td-accent</code> accent colour. the focus ring uses the ink colour.</li>
+        <li><code>--td-font</code> font stack.</li>
+      </ul>
+
+      <h2>demo</h2>
+      <div class="kit-demo">
+        <div data-tezos-desk data-wallet="{{WALLET}}" data-title="the collector" data-limit="6" data-snapshot="desk-snapshot"></div>
+        <script type="application/json" id="desk-snapshot">{{SNAPSHOT}}</script>
+      </div>
+
+      <h2>the door</h2>
+      <p>a second script. connect a tezos wallet and sign in with a plain text message. connecting shares the address. signing in moves nothing.</p>
+      <div class="kit-demo">
+        <div data-tezos-door data-app="office noun"></div>
+      </div>
+
+      <h3>install the door</h3>
+<pre><code>&lt;link rel="stylesheet" href="https://officenoun.xyz/kit/tezos-desk.css"&gt;
+&lt;script src="https://officenoun.xyz/kit/tezos-door.js"&gt;&lt;/script&gt;
+&lt;div data-tezos-door&gt;&lt;/div&gt;</code></pre>
+      <p>the wallet library (beacon sdk 4.8.1, about 4 mb) is not loaded with the page. it loads from unpkg.com on the first click, and not before. after that the sdk talks to beacon's relay servers and, for some wallets, walletconnect servers.</p>
+      <p>who gets contacted: on load the desk asks api.tzkt.io and the image hosts in the token metadata. the door contacts nobody on load.</p>
+
+      <h3>door options</h3>
+      <ul>
+        <li><code>data-app</code> name shown in the wallet prompt. default the page hostname.</li>
+        <li><code>data-network</code> default "mainnet".</li>
+        <li><code>data-statement</code> the one line the user signs. default "sign in to {host}. this moves nothing."</li>
+        <li><code>data-sdk</code> url of the beacon sdk browser bundle. default a pinned unpkg url. https only (http for localhost). refused with "no fingerprint for that sdk." unless <code>data-sdk-integrity</code> is also set. a beacon already on the page is ignored.</li>
+        <li><code>data-sdk-integrity</code> sha-384 integrity for a custom <code>data-sdk</code>. the default url ships with its own.</li>
+        <li><code>data-nonce</code> a nonce your server issued, 8 to 128 characters of letters, digits, _ and -. used as the nonce line. anything else shows "bad nonce.".</li>
+      </ul>
+
+      <h3>door events</h3>
+      <p>all bubble from the element. <code>detail</code> is below.</p>
+      <ul>
+        <li><code>tezosdoor:connect</code> address, publicKey, network.</li>
+        <li><code>tezosdoor:disconnect</code> address.</li>
+        <li><code>tezosdoor:signin</code> the session: address, publicKey, message, payloadHex, signature, issued, expires.</li>
+        <li><code>tezosdoor:signout</code> address.</li>
+      </ul>
+
+      <h3>what the door does not do</h3>
+      <ul>
+        <li>no transactions. it asks the wallet for the sign permission only and never builds or sends an operation.</li>
+        <li>no signature verification. the session is only a claim.</li>
+        <li>no keys. it never asks for a secret key or a seed phrase.</li>
+      </ul>
+
+      <h3>restored sessions</h3>
+      <p>a session left in the tab by an earlier load is never shown as signed in. if it looks valid and is under 12 hours old, the door says "connected earlier as tz1abc…wxyz. not checked." and offers "sign in again" or "forget". getSession() returns null until a fresh sign-in on this page load.</p>
+
+      <h3>before you trust a sign-in</h3>
+      <p>a site that wants to trust a sign-in has to do all four of these on its server:</p>
+      <ol>
+        <li>recompute the payload from the message and check the signature.</li>
+        <li>derive the tz address from the public key itself, or fetch the key from the chain. never trust the session's address field.</li>
+        <li>issue the nonce on the server (data-nonce) and accept it once.</li>
+        <li>check that the host and uri lines match your site, and that now is before expires.</li>
+      </ol>
+      <p>until all four are done, a session is only a claim.</p>
+
+      <p>CC0 — copy it.</p>
+    </main>
+
+    <script src="tezos-desk.js"></script>
+    <script src="tezos-door.js"></script>
+  </body>
+</html>

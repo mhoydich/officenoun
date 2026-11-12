@@ -1,0 +1,192 @@
+/* office dao builder. CC0. scoped under .office-dao. uses the site's own custom properties. */
+.office-dao {
+  --od-ink: var(--ink, #17171b);
+  --od-muted: var(--muted-ink, #575965);
+  --od-paper: var(--paper, #f7f3e9);
+  --od-line: var(--paper-line, rgba(23, 23, 27, 0.16));
+  --od-focus: var(--focus, #e9265c);
+}
+
+.office-dao .od-card,
+.office-dao .od-memo {
+  margin: 0 0 1rem;
+  padding: 1rem;
+  background: var(--od-paper);
+  border: 1px solid var(--od-line);
+}
+
+.office-dao .od-card h3,
+.office-dao .od-memo h3 {
+  margin: 0 0 0.6rem;
+  font-size: 0.9rem;
+}
+
+.office-dao .od-card p {
+  margin: 0 0 0.4rem;
+}
+
+.office-dao form,
+.office-dao [data-od-builder] {
+  max-width: 100%;
+}
+
+.office-dao .od-field,
+.office-dao fieldset {
+  margin: 0 0 1.1rem;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.office-dao legend,
+.office-dao label {
+  display: block;
+  padding: 0;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.office-dao input[type="text"] {
+  display: block;
+  width: 100%;
+  margin: 0.25rem 0 0.2rem;
+  padding: 0.45rem 0.55rem;
+  color: var(--od-ink);
+  background: #fff;
+  border: 1px solid var(--od-ink);
+  border-radius: 0;
+  font: inherit;
+}
+
+.office-dao input:focus-visible,
+.office-dao textarea:focus-visible,
+.office-dao button:focus-visible {
+  outline: 3px solid var(--od-focus);
+  outline-offset: 2px;
+}
+
+.office-dao .od-check {
+  display: block;
+  margin: 0.3rem 0;
+  font-weight: 400;
+}
+
+.office-dao .od-hint,
+.office-dao .od-note,
+.office-dao .od-memo-sub {
+  margin: 0 0 0.3rem;
+  color: var(--od-muted);
+  font-size: 0.78rem;
+}
+
+.office-dao .od-error {
+  margin: 0 0 0.3rem;
+  color: #a1123a;
+  font-size: 0.78rem;
+}
+
+.office-dao .od-error:empty {
+  display: none;
+}
+
+.office-dao .od-rows {
+  margin: 0 0 0.6rem;
+  padding: 0;
+  list-style: none;
+}
+
+.office-dao .od-row {
+  margin: 0 0 0.5rem;
+}
+
+.office-dao .od-row-inputs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 7rem auto;
+  gap: 0.4rem;
+  align-items: start;
+}
+
+.office-dao .od-row-inputs input {
+  margin: 0;
+}
+
+.office-dao .od-button {
+  margin: 0 0.5rem 0.4rem 0;
+  padding: 0.4rem 0.75rem;
+  color: var(--od-paper);
+  background: var(--od-ink);
+  border: 1px solid var(--od-ink);
+  border-radius: 0;
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.office-dao .od-button.od-quiet {
+  color: var(--od-ink);
+  background: transparent;
+}
+
+.office-dao .od-button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.office-dao .od-memo dl {
+  margin: 0 0 0.6rem;
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: 0.2rem 0.75rem;
+}
+
+.office-dao .od-memo dt {
+  color: var(--od-muted);
+}
+
+.office-dao .od-memo dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.office-dao .od-json {
+  display: block;
+  width: 100%;
+  margin: 0 0 0.6rem;
+  padding: 0.6rem;
+  color: var(--od-ink);
+  background: rgba(23, 23, 27, 0.07);
+  border: 1px solid var(--od-line);
+  border-radius: 0;
+  font: inherit;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.office-dao .od-mint {
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.office-dao .od-mint li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 1rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--od-line);
+}
+
+.office-dao .od-mint .od-status {
+  margin-left: auto;
+  color: var(--od-muted);
+}
+
+@media (max-width: 480px) {
+  .office-dao .od-row-inputs {
+    grid-template-columns: minmax(0, 1fr) 5.5rem;
+  }
+  .office-dao .od-row-inputs .od-button {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}

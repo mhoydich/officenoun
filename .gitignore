@@ -3,3 +3,10 @@ dist/
 index.html
 node_modules/
 .wrangler/
+public/today.svg
+public/card.png
+public/nouns/day/
+public/org/index.html
+public/today/index.html
+public/dao/index.html
+public/dashboard/index.html

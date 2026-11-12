@@ -1,0 +1,226 @@
+{
+  "wallet": "tz1UWibBbQXvuSkThsLUGAaL4R5j7X3PSCKj",
+  "at": "2026-11-12T14:03:56.561Z",
+  "balanceTez": 62.157278,
+  "published": 26,
+  "held": 37,
+  "transactions": 140,
+  "tokens": [
+    {
+      "contract": "KT1T8ZiUom87dQB8PyQ6i1wE6Tr4YE7qr1Ab",
+      "tokenId": "19",
+      "name": "Sun-warmed sea stacks · Series One, 20 of 20",
+      "supply": 100,
+      "holders": 2,
+      "firstTime": "2026-11-12T03:56:28Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-077.webp"
+    },
+    {
+      "contract": "KT1T8ZiUom87dQB8PyQ6i1wE6Tr4YE7qr1Ab",
+      "tokenId": "18",
+      "name": "Violet horizon · Series One, 19 of 20",
+      "supply": 100,
+      "holders": 2,
+      "firstTime": "2026-11-12T03:56:28Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-066.webp"
+    },
+    {
+      "contract": "KT1T8ZiUom87dQB8PyQ6i1wE6Tr4YE7qr1Ab",
+      "tokenId": "17",
+      "name": "Golden modern · Series One, 18 of 20",
+      "supply": 100,
+      "holders": 2,
+      "firstTime": "2026-11-12T03:56:28Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-061.webp"
+    },
+    {
+      "contract": "KT1T8ZiUom87dQB8PyQ6i1wE6Tr4YE7qr1Ab",
+      "tokenId": "16",
+      "name": "Coastal coordinates · Series One, 17 of 20",
+      "supply": 100,
+      "holders": 2,
+      "firstTime": "2026-11-12T03:56:28Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-057.webp"
+    },
+    {
+      "contract": "KT1T8ZiUom87dQB8PyQ6i1wE6Tr4YE7qr1Ab",
+      "tokenId": "15",
+      "name": "Coral coast · Series One, 16 of 20",
+      "supply": 100,
+      "holders": 2,
+      "firstTime": "2026-11-12T03:56:28Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-054.webp"
+    },
+    {
+      "contract": "KT1T8ZiUom87dQB8PyQ6i1wE6Tr4YE7qr1Ab",
+      "tokenId": "14",
+      "name": "Pink Pacific · Series One, 15 of 20",
+      "supply": 100,
+      "holders": 2,
+      "firstTime": "2026-11-12T03:56:16Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-053.webp"
+    },
+    {
+      "contract": "KT1T8ZiUom87dQB8PyQ6i1wE6Tr4YE7qr1Ab",
+      "tokenId": "13",
+      "name": "Shoreline in layers · Series One, 14 of 20",
+      "supply": 100,
+      "holders": 2,
+      "firstTime": "2026-11-12T03:56:16Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-051.webp"
+    },
+    {
+      "contract": "KT1T8ZiUom87dQB8PyQ6i1wE6Tr4YE7qr1Ab",
+      "tokenId": "12",
+      "name": "Coastal afternoon · Series One, 13 of 20",
+      "supply": 100,
+      "holders": 2,
+      "firstTime": "2026-11-12T03:56:16Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-041.webp"
+    },
+    {
+      "contract": "KT1T8ZiUom87dQB8PyQ6i1wE6Tr4YE7qr1Ab",
+      "tokenId": "11",
+      "name": "Sea geometry · Series One, 12 of 20",
+      "supply": 100,
+      "holders": 2,
+      "firstTime": "2026-11-12T03:56:16Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-036.webp"
+    },
+    {
+      "contract": "KT1T8ZiUom87dQB8PyQ6i1wE6Tr4YE7qr1Ab",
+      "tokenId": "10",
+      "name": "Ocean frames · Series One, 11 of 20",
+      "supply": 100,
+      "holders": 2,
+      "firstTime": "2026-11-12T03:56:16Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-035.webp"
+    },
+    {
+      "contract": "KT1T8ZiUom87dQB8PyQ6i1wE6Tr4YE7qr1Ab",
+      "tokenId": "9",
+      "name": "Pacific palms · Series One, 10 of 20",
+      "supply": 100,
+      "holders": 2,
+      "firstTime": "2026-11-12T03:56:04Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-028.webp"
+    },
+    {
+      "contract": "KT1T8ZiUom87dQB8PyQ6i1wE6Tr4YE7qr1Ab",
+      "tokenId": "8",
+      "name": "Palm avenue · Series One, 9 of 20",
+      "supply": 100,
+      "holders": 2,
+      "firstTime": "2026-11-12T03:56:04Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-026.webp"
+    },
+    {
+      "contract": "KT1T8ZiUom87dQB8PyQ6i1wE6Tr4YE7qr1Ab",
+      "tokenId": "7",
+      "name": "Moonlit water · Series One, 8 of 20",
+      "supply": 100,
+      "holders": 2,
+      "firstTime": "2026-11-12T03:56:04Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-020.webp"
+    },
+    {
+      "contract": "KT1T8ZiUom87dQB8PyQ6i1wE6Tr4YE7qr1Ab",
+      "tokenId": "6",
+      "name": "Palm color study · Series One, 7 of 20",
+      "supply": 100,
+      "holders": 2,
+      "firstTime": "2026-11-12T03:56:04Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-018.webp"
+    },
+    {
+      "contract": "KT1T8ZiUom87dQB8PyQ6i1wE6Tr4YE7qr1Ab",
+      "tokenId": "5",
+      "name": "Palms at the corner · Series One, 6 of 20",
+      "supply": 100,
+      "holders": 3,
+      "firstTime": "2026-11-12T03:56:04Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-017.webp"
+    },
+    {
+      "contract": "KT1T8ZiUom87dQB8PyQ6i1wE6Tr4YE7qr1Ab",
+      "tokenId": "4",
+      "name": "Electric orbit · Series One, 5 of 20",
+      "supply": 100,
+      "holders": 2,
+      "firstTime": "2026-11-12T03:55:52Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-012.webp"
+    },
+    {
+      "contract": "KT1T8ZiUom87dQB8PyQ6i1wE6Tr4YE7qr1Ab",
+      "tokenId": "3",
+      "name": "Blue hour surf · Series One, 4 of 20",
+      "supply": 100,
+      "holders": 2,
+      "firstTime": "2026-11-12T03:55:52Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-011.webp"
+    },
+    {
+      "contract": "KT1T8ZiUom87dQB8PyQ6i1wE6Tr4YE7qr1Ab",
+      "tokenId": "2",
+      "name": "Ocean desktop · Series One, 3 of 20",
+      "supply": 100,
+      "holders": 2,
+      "firstTime": "2026-11-12T03:55:52Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-008.webp"
+    },
+    {
+      "contract": "KT1T8ZiUom87dQB8PyQ6i1wE6Tr4YE7qr1Ab",
+      "tokenId": "1",
+      "name": "Pacific daydream · Series One, 2 of 20",
+      "supply": 100,
+      "holders": 2,
+      "firstTime": "2026-11-12T03:55:52Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-007.webp"
+    },
+    {
+      "contract": "KT1T8ZiUom87dQB8PyQ6i1wE6Tr4YE7qr1Ab",
+      "tokenId": "0",
+      "name": "Wave study · Series One, 1 of 20",
+      "supply": 100,
+      "holders": 2,
+      "firstTime": "2026-11-12T03:55:52Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-006.webp"
+    },
+    {
+      "contract": "KT1NKyk3VyVXRsTBAbTvizx53nFvs12MYPit",
+      "tokenId": "2",
+      "name": "Night bloom",
+      "supply": 100,
+      "holders": 2,
+      "firstTime": "2026-11-12T03:53:28Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-015.webp"
+    },
+    {
+      "contract": "KT18obsxd79djD8Br9mpsWYXoEisX3hwwX2h",
+      "tokenId": "2",
+      "name": "Charter No. 1 · The Collector",
+      "supply": 100,
+      "holders": 2,
+      "firstTime": "2026-11-12T03:15:07Z",
+      "image": "https://elsegundo.xyz/art/mh-25-010.webp"
+    },
+    {
+      "contract": "KT18obsxd79djD8Br9mpsWYXoEisX3hwwX2h",
+      "tokenId": "1",
+      "name": "Postcard No. 1",
+      "supply": 1,
+      "holders": 1,
+      "firstTime": "2026-11-12T02:21:13Z",
+      "image": "https://elsegundo.xyz/art/mh-2025-034.webp"
+    },
+    {
+      "contract": "KT18obsxd79djD8Br9mpsWYXoEisX3hwwX2h",
+      "tokenId": "0",
+      "name": "Broadcast No. 1 · The channel is open",
+      "supply": 500,
+      "holders": 2,
+      "firstTime": "2026-11-12T02:21:13Z",
+      "image": "https://elsegundo.xyz/art/mh-25-001.webp"
+    }
+  ]
+}
