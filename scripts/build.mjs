@@ -448,6 +448,11 @@ const loomTemplate = await readFile(path.join(root, "src/loom.template.html"), "
 await mkdir(path.join(publicDir, "loom"), { recursive: true });
 await writeFile(path.join(publicDir, "loom/index.html"), loomTemplate.replaceAll("{{NAV_EXTRA}}", navExtra));
 
+// ---- /bench/: static page; the scorecard is filled in the browser by public/kit/office-bench.js ----
+const benchTemplate = await readFile(path.join(root, "src/bench.template.html"), "utf8");
+await mkdir(path.join(publicDir, "bench"), { recursive: true });
+await writeFile(path.join(publicDir, "bench/index.html"), benchTemplate.replaceAll("{{NAV_EXTRA}}", navExtra));
+
 // ---- /desk/ and /charter/: rendered from config.desk and config.charter by scripts/desk-pages.mjs ----
 for (const [name, render, block] of [["desk", renderDeskPage, config.desk], ["charter", renderCharterPage, config.charter]]) {
   const pageTemplate = await readFile(path.join(root, `src/${name}.template.html`), "utf8");
