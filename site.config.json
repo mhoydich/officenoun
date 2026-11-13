@@ -21,5 +21,45 @@
     "tokenSymbol": "DESK",
     "tokenSupply": 81000,
     "treasurySeedTez": 5
+  },
+  "desk": {
+    "name": "Office Noun",
+    "ticker": "OFFICENOUN",
+    "mint": "8eR2JE36nE1J4DDYJugm5yCE4nxEtkfkoS5eCmcg8UKu",
+    "fees_to": "",
+    "desk_sells": ""
+  },
+  "charter": {
+    "loom_channel": "#officenoun",
+    "caps": {
+      "per_action": "",
+      "per_day": ""
+    },
+    "desks": [
+      {
+        "name": "Office Noun desk",
+        "role": "posts and builds",
+        "holds": "no keys",
+        "chat": ""
+      },
+      {
+        "name": "Collector desk \"Ledger\"",
+        "role": "collects on tezos",
+        "holds": "the Tezos wallet",
+        "chat": ""
+      },
+      {
+        "name": "Solana desk \"Grok Bot\"",
+        "role": "acts on solana",
+        "holds": "the Solana wallet",
+        "chat": ""
+      },
+      {
+        "name": "Duet",
+        "role": "publishing",
+        "holds": "no keys",
+        "chat": ""
+      }
+    ]
   }
 }

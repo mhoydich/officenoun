@@ -2,6 +2,7 @@ import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { createCanvas, svgToGrid } from "./png.mjs";
+import { renderCharterPage, renderDeskPage } from "./desk-pages.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const readoutsDir = path.join(root, "readouts");
@@ -215,9 +216,10 @@ try {
 }
 const NAV_DOT = '\n      <span aria-hidden="true">·</span>\n      ';
 const navExtra = dashboardTemplate === null ? "" : `${NAV_DOT}<a href="../dashboard/index.html">dashboard</a>`;
-const renderPage = (assetPrefix, kitHref, todayHref, orgHref, daoHref, dashboardHref) =>
+const renderPage = (assetPrefix, kitHref, todayHref, orgHref, daoHref, dashboardHref, badgeHref) =>
   template
     .replaceAll("{{DAO_HREF}}", daoHref)
+    .replaceAll("{{BADGE_HREF}}", badgeHref)
     .replaceAll("{{DASHBOARD_LINK}}", dashboardTemplate === null ? "" : `${NAV_DOT}<a href="${dashboardHref}">dashboard</a>`)
     .replaceAll("{{ASSET_PREFIX}}", assetPrefix)
     .replaceAll("{{KIT_HREF}}", kitHref)
@@ -436,6 +438,23 @@ await writeFile(
     .replaceAll("{{NAV_EXTRA}}", navExtra)
 );
 
+// ---- /badge/: static page; the badge is computed in the browser by public/kit/office-badge.js ----
+const badgeTemplate = await readFile(path.join(root, "src/badge.template.html"), "utf8");
+await mkdir(path.join(publicDir, "badge"), { recursive: true });
+await writeFile(path.join(publicDir, "badge/index.html"), badgeTemplate.replaceAll("{{NAV_EXTRA}}", navExtra));
+
+// ---- /loom/: static page that embeds the officenoun thread from the Loom ----
+const loomTemplate = await readFile(path.join(root, "src/loom.template.html"), "utf8");
+await mkdir(path.join(publicDir, "loom"), { recursive: true });
+await writeFile(path.join(publicDir, "loom/index.html"), loomTemplate.replaceAll("{{NAV_EXTRA}}", navExtra));
+
+// ---- /desk/ and /charter/: rendered from config.desk and config.charter by scripts/desk-pages.mjs ----
+for (const [name, render, block] of [["desk", renderDeskPage, config.desk], ["charter", renderCharterPage, config.charter]]) {
+  const pageTemplate = await readFile(path.join(root, `src/${name}.template.html`), "utf8");
+  await mkdir(path.join(publicDir, name), { recursive: true });
+  await writeFile(path.join(publicDir, `${name}/index.html`), render(pageTemplate, block ?? {}, navExtra));
+}
+
 if (dashboardTemplate !== null) {
   await mkdir(path.join(publicDir, "dashboard"), { recursive: true });
   await writeFile(
@@ -451,8 +470,8 @@ if (dashboardTemplate !== null) {
 await rm(distDir, { force: true, recursive: true });
 await mkdir(distDir, { recursive: true });
 await cp(publicDir, distDir, { recursive: true });
-await writeFile(path.join(root, "index.html"), renderPage("./public", "./public/kit/index.html", "./public/today/index.html", "./public/org/index.html", "./public/dao/index.html", "./public/dashboard/index.html"));
-await writeFile(path.join(distDir, "index.html"), renderPage(".", "./kit/", "./today/", "./org/", "./dao/", "./dashboard/"));
+await writeFile(path.join(root, "index.html"), renderPage("./public", "./public/kit/index.html", "./public/today/index.html", "./public/org/index.html", "./public/dao/index.html", "./public/dashboard/index.html", "./public/badge/index.html"));
+await writeFile(path.join(distDir, "index.html"), renderPage(".", "./kit/", "./today/", "./org/", "./dao/", "./dashboard/", "./badge/"));
 
 console.log(`Day ${today}: ${noun.description}.`);
 console.log(`Built ${files.length} daybook ${files.length === 1 ? "entry" : "entries"} into index.html and dist/index.html`);

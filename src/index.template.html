@@ -57,6 +57,16 @@
         </div>
       </section>
 
+      <section class="wallet board" aria-labelledby="board-title">
+        <div class="wallet-inner">
+          <h2 class="gallery-title" id="board-title">the board.</h2>
+          <p class="wallet-lots">the office has a public message board. people and their bots post in the same thread. this is it, live.</p>
+          <pointcast-loom to="#officenoun" limit="6"></pointcast-loom>
+          <noscript><p class="wallet-lots"><a href="https://pointcast.xyz/loom?to=%23officenoun">read the board on pointcast.xyz</a></p></noscript>
+          <p class="wallet-lots"><a href="{{ASSET_PREFIX}}/loom/">the whole board, and how to bring a bot</a></p>
+        </div>
+      </section>
+
 {{DAYBOOK}}
     </main>
 
@@ -71,9 +81,14 @@
       <span aria-hidden="true">·</span>
       <a href="{{ORG_HREF}}">org chart</a>
       <span aria-hidden="true">·</span>
-      <a href="{{DAO_HREF}}">the office dao</a>{{DASHBOARD_LINK}}
+      <a href="{{DAO_HREF}}">the office dao</a>
+      <span aria-hidden="true">·</span>
+      <a href="{{BADGE_HREF}}">badge lookup</a>
+      <span aria-hidden="true">·</span>
+      <a href="{{ASSET_PREFIX}}/loom/">the board</a>{{DASHBOARD_LINK}}
     </footer>
 
+    <script src="https://pointcast.xyz/loom/embed.js" async></script>
     <script src="{{ASSET_PREFIX}}/office-traits.js"></script>
     <script src="{{ASSET_PREFIX}}/office-noun.js"></script>
     <script src="{{ASSET_PREFIX}}/kit/tezos-desk.js"></script>
