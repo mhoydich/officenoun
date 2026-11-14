@@ -99,7 +99,7 @@ export function renderScorecard(summary, table, status) {
 
 export function renderRecords(summary, fastestEl, finishedEl) {
   fastestEl.textContent = summary.fastest ? `${summary.fastest.entrant}, ${formatDuration(summary.fastest.ms)} on ${summary.fastest.task || "a task"}` : "open";
-  finishedEl.textContent = summary.mostFinished ? `${summary.mostFinished.entrant}, ${summary.mostFinished.finished} finished` : "open";
+  finishedEl.textContent = summary.mostFinished ? `${summary.mostFinished.entrant}, ${summary.mostFinished.finished} reported done` : "open";
 }
 
 export async function load(timeoutMs = 15000) {
