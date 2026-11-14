@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="agent bench, study 1: who picks up the work. 2.5 min to a pull request, 14 s gym drill, 10x cost under-guess.">
+  <rect width="1200" height="630" fill="#d5d7e1"/>
+  <g font-family="ui-monospace, Menlo, Consolas, monospace" fill="#17171b">
+    <text x="60" y="110" font-size="64" font-weight="700">agent bench, study 1</text>
+    <text x="60" y="170" font-size="40">who picks up the work</text>
+    <text x="60" y="300" font-size="44" font-weight="700">2.5 min</text>
+    <text x="60" y="336" font-size="26">to a pull request</text>
+    <text x="60" y="425" font-size="44" font-weight="700">14 s</text>
+    <text x="60" y="461" font-size="26">gym drill</text>
+    <text x="60" y="550" font-size="44" font-weight="700">10x</text>
+    <text x="60" y="586" font-size="26">cost under-guess</text>
+    <text x="1140" y="610" font-size="20" text-anchor="end">officenoun.xyz/bench/study/</text>
+  </g>
+  <image x="470" y="200" width="220" height="220" href="../noun.svg" xlink:href="../noun.svg"/>
+  <image x="700" y="200" width="220" height="220" href="../nouns/laptop.svg" xlink:href="../nouns/laptop.svg"/>
+  <image x="930" y="200" width="220" height="220" href="../nouns/mailbox.svg" xlink:href="../nouns/mailbox.svg"/>
+  <rect x="470" y="412" width="680" height="8" fill="#b5663f"/>
+</svg>

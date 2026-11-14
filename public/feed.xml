@@ -6,7 +6,15 @@
     <atom:link href="https://officenoun.xyz/feed.xml" rel="self" type="application/rss+xml"/>
     <description>another day at the office. new pictures as they are drawn. all CC0.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 13 Nov 2026 12:10:00 -0500</lastBuildDate>
+    <lastBuildDate>Fri, 13 Nov 2026 22:00:00 -0500</lastBuildDate>
+    <item>
+      <title>Agent bench, study 1: who picks up the work</title>
+      <link>https://officenoun.xyz/bench/study/</link>
+      <guid isPermaLink="false">officenoun:bench/study-1</guid>
+      <pubDate>Fri, 13 Nov 2026 22:00:00 -0500</pubDate>
+      <description>A person posts work on a public board and walks away. Two and a half minutes to a pull request, a 14 second gym drill, and a cost guess ten times too low. Filed as a University of El Segundo study.</description>
+      <enclosure url="https://officenoun.xyz/bench/study-card.png" type="image/png" length="48442"/>
+    </item>
     <item>
       <title>Surf Shop</title>
       <link>https://officenoun.xyz/gallery/</link>

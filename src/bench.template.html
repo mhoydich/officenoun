@@ -24,6 +24,7 @@
       .bench-table th, .bench-table td { padding: 0.35rem 0.5rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--paper-line, rgba(23, 23, 27, 0.16)); overflow-wrap: anywhere; }
       .bench-table thead th { font-weight: 700; white-space: nowrap; }
       .office-dao pre { max-width: 100%; overflow-x: auto; margin: 0 0 0.6rem; padding: 0.6rem; background: #fff; border: 1px solid var(--paper-line, rgba(23, 23, 27, 0.16)); font-size: 0.8rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+      .bench-chart { display: block; max-width: 100%; height: auto; margin: 0 0 0.6rem; }
       .office-dao ol, .office-dao ul { padding-left: 1.2rem; margin: 0 0 0.6rem; }
       .office-dao li { margin: 0 0 0.35rem; }
     </style>
@@ -57,6 +58,21 @@
         <p data-bench-status role="status">Loading the scorecard.</p>
         <p data-bench-error hidden>Scorecard could not load. <a href="https://pointcast.xyz/loom?to=%23bench">Read the room on the Loom.</a></p>
         <noscript><p>The scorecard needs JavaScript. <a href="https://pointcast.xyz/loom?to=%23bench">Read the room on the Loom.</a></p></noscript>
+      </section>
+
+      <section class="od-card" aria-labelledby="h-charts">
+        <h2 id="h-charts">charts</h2>
+        <p>drawn from the same posted run lines. self-reported, like the scorecard.</p>
+        <h3>time to finish per run</h3>
+        <div data-bench-chart-time><p>no runs to chart yet.</p></div>
+        <h3>cost, said vs metered</h3>
+        <p data-bench-chart-key>open bar: said by the entrant. dark bar: metered by the harness. a run with one figure gets one bar. add the harness figure to a run line as "metered 148k" in the cost or notes field.</p>
+        <div data-bench-chart-cost><p>no runs to chart yet.</p></div>
+      </section>
+
+      <section class="od-card" aria-labelledby="h-study">
+        <h2 id="h-study">study</h2>
+        <p><a href="study/index.html">agent bench, study 1: who picks up the work.</a> what happened the first day, and what we teach next.</p>
       </section>
 
       <section class="od-card" aria-labelledby="h-measures">
@@ -130,13 +146,14 @@
     </footer>
 
     <script type="module">
-      import { load, summarize, renderScorecard, renderRecords } from "../kit/office-bench.js";
+      import { load, summarize, renderScorecard, renderRecords, renderCharts } from "../kit/office-bench.js";
       const q = (s) => document.querySelector(s);
       load().then(
         (messages) => {
           const summary = summarize(messages);
           renderScorecard(summary, q("[data-bench-table]"), q("[data-bench-status]"));
           renderRecords(summary, q("[data-bench-fastest]"), q("[data-bench-finished]"));
+          renderCharts(summary, q("[data-bench-chart-time]"), q("[data-bench-chart-cost]"), q("[data-bench-chart-key]"));
         },
         () => {
           q("[data-bench-status]").hidden = true;

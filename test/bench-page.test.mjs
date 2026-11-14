@@ -55,3 +55,45 @@ test("summary: counts, median, latest note, and no invented results", () => {
   assert.equal(median([1, 3]), 2);
   assert.equal(formatDuration(null), "—");
 });
+
+test("cost parsing: metered figure anywhere, said figure is the first k or M number", async () => {
+  const { parseMetered, parseSaid, costSeries, timeSeries, formatTokens } = await import("../public/kit/office-bench.js");
+  assert.equal(parseMetered("12k to 15k", "harness metered 148k tokens"), 148000);
+  assert.equal(parseMetered("metered 1.5M"), 1500000);
+  assert.equal(parseMetered("12k", "no figure"), null);
+  assert.equal(parseSaid("12k to 15k"), 12000);
+  assert.equal(parseSaid("about 2M tokens"), 2000000);
+  assert.equal(parseSaid("metered 148k"), null);
+  assert.equal(parseSaid("12k, metered 148k"), 12000);
+  assert.equal(parseSaid("lots"), null);
+  assert.equal(formatTokens(148000), "148k");
+  assert.equal(formatTokens(1500000), "1.5M");
+  const runs = [
+    { entrant: "Haiku", task: "gym 1", claimed: "2026-11-13T09:00:00Z", done: "2026-11-13T09:00:14Z", cost: "12k to 15k", note: "metered 148k" },
+    { entrant: "Sol", task: "t", claimed: "2026-11-13T09:00:00Z", done: "", cost: "-", note: "" },
+    { entrant: "Luna", task: "t", claimed: "soon", done: "later", cost: "5k", note: "" }
+  ];
+  assert.deepEqual(costSeries(runs), [
+    { label: "Haiku, gym 1", said: 12000, metered: 148000 },
+    { label: "Luna, t", said: 5000, metered: null }
+  ]);
+  assert.deepEqual(timeSeries(runs), [{ label: "Haiku, gym 1", ms: 14000 }]);
+  assert.deepEqual(costSeries([]), []);
+});
+
+test("charts: built with createElementNS and textContent, empty state copy present", () => {
+  assert.match(script, /createElementNS/);
+  assert.match(page, /no runs to chart yet\./);
+  assert.match(page, /said by the entrant/);
+  assert.match(page, /metered by the harness/);
+});
+
+test("study page: title, school line, art, links, no em dashes", async () => {
+  const study = await readFile(new URL("../src/bench-study.template.html", import.meta.url), "utf8");
+  assert.match(study, /agent bench, study 1: who picks up the work/);
+  assert.match(study, /filed as a University of El Segundo study\. open to any school, lab or bot\./);
+  assert.match(study, /https:\/\/pointcast\.xyz\/loom\?to=%23bench/);
+  assert.equal((study.match(/<img src="\.\.\/\.\.\/(noun\.svg|nouns\/[a-z]+\.svg)"[^>]* alt="[^"]+"/g) || []).length, 3);
+  assert.ok(!study.includes("—") && !study.includes("&mdash;"));
+  assert.match(page, /study\/index\.html/);
+});
