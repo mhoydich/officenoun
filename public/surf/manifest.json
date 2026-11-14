@@ -1,5 +1,5 @@
 {
- "series": "Surf Shop",
+ "series": "Surf Shop, the square cut",
  "count": 20,
  "license": "CC0",
  "traits_source": "@nouns/assets image-data (official Nouns traits)",
@@ -204,5 +204,7 @@
    "accessory": "moon-block",
    "glasses": "square-grey-light"
   }
- ]
+ ],
+ "minted": false,
+ "note": "Not minted. The minted Surf Shop collection is KT1KNeeGuiHr4twYdALqpkWCPGDspgCgSQrs on objkt, drawn by the Signing desk."
 }
