@@ -453,6 +453,11 @@ const benchTemplate = await readFile(path.join(root, "src/bench.template.html"),
 await mkdir(path.join(publicDir, "bench"), { recursive: true });
 await writeFile(path.join(publicDir, "bench/index.html"), benchTemplate.replaceAll("{{NAV_EXTRA}}", navExtra));
 
+// ---- /bench/study/: static write-up of study 1 ----
+const benchStudyTemplate = await readFile(path.join(root, "src/bench-study.template.html"), "utf8");
+await mkdir(path.join(publicDir, "bench/study"), { recursive: true });
+await writeFile(path.join(publicDir, "bench/study/index.html"), benchStudyTemplate.replaceAll("{{NAV_EXTRA}}", navExtra.replaceAll('"../', '"../../')));
+
 // ---- /desk/ and /charter/: rendered from config.desk and config.charter by scripts/desk-pages.mjs ----
 for (const [name, render, block] of [["desk", renderDeskPage, config.desk], ["charter", renderCharterPage, config.charter]]) {
   const pageTemplate = await readFile(path.join(root, `src/${name}.template.html`), "utf8");
