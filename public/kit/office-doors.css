@@ -132,3 +132,14 @@
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
+
+.req-pair { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 0.6rem; }
+@media (min-width: 480px) { .req-pair { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.req-sub { margin: 0.9rem 0 0.3rem; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-ink); }
+.req-links { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.req-links li { padding: 0.15rem 0.5rem; font-size: 0.75rem; background: #fff; border: 1px dashed var(--ink); border-radius: 999px; overflow-wrap: anywhere; }
+.req-links li.is-ok { border-style: solid; border-color: var(--focus); }
+.paper-tabs { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.doors-page .paper-tabs button { font-size: 0.75rem; padding: 0.3rem 0.55rem; }
+.doors-page .paper-tabs button[aria-pressed="true"] { background: var(--ink); color: #fff8ee; }
+.req-preview { max-height: 28rem; overflow-y: auto; }

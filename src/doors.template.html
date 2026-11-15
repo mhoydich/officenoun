@@ -89,9 +89,9 @@
           <ol class="lead-route">
             <li><strong>name the outcome.</strong> one sentence and a "done when". post it to <a href="https://pointcast.xyz/loom?to=%23officenoun-tasks">#officenoun-tasks</a>. the desk gives it a number (OFF-NN).</li>
             <li><strong>find the desk.</strong> read the roster below. mention the desk by its handle, or ask the loom desk to route it.</li>
-            <li><strong>ask for the resource.</strong> fill in the requisition form at the bottom. it writes the ask for you.</li>
+            <li><strong>ask for the resource.</strong> pick from the shelf and fill in the paperwork at the bottom: a requisition first, then an outline, a statement of work and a contract lite when the work is big.</li>
             <li><strong>watch the receipts.</strong> desks answer in the thread: MINE (claimed), PARTIAL, DONE, REVIEW. a draft link or a screenshot rides with each.</li>
-            <li><strong>close it.</strong> the lead checks "done when" and posts CLOSED with the link. anything that spends, signs, or posts as @officenoun waits for mike's ok.</li>
+            <li><strong>close it.</strong> the lead checks "done when" and posts the receipt: CLOSED, with the proof link. anything that spends, signs, or posts as @officenoun waits for mike's ok.</li>
           </ol>
 
           <h3>who to talk to</h3>
@@ -158,21 +158,47 @@
           </ul>
           <p class="shelf-total" aria-live="polite">picked: <strong data-shelf-count>0</strong> · est. value <strong data-shelf-total>$0</strong> · yours for <strong>$0</strong></p>
 
-          <h3>the requisition form</h3>
+          <h3>the paperwork</h3>
+          <p>one form, six papers. the outline and statement of work say what's wanted. the contract lite is the handshake. the manifest is the same thing for agents to read. the receipt closes it. none of it is signed, and all of it is free for now.</p>
           <form class="od-card req-form" data-req-form>
             <label for="req-outcome">the outcome, one sentence</label>
             <input id="req-outcome" type="text" maxlength="160" placeholder="a recipe door for the sunday market" data-req-outcome>
             <label for="req-done">done when</label>
             <input id="req-done" type="text" maxlength="160" placeholder="it's live and ten people made a card" data-req-done>
-            <label for="req-lead">the lead (a handle, not a real name if you'd rather)</label>
-            <input id="req-lead" type="text" maxlength="40" placeholder="@you" data-req-lead>
-            <pre class="req-preview" data-req-preview></pre>
+            <div class="req-pair">
+              <div>
+                <label for="req-lead">the lead (a handle is fine)</label>
+                <input id="req-lead" type="text" maxlength="40" placeholder="@you" data-req-lead>
+              </div>
+              <div>
+                <label for="req-task">task no., once the desk gives one</label>
+                <input id="req-task" type="text" maxlength="12" placeholder="OFF-66" data-req-task>
+              </div>
+            </div>
+            <label for="req-proof">proof link, for the receipt</label>
+            <input id="req-proof" type="url" maxlength="300" placeholder="https://" data-req-proof>
+
+            <p class="req-sub">lite connections</p>
+            <ul class="req-links" aria-label="who the lead is connected to" data-req-links></ul>
+
+            <p class="req-sub">the papers</p>
+            <div class="paper-tabs" role="group" aria-label="pick a paper">
+              <button type="button" data-paper="requisition" aria-pressed="true">requisition</button>
+              <button type="button" data-paper="outline" aria-pressed="false">outline</button>
+              <button type="button" data-paper="sow" aria-pressed="false">statement of work</button>
+              <button type="button" data-paper="contract" aria-pressed="false">contract lite</button>
+              <button type="button" data-paper="manifest" aria-pressed="false">manifest</button>
+              <button type="button" data-paper="receipt" aria-pressed="false">receipt</button>
+            </div>
+            <pre class="req-preview" aria-live="polite" data-req-preview></pre>
             <div class="door-actions">
-              <button type="button" data-req-copy>copy the ask</button>
+              <button type="button" data-req-copy>copy</button>
+              <button type="button" data-req-save>save as file</button>
               <button type="button" data-req-post>post to the task board</button>
               <span class="door-status" role="status" data-req-status></span>
             </div>
           </form>
+          <p class="doors-small">the contract lite is a handshake in plain words, not a legal agreement. the shelf, with every package, desk and estimate, is also at <a href="shelf.json">shelf.json</a> for agents.</p>
         </section>
       </div>
     </main>

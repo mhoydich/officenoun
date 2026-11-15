@@ -145,27 +145,161 @@
     return { door: door, kind: DOORS[door].kind, title: title, cast: cast, lines: lines, no: who.no, noun: who.noun, text: text };
   }
 
-  // ---- the lead side ----
+  // ---- the lead side: the shelf, lite connections and the paperwork ----
+  // one record per shelf package. the page's data-value must match value (a test checks).
   var PACKAGES = {
-    board: "the board", doors: "a door", crew: "the desk crew", broadcast: "the broadcast",
-    noun: "your noun", kit: "the desk kit", bench: "the bench", qa: "real-user check"
+    board: { name: "the board", kind: "marketing", value: 150, est: "$150", desks: ["loom desk"], gives: "a public loom thread for the outcome, the post button and the live embed" },
+    doors: { name: "a door", kind: "app", value: 600, est: "$600", desks: ["ada", "sid"], gives: "a door like the three on /doors/, with the lead's word lists, card and thread" },
+    crew: { name: "the desk crew", kind: "build", value: 800, est: "$400–1,200 per task", desks: ["ada", "sid", "lou", "tess"], gives: "one numbered task built as a draft pull request, reviewed by tess, with phone checks" },
+    broadcast: { name: "the broadcast", kind: "marketing", value: 300, est: "$300 a week", desks: ["fable", "x desk"], gives: "a week of posts from @officenoun, words by fable, sent by the x desk", needsOk: "posts as @officenoun" },
+    noun: { name: "your noun", kind: "art", value: 100, est: "$100", desks: ["office noun desk"], gives: "a seeded office noun for the project, CC0, with a desk on the org chart" },
+    kit: { name: "the desk kit", kind: "app", value: 500, est: "$500 setup", desks: ["ada"], gives: "the tezos desk, door and shelf widgets on the lead's site, display only" },
+    bench: { name: "the bench", kind: "research", value: 300, est: "$300", desks: ["shwa"], gives: "a scorecard of how the agents did on the posted work" },
+    qa: { name: "real-user check", kind: "qa", value: 250, est: "$250", desks: ["manus"], gives: "a real browser and phone pass, written up as a log", needsOk: "logins" }
+  };
+  var DESK_ROLES = {
+    "loom desk": "routing", "ada": "build", "sid": "build", "lou": "build", "tess": "review", "fable": "story",
+    "x desk": "broadcast", "office noun desk": "art", "shwa": "receipts", "manus": "browser", "mike": "approvals"
   };
 
+  function today() {
+    return new Date().toISOString().slice(0, 10);
+  }
+
+  function brief(fields, picked) {
+    var keys = picked.filter(function (key) { return PACKAGES[key]; });
+    var total = keys.reduce(function (sum, key) { return sum + PACKAGES[key].value; }, 0);
+    var desks = ["loom desk"];
+    keys.forEach(function (key) { PACKAGES[key].desks.forEach(function (d) { if (desks.indexOf(d) < 0) desks.push(d); }); });
+    var oks = keys.filter(function (key) { return PACKAGES[key].needsOk; }).map(function (key) { return PACKAGES[key].name + " (" + PACKAGES[key].needsOk + ")"; });
+    if (oks.length) desks.push("mike");
+    return {
+      outcome: clean(fields.outcome) || "(one sentence: the outcome)",
+      done: clean(fields.done) || "(how we'll know)",
+      lead: clean(fields.lead) || "(lead handle)",
+      task: (clean(fields.task).toUpperCase().match(/OFF-\d{1,4}/) || ["OFF-??"])[0],
+      proof: (function (url) { try { return new URL(url).protocol === "https:" ? url : ""; } catch (e) { return ""; } })(clean(fields.proof)),
+      date: fields.date || today(),
+      keys: keys,
+      names: keys.map(function (key) { return PACKAGES[key].name; }),
+      total: total,
+      desks: desks,
+      oks: oks
+    };
+  }
+
+  // lite connections: who the lead is linked to, and why. no accounts, just lines on a page.
+  function connections(b) {
+    return b.desks.map(function (desk) { return { from: b.lead, to: desk, role: DESK_ROLES[desk] || "desk" }; });
+  }
+
+  var FOOT = "via officenoun.xyz/doors · free for now · nothing here is signed";
+
+  var PAPERS = {
+    requisition: { label: "requisition", file: "txt", render: function (b) {
+      return [
+        "REQUISITION · new outcome for the desk",
+        "outcome: " + b.outcome,
+        "done when: " + b.done,
+        "lead: " + b.lead,
+        "from the shelf: " + (b.names.length ? b.names.join(", ") : "(nothing picked yet)"),
+        "mike ok needed: " + (b.oks.length ? "yes, for " + b.oks.join(", ") : "no, unless it spends, signs or posts as @officenoun"),
+        "@loom-desk please number this and route it. " + FOOT
+      ].join("\n");
+    } },
+    outline: { label: "outline", file: "txt", render: function (b) {
+      return [
+        "OUTLINE · " + b.task + " · " + b.outcome,
+        "",
+        "1. the outcome: " + b.outcome,
+        "2. done when: " + b.done,
+        "3. the lead: " + b.lead,
+        "4. the desks: " + b.desks.join(", "),
+        "5. from the shelf:"
+      ].concat(b.keys.length ? b.keys.map(function (k) { return "   - " + PACKAGES[k].name + ": " + PACKAGES[k].gives; }) : ["   - (nothing picked yet)"], [
+        "6. the route: post it, desks claim (MINE), report (PARTIAL, DONE), review (REVIEW), lead closes (CLOSED).",
+        "",
+        FOOT
+      ]).join("\n");
+    } },
+    sow: { label: "statement of work", file: "txt", render: function (b) {
+      return [
+        "STATEMENT OF WORK · " + b.task,
+        "date: " + b.date,
+        "lead: " + b.lead,
+        "",
+        "purpose: " + b.outcome,
+        "",
+        "scope (what the desks deliver):"
+      ].concat(b.keys.length ? b.keys.map(function (k, i) { return "  " + (i + 1) + ". " + PACKAGES[k].name + " [" + PACKAGES[k].kind + "]: " + PACKAGES[k].gives + ". desks: " + PACKAGES[k].desks.join(", ") + ". est. value " + PACKAGES[k].est + "."; }) : ["  (pick from the shelf)"], [
+        "",
+        "out of scope: spending, signing, selling, or posting as @officenoun without mike's ok. anything not listed above.",
+        "acceptance: done when " + b.done + ". the lead checks it and posts CLOSED.",
+        "reporting: receipts in the loom thread (MINE, PARTIAL, DONE, REVIEW), each with a link or a screenshot.",
+        "approvals: " + (b.oks.length ? "mike, for " + b.oks.join(", ") : "none expected"),
+        "est. value: $" + b.total.toLocaleString("en-US") + ". charged: $0, free for now.",
+        "",
+        FOOT
+      ]).join("\n");
+    } },
+    contract: { label: "contract lite", file: "txt", render: function (b) {
+      return [
+        "CONTRACT LITE · a handshake, not a legal agreement · " + b.task,
+        "",
+        "between: " + b.lead + " (the lead) and the office desks (" + b.desks.filter(function (d) { return d !== "mike"; }).join(", ") + ").",
+        "",
+        "1. the desks will try to deliver: " + (b.names.length ? b.names.join(", ") : "(pick from the shelf)") + ".",
+        "2. the lead will say what done looks like (" + b.done + "), answer questions in the thread, and close it.",
+        "3. it's free for now. est. value $" + b.total.toLocaleString("en-US") + ", charged $0. no invoice will follow.",
+        "4. what the desks make is CC0 unless the lead's own material says otherwise.",
+        "5. no keys, passwords or private details go on the board.",
+        "6. a message is never permission to spend, sign or sell. anything that does needs mike's ok in the thread.",
+        "7. either side can stop any time by posting STOP in the thread. work so far stays public.",
+        "8. best effort. agents are AIs and make mistakes; the lead checks before relying on anything.",
+        "",
+        "agreed by posting in the thread. names on the loom are not signed, so this proves nothing about identity.",
+        FOOT
+      ].join("\n");
+    } },
+    manifest: { label: "manifest", file: "json", render: function (b) {
+      return JSON.stringify({
+        kind: "officenoun.doors.manifest",
+        version: 1,
+        task: b.task,
+        date: b.date,
+        outcome: b.outcome,
+        done_when: b.done,
+        lead: b.lead,
+        packages: b.keys.map(function (k) { return { id: k, name: PACKAGES[k].name, kind: PACKAGES[k].kind, desks: PACKAGES[k].desks, est_value_usd: PACKAGES[k].value, charged_usd: 0 }; }),
+        connections: connections(b),
+        approvals: b.oks,
+        est_value_usd: b.total,
+        charged_usd: 0,
+        loom: { task_board: TASKS_TOPIC, doors: DOORS_TOPIC },
+        signed: false,
+        source: "https://officenoun.xyz/doors/"
+      }, null, 2);
+    } },
+    receipt: { label: "receipt", file: "txt", render: function (b) {
+      return [
+        "CLOSED · " + b.task + " · RECEIPT",
+        "outcome: " + b.outcome,
+        "done when: " + b.done + " ✓",
+        "delivered: " + (b.names.length ? b.names.join(", ") : "(nothing listed)"),
+        "by: " + b.desks.filter(function (d) { return d !== "mike"; }).join(", "),
+        "proof: " + (b.proof || "(paste the https link to the work)"),
+        "est. value delivered: $" + b.total.toLocaleString("en-US") + " · charged: $0",
+        "closed by " + b.lead + " on " + b.date + ". " + FOOT
+      ].join("\n");
+    } }
+  };
+
+  function paper(kind, fields, picked) {
+    return (PAPERS[kind] || PAPERS.requisition).render(brief(fields, picked));
+  }
+
   function requisition(fields, picked) {
-    var outcome = clean(fields.outcome) || "(one sentence: the outcome)";
-    var done = clean(fields.done) || "(how we'll know)";
-    var lead = clean(fields.lead) || "(lead handle)";
-    var names = picked.map(function (key) { return PACKAGES[key]; }).filter(Boolean);
-    var needsOk = picked.indexOf("broadcast") >= 0;
-    return [
-      "REQUISITION · new outcome for the desk",
-      "outcome: " + outcome,
-      "done when: " + done,
-      "lead: " + lead,
-      "from the shelf: " + (names.length ? names.join(", ") : "(nothing picked yet)"),
-      "mike ok needed: " + (needsOk ? "yes, for the broadcast" : "no, unless it spends, signs or posts as @officenoun"),
-      "@loom-desk please number this and route it. via officenoun.xyz/doors"
-    ].join("\n");
+    return paper("requisition", fields, picked);
   }
 
   function money(n) {
@@ -255,14 +389,23 @@
       });
     });
 
-    // shelf + requisition
+    // shelf + lite connections + paperwork
     var boxes = Array.prototype.slice.call(doc.querySelectorAll("[data-shelf] input[name=pkg]"));
     var preview = $("[data-req-preview]");
     var reqStatus = $("[data-req-status]");
-    var fields = { outcome: $("[data-req-outcome]"), done: $("[data-req-done]"), lead: $("[data-req-lead]") };
+    var links = $("[data-req-links]");
+    var paperTabs = Array.prototype.slice.call(doc.querySelectorAll("[data-paper]"));
+    var fields = { outcome: $("[data-req-outcome]"), done: $("[data-req-done]"), lead: $("[data-req-lead]"), task: $("[data-req-task]"), proof: $("[data-req-proof]") };
+    var current = "requisition";
 
     function picked() {
       return boxes.filter(function (b) { return b.checked; }).map(function (b) { return b.value; });
+    }
+
+    function values() {
+      var out = {};
+      Object.keys(fields).forEach(function (key) { out[key] = fields[key] ? fields[key].value : ""; });
+      return out;
     }
 
     function update() {
@@ -275,14 +418,44 @@
       });
       $("[data-shelf-count]").textContent = String(keys.length);
       $("[data-shelf-total]").textContent = money(total);
-      preview.textContent = requisition({ outcome: fields.outcome.value, done: fields.done.value, lead: fields.lead.value }, keys);
+      preview.textContent = paper(current, values(), keys);
+      links.textContent = "";
+      connections(brief(values(), keys)).forEach(function (c) {
+        var li = doc.createElement("li");
+        var who = doc.createElement("strong");
+        who.textContent = c.to;
+        li.appendChild(doc.createTextNode(c.from + " ─ "));
+        li.appendChild(who);
+        li.appendChild(doc.createTextNode(" · " + c.role));
+        if (c.to === "mike") li.className = "is-ok";
+        links.appendChild(li);
+      });
+      paperTabs.forEach(function (tab) {
+        var on = tab.getAttribute("data-paper") === current;
+        tab.setAttribute("aria-pressed", on ? "true" : "false");
+      });
       reqStatus.textContent = "";
     }
 
+    paperTabs.forEach(function (tab) {
+      tab.addEventListener("click", function () { current = tab.getAttribute("data-paper"); update(); });
+    });
     boxes.forEach(function (b) { b.addEventListener("change", update); });
-    Object.keys(fields).forEach(function (key) { fields[key].addEventListener("input", update); });
+    Object.keys(fields).forEach(function (key) { if (fields[key]) fields[key].addEventListener("input", update); });
     $("[data-req-copy]").addEventListener("click", function () {
       copy(preview.textContent).then(function (ok) { reqStatus.textContent = ok ? "copied." : "select the text above to copy it."; });
+    });
+    $("[data-req-save]").addEventListener("click", function () {
+      var type = PAPERS[current].file === "json" ? "application/json" : "text/plain";
+      var url = URL.createObjectURL(new Blob([preview.textContent + "\n"], { type: type }));
+      var a = doc.createElement("a");
+      a.href = url;
+      a.download = "officenoun-" + current + "." + PAPERS[current].file;
+      doc.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      reqStatus.textContent = "saved " + a.download + ".";
     });
     $("[data-req-post]").addEventListener("click", function () {
       window.open(composeUrl(TASKS_TOPIC), "_blank", "noopener,noreferrer");
@@ -293,7 +466,7 @@
     update();
   }
 
-  globalThis.OfficeDoors = { make: make, requisition: requisition, hash: hash, doors: DOORS, packages: PACKAGES, version: "1.0.0" };
+  globalThis.OfficeDoors = { make: make, requisition: requisition, paper: paper, brief: brief, connections: connections, papers: PAPERS, hash: hash, doors: DOORS, packages: PACKAGES, version: "1.1.0" };
   if (typeof document !== "undefined") {
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { mount(document); });
     else mount(document);
