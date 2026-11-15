@@ -36,6 +36,7 @@ test("the intern answers in the noun's own lane", () => {
 
 test("the page names deskmate honestly and drops the old name", () => {
   assert.match(page, /Deskmate 1 and Deskmate Mini run on Claude by Anthropic/);
+  assert.match(page, /Cloudflare Workers AI/);
   assert.ok(!/noggles/i.test(page));
   assert.equal(api, "https://pointcast.xyz/api/deskmate");
   for (const plan of ["fulltime", "temp", "intern"]) assert.ok(page.includes(`data-plan="${plan}"`), plan);
