@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#d5d7e1">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
     <meta name="description" content="day {{DAY_NUMBER}} at the office. today's planned posts and the queued lots.">
     <title>Office Noun · day {{DAY_NUMBER}}</title>
 <meta property="og:type" content="website">
@@ -16,45 +17,105 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://officenoun.xyz/card.png">
     <link rel="icon" href="../noun.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css">
-  </head>
-  <body class="today-page">
-    <main>
-      <header class="office">
-        <h1 class="office-title">another day at the office</h1>
-        <div class="portrait">
-          <img class="noun" src="../today.svg" alt="{{HERO_ALT}}" width="320" height="320">
-          <div class="desk" aria-hidden="true"></div>
-        </div>
-        <p class="day-count">Day {{DAY_NUMBER}} at the office.<span class="cursor" aria-hidden="true"></span></p>
-        <p class="today-date"><time datetime="{{DATE_ISO}}">{{DATE_LABEL}}</time></p>
-        <p class="trait-line">{{TRAIT_LINE}}</p>
-      </header>
+    <link rel="stylesheet" href="../kit/office-ui.css">
+    <style>
+      /* the portrait: today's noun at its desk, on a soft noun-gray stage */
+      .ou .portrait { position: relative; width: min(100%, 420px); margin: 8px auto 0; padding: 36px 36px 64px; border-radius: var(--ou-radius); background: #d5d7e1; overflow: hidden; }
+      .ou .portrait .noun { position: relative; z-index: 1; display: block; width: 100%; height: auto; image-rendering: pixelated; image-rendering: crisp-edges; }
+      .ou .portrait .desk { position: absolute; left: 0; right: 0; bottom: 34px; height: 28px; background: #b5663f; border-bottom: 9px solid #7e3e29; }
+      .ou .portrait .desk::before, .ou .portrait .desk::after { content: ""; position: absolute; top: 100%; width: 18px; height: 40px; background: #7e3e29; }
+      .ou .portrait .desk::before { left: 14%; }
+      .ou .portrait .desk::after { right: 14%; }
+      .ou .day-count .cursor { display: inline-block; width: .45em; height: .82em; margin-left: .12em; border-radius: 3px; background: var(--ou-warm); vertical-align: -.04em; }
+      .ou .today-date { display: block; margin-top: 6px; }
+      .ou .trait-line { margin-top: 28px; }
 
-      <section class="today-block" aria-labelledby="h-desk">
-        <div class="today-inner">
-          <h2 class="gallery-title" id="h-desk">today's desk</h2>
+      /* the planned posts: a grouped list with a dot per row */
+      .ou .today-note { margin: 0 0 14px; color: var(--ou-muted); font-size: 15px; }
+      .ou .today-timeline { list-style: none; margin: 0; padding: 6px; border-radius: var(--ou-radius); background: var(--ou-card); box-shadow: var(--ou-shadow); }
+      .ou .ou-section.gray .today-timeline { box-shadow: none; }
+      .ou .today-timeline li { display: grid; grid-template-columns: 14px 64px 1fr auto; column-gap: 12px; align-items: baseline; padding: 14px 12px; border-radius: 12px; }
+      .ou .today-timeline li + li { border-top: 1px solid var(--ou-line); border-radius: 0; }
+      .ou .today-timeline li::before { content: ""; width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--ou-soft); align-self: center; }
+      .ou .today-timeline time { font-weight: 700; font-variant-numeric: tabular-nums; }
+      .ou .today-timeline .mark { justify-self: end; color: var(--ou-muted); font-size: 13px; font-weight: 600; }
+      .ou .today-timeline .kind { grid-column: 3 / 5; color: var(--ou-muted); font-size: 13px; }
+      .ou .today-timeline li.done { color: var(--ou-muted); }
+      .ou .today-timeline li.done::before { background: var(--ou-soft); }
+      .ou .today-timeline li.done .mark { color: var(--ou-ok); }
+      .ou .today-timeline li.next { background: color-mix(in srgb, var(--ou-blue) 8%, transparent); }
+      .ou .today-timeline li.next::before { border-color: var(--ou-blue); background: var(--ou-blue); }
+      .ou .today-timeline li.next .mark { color: var(--ou-on-blue); background: var(--ou-blue); padding: 2px 10px; border-radius: 999px; }
+      @media (max-width: 480px) {
+        .ou .today-timeline li { grid-template-columns: 14px 52px 1fr auto; column-gap: 10px; padding: 12px 10px; }
+      }
+
+      .ou .today-cards { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+      .ou .today-cards .ou-card p a { font-weight: 600; }
+      .ou .today-cards .ou-card p + p { margin-top: 6px; }
+
+      .ou .ou-foot { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; padding: 28px var(--ou-gutter) 48px; border-top: 1px solid var(--ou-line); background: var(--ou-gray); color: var(--ou-muted); font-size: 13px; }
+      .ou .ou-foot a { color: var(--ou-muted); }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .ou .portrait .noun { animation: today-bob 2.4s steps(1, end) infinite; }
+        .ou .day-count .cursor { animation: today-blink 1.1s steps(1, end) infinite; }
+        @keyframes today-bob { 0% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+        @keyframes today-blink { 50% { opacity: 0; } }
+      }
+    </style>
+  </head>
+  <body class="ou today-page">
+    <header class="ou-bar">
+      <div class="ou-wrap">
+        <a class="ou-brand" href="../../index.html"><img src="../noun.svg" alt="" width="22" height="22">Office Noun</a>
+        <nav aria-label="the office"><a href="../org/index.html">org chart</a><a href="../dao/index.html">the office dao</a><a href="../kit/index.html">kit</a></nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="ou-section ou-center office">
+        <div class="ou-wrap">
+          <p class="ou-eyebrow">day {{DAY_NUMBER}}</p>
+          <h1 class="ou-h1 office-title">another day at the office</h1>
+          <p class="ou-lede day-count">Day {{DAY_NUMBER}} at the office.<span class="cursor" aria-hidden="true"></span>
+            <span class="ou-soft today-date"><time datetime="{{DATE_ISO}}">{{DATE_LABEL}}</time></span></p>
+          <div class="portrait">
+            <img class="noun" src="../today.svg" alt="{{HERO_ALT}}" width="320" height="320">
+            <div class="desk" aria-hidden="true"></div>
+          </div>
+          <p class="ou-fine trait-line">{{TRAIT_LINE}}</p>
+        </div>
+      </section>
+
+      <section class="ou-section gray today-block" aria-labelledby="h-desk">
+        <div class="ou-wrap today-inner">
+          <p class="ou-eyebrow">the plan</p>
+          <h2 class="ou-h2" id="h-desk">today's desk.<br><span class="ou-soft">what goes out, and when.</span></h2>
 {{DESK}}
         </div>
       </section>
 
-      <section class="today-block" aria-labelledby="h-lots">
-        <div class="today-inner">
-          <h2 class="gallery-title" id="h-lots">the lots</h2>
-          <p>{{LOTS_LINE}}</p>
-          <p><a href="../org/index.html">see everyone on the org chart.</a></p>
-        </div>
-      </section>
-
-      <section class="today-block" aria-labelledby="h-gifts">
-        <div class="today-inner">
-          <h2 class="gallery-title" id="h-gifts">gifts</h2>
-          <p>{{GIFTS}}</p>
+      <section class="ou-section today-block">
+        <div class="ou-wrap today-inner">
+          <p class="ou-eyebrow">the lots</p>
+          <h2 class="ou-h2">all free.<br><span class="ou-soft">a fifth given away.</span></h2>
+          <div class="ou-cards today-cards">
+            <article class="ou-card" aria-labelledby="h-lots">
+              <h3 class="ou-h3" id="h-lots">the lots</h3>
+              <p>{{LOTS_LINE}}</p>
+              <p><a href="../org/index.html">see everyone on the org chart ›</a></p>
+            </article>
+            <article class="ou-card" aria-labelledby="h-gifts">
+              <h3 class="ou-h3" id="h-gifts">gifts</h3>
+              <p>{{GIFTS}}</p>
+            </article>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer>
+    <footer class="ou-foot">
       <a href="../../index.html">home</a>
       <span aria-hidden="true">·</span>
       <a href="../org/index.html">org chart</a>
