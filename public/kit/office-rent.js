@@ -9,8 +9,9 @@
 
   var API = "https://pointcast.xyz/api/deskmate";
   var MAX_TURNS = 12;
+  var TIMEOUT_MS = 20000;
   var PLAN_NAMES = { fulltime: "Deskmate 1", temp: "Deskmate Mini", intern: "the intern" };
-  var GENERAL_CHIPS = ["what are you good at?", "write me five lines about monday", "lunch from eggs, rice and scallions"];
+  var GENERAL_CHIPS = ["make me a noun", "what are you good at?", "write me five lines about monday", "lunch from eggs, rice and scallions"];
 
   function doors() { return globalThis.OfficeDoors; }
 
@@ -38,6 +39,75 @@
     }
     var card = doors().make(door, seed);
     return [lead + " " + card.title + ":"].concat(card.lines).join("\n");
+  }
+
+
+  // ---- chat-drawn nouns: "make me a noun" builds a new one from the CC0 traits (public/rent/parts.js) ----
+  var ART_ASK = /\b(make|draw|create|generate|design|paint|sketch|give)\b[^.?!]{0,40}\b(noun|nouns|art|image|picture|pic|pfp|avatar|portrait|character)\b|\b(new|original|random)\s+noun\b/i;
+  var PARTS_URL = "parts.js";
+  var partsPromise = null;
+
+  function wantsArt(text) { return ART_ASK.test(String(text || "")); }
+
+  function loadParts(doc) {
+    if (globalThis.NOUN_PARTS) return Promise.resolve(globalThis.NOUN_PARTS);
+    if (partsPromise) return partsPromise;
+    partsPromise = new Promise(function (resolve, reject) {
+      var s = doc.createElement("script");
+      s.src = PARTS_URL;
+      s.async = true;
+      s.onload = function () { globalThis.NOUN_PARTS ? resolve(globalThis.NOUN_PARTS) : reject(new Error("no parts")); };
+      s.onerror = function () { partsPromise = null; reject(new Error("parts failed")); };
+      doc.head.appendChild(s);
+    });
+    return partsPromise;
+  }
+
+  function seeded(seed) {
+    return function () {
+      seed = (seed + 0x6d2b79f5) >>> 0;
+      var t = seed;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function paintRle(grid, rle, palette) {
+    var bytes = rle.slice(2).match(/../g).map(function (h) { return parseInt(h, 16); });
+    var top = bytes[1], right = bytes[2], left = bytes[4], x = left, y = top;
+    for (var i = 5; i < bytes.length; i += 2) {
+      for (var n = 0; n < bytes[i]; n += 1) {
+        if (bytes[i + 1] && palette[bytes[i + 1]] && y < 32) grid[y][x] = "#" + palette[bytes[i + 1]];
+        x += 1;
+        if (x >= right) { x = left; y += 1; }
+      }
+    }
+  }
+
+  // same words + same count, same noun. returns { no, title, description, svg }.
+  function drawNoun(parts, seedText, count) {
+    var key = "draw:" + String(seedText || "").trim().toLowerCase() + ":" + (count || 0);
+    var h = doors().hash(key);
+    var random = seeded(h);
+    var pick = function (list) { return list[Math.floor(random() * list.length)]; };
+    var body = pick(parts.bodies), accessory = pick(parts.accessories), head = pick(parts.heads), glasses = pick(parts.glasses);
+    var grid = [];
+    for (var r = 0; r < 32; r += 1) grid.push(new Array(32).fill(null));
+    [body, accessory, head, glasses].forEach(function (t) { paintRle(grid, t[1], parts.palette); });
+    var cell = 10, out = '<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320" shape-rendering="crispEdges"><rect width="100%" height="100%" fill="#d5d7e1"/>';
+    grid.forEach(function (row, y) {
+      for (var x = 0; x < 32;) {
+        var c = row[x], end = x + 1;
+        while (c && end < 32 && row[end] === c) end += 1;
+        if (c) out += '<rect x="' + x * cell + '" y="' + y * cell + '" width="' + (end - x) * cell + '" height="' + cell + '" fill="' + c + '"/>';
+        x = end;
+      }
+    });
+    var glassesLabel = glasses[0].replace(/^square\s+/, "").replace(/^hip\s+/, "") + " noggles";
+    var no = 10000 + (h % 90000);
+    var description = "a " + head[0] + " head, " + glassesLabel + " and " + (accessory[0] === "none" ? "no accessory" : "a " + accessory[0] + " shirt") + ", on a " + body[0] + " body";
+    return { no: no, title: head[0].replace(/\b\w/g, function (c) { return c.toUpperCase(); }) + " Noun", description: description, svg: out + "</svg>" };
   }
 
   function readRoster(doc) {
@@ -121,6 +191,7 @@
       state.history.push({ role: "assistant", content: text });
       state.history = state.history.slice(-MAX_TURNS);
       bubble(viaIntern ? "noun rn-intern" : "noun", text);
+      if (viaIntern) meta.textContent = "answered by the intern (word lists, no ai)";
     }
 
     function send(text) {
@@ -130,13 +201,17 @@
       state.history.push({ role: "user", content: text });
       state.history = state.history.slice(-MAX_TURNS);
       input.value = "";
+      if (wantsArt(text)) { art(text); return; }
       if (state.plan === "intern" || state.open === false) { reply(intern(text, state.noun), true); return; }
       state.busy = true;
       var typing = bubble("noun rn-typing", "…");
+      var ctrl = typeof AbortController === "function" ? new AbortController() : null;
+      var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, TIMEOUT_MS);
       fetch(API, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ plan: state.plan, noun: state.noun.slug, messages: state.history })
+        body: JSON.stringify({ plan: state.plan, noun: state.noun.slug, messages: state.history }),
+        signal: ctrl ? ctrl.signal : undefined
       }).then(function (res) {
         return res.json().then(function (data) { return { status: res.status, data: data }; });
       }).then(function (r) {
@@ -145,9 +220,62 @@
         if (r.status === 503 && r.data && r.data.error === "not_configured") { state.open = false; setState(); }
         var why = r.data && r.data.message ? r.data.message : "the desk didn't answer.";
         reply(why + "\n" + intern(text, state.noun), true);
+      }, function (error) {
+        typing.remove();
+        var slow = error && error.name === "AbortError";
+        reply((slow ? "the desk is slow right now, so the intern took this one." : "can't reach the desk right now.") + "\n" + intern(text, state.noun), true);
+      }).then(function () { clearTimeout(timer); state.busy = false; });
+    }
+
+    var drawCount = 0;
+    function art(text) {
+      state.busy = true;
+      var typing = bubble("noun rn-typing", "drawing…");
+      loadParts(doc).then(function (parts) {
+        typing.remove();
+        var made = drawNoun(parts, text, drawCount);
+        drawCount += 1;
+        var li = doc.createElement("li");
+        li.className = "rn-msg rn-noun rn-art";
+        var img = doc.createElement("img");
+        img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(made.svg);
+        img.alt = "noun no. " + made.no + ": " + made.description;
+        img.width = 320;
+        img.height = 320;
+        var cap = doc.createElement("p");
+        cap.textContent = "fresh off the copier: noun no. " + made.no + ", " + made.description + ". CC0 nouns traits, drawn just now.";
+        var row = doc.createElement("div");
+        row.className = "rn-art-actions";
+        var save = doc.createElement("button");
+        save.type = "button";
+        save.textContent = "Save";
+        save.addEventListener("click", function () {
+          var url = URL.createObjectURL(new Blob([made.svg], { type: "image/svg+xml" }));
+          var a = doc.createElement("a");
+          a.href = url;
+          a.download = "office-noun-" + made.no + ".svg";
+          doc.body.appendChild(a);
+          a.click();
+          a.remove();
+          setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+        });
+        var again = doc.createElement("button");
+        again.type = "button";
+        again.textContent = "Another";
+        again.addEventListener("click", function () { if (!state.busy) art(text); });
+        row.appendChild(save);
+        row.appendChild(again);
+        li.appendChild(img);
+        li.appendChild(cap);
+        li.appendChild(row);
+        log.appendChild(li);
+        log.scrollTop = log.scrollHeight;
+        state.history.push({ role: "assistant", content: "(drew noun no. " + made.no + ": " + made.description + ")" });
+        state.history = state.history.slice(-MAX_TURNS);
+        meta.textContent = "drawn in your browser from the CC0 nouns traits";
       }, function () {
         typing.remove();
-        reply("can't reach the desk right now.\n" + intern(text, state.noun), true);
+        reply("the copier is jammed. try the drawing again in a second.", true);
       }).then(function () { state.busy = false; });
     }
 
@@ -185,7 +313,7 @@
     }
   }
 
-  globalThis.OfficeRent = { intern: intern, api: API, version: "2.0.0" };
+  globalThis.OfficeRent = { intern: intern, api: API, wantsArt: wantsArt, drawNoun: drawNoun, version: "2.1.0" };
   if (typeof document !== "undefined") {
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { mount(document); });
     else mount(document);
