@@ -38,6 +38,11 @@
 .rn-you { align-self: flex-end; background: var(--dn-blue); color: #fff; border-bottom-right-radius: 6px; }
 .rn-noun { align-self: flex-start; background: #e9e9eb; color: var(--dn-ink); border-bottom-left-radius: 6px; }
 .rn-intern { background: #fff4e5; color: #6b3a00; }
+.rn-art { max-width: 300px; padding: 10px; }
+.rn-art img { display: block; width: 100%; height: auto; border-radius: 14px; image-rendering: pixelated; }
+.rn-art p { margin: 8px 4px 6px; font-size: 14px; line-height: 1.4; }
+.rn-art-actions { display: flex; gap: 8px; padding: 0 4px 4px; }
+.doors-body .rn-art-actions button { padding: 6px 14px; border: 0; border-radius: 980px; background: #fff; color: var(--dn-blue); font: 500 14px/1.2 var(--dn-font); cursor: pointer; }
 .rn-typing { color: var(--dn-muted); letter-spacing: 0.2em; }
 .rn-system { align-self: center; padding: 4px 12px; background: transparent; color: var(--dn-soft); font-size: 13px; }
 @keyframes rn-pop { from { opacity: 0; transform: translateY(6px) scale(0.98); } to { opacity: 1; transform: none; } }

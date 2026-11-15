@@ -46,3 +46,24 @@ test("rent copy never talks about investing or prices", () => {
   const text = page.replace(/<[^>]+>/g, " ").toLowerCase();
   for (const word of ["buy now", "invest", "price"]) assert.ok(!text.includes(word), word);
 });
+
+test("art asks are recognised, ordinary chat is not", () => {
+  const { wantsArt } = globalThis.OfficeRent;
+  for (const t of ["make me a noun", "make an original art nouns image, mh", "draw me a pfp", "random noun please", "create a nouns character"]) assert.ok(wantsArt(t), t);
+  for (const t of ["lunch from eggs", "write me five lines about monday", "what are you good at?", "turn this into one outcome"]) assert.ok(!wantsArt(t), t);
+});
+
+test("chat-drawn nouns are seeded, new-headed and escape-free svg", async () => {
+  await import("../public/rent/parts.js");
+  const { drawNoun } = globalThis.OfficeRent;
+  const parts = globalThis.NOUN_PARTS;
+  const a = drawNoun(parts, "make me a noun", 0);
+  assert.deepEqual(a, drawNoun(parts, "Make me a noun ", 0));
+  assert.notEqual(a.no, drawNoun(parts, "make me a noun", 1).no);
+  assert.match(a.svg, /^<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg"/);
+  assert.ok((a.svg.match(/<rect/g) || []).length > 20);
+  assert.ok(!/stapler head|calendar head|laptop head/.test(a.description));
+  for (const canon of ["calendar", "calculator", "stapler", "coffeebean", "cordlessphone", "mailbox", "mouse", "mug", "pencil tip", "laptop"]) {
+    assert.ok(!parts.heads.some((h) => h[0] === canon), canon);
+  }
+});
