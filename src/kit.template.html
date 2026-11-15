@@ -20,9 +20,13 @@
     <link rel="stylesheet" href="office-ui.css">
     <link rel="stylesheet" href="tezos-desk.css">
     <style>
+      /* the kit's warm eyebrow is 4.25:1 on white; a touch deeper clears AA on white and gray (dark mode keeps the kit value) */
+      body.ou { --ou-warm: #a85a35; }
+      .ou .kit-head .ou-h1 { font-size: clamp(44px, 8vw, 76px); }
       .ou pre { margin: 0 0 8px; padding: 16px; border-radius: 14px; background: var(--ou-card); overflow: auto; font: 12.5px/1.55 var(--ou-mono); letter-spacing: 0; white-space: pre-wrap; word-break: break-word; }
       .ou .ou-section:not(.gray) pre { background: var(--ou-gray); }
       .ou code { font-family: var(--ou-mono); font-size: .88em; letter-spacing: 0; overflow-wrap: anywhere; }
+      .ou .kit-new a { text-decoration: underline; text-underline-offset: .18em; }
       .ou .kit-new { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; margin: 0 0 22px; font-size: 15px; }
       .ou .kit-copy { max-width: 680px; margin: 0 0 16px; color: var(--ou-muted); }
       .ou .ou-center .kit-copy { margin-left: auto; margin-right: auto; }
@@ -59,7 +63,7 @@
     </header>
 
     <main class="kit-page">
-      <section class="ou-section ou-center">
+      <section class="ou-section ou-center kit-head">
         <div class="ou-wrap">
           <p class="kit-new"><span class="ou-tag new">new</span><span><a href="./ui/">office ui kit</a>, the look behind doors, faucets and pools as one stylesheet. one link tag, cc0.</span></p>
           <p class="ou-eyebrow">tezos desk kit · cc0</p>

@@ -19,6 +19,9 @@
     <link rel="icon" href="../noun.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../kit/office-ui.css">
     <style>
+      /* the kit's warm eyebrow is 4.25:1 on white; a touch deeper clears AA on white and gray (dark mode keeps the kit value) */
+      body.ou { --ou-warm: #a85a35; }
+      .ou .org-head .ou-h1 { font-size: clamp(44px, 8vw, 76px); }
       .ou .org-clock { display: inline-flex; align-items: center; gap: 8px; margin-top: 4px; padding: 10px 18px; border-radius: 999px; background: var(--ou-ink); color: var(--ou-bg); font-size: 15px; font-weight: 600; }
       .ou .org-clock::before { content: ""; width: 14px; height: 14px; border-radius: 50%; border: 2px solid currentColor; background: linear-gradient(currentColor, currentColor) 50% 15% / 2px 40% no-repeat; }
 
@@ -43,7 +46,6 @@
       .ou .org-who { color: var(--ou-warm); font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
       .ou .org-title { font-size: 16px; font-weight: 600; }
       .ou .org-traits, .ou .org-boss { color: var(--ou-muted); font-size: 13px; }
-      .ou .org-boss { color: var(--ou-soft); }
 
       .ou .ou-foot { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; padding: 28px var(--ou-gutter) 48px; border-top: 1px solid var(--ou-line); color: var(--ou-muted); font-size: 13px; }
       .ou .ou-foot a { color: var(--ou-muted); }
@@ -57,14 +59,14 @@
       </div>
     </header>
 
-    <header class="ou-section ou-center org-head">
+    <section class="ou-section ou-center org-head" aria-labelledby="org-h1">
       <div class="ou-wrap">
         <p class="ou-eyebrow">who reports to whom</p>
-        <h1 class="ou-h1">the org chart.<br><span class="ou-soft">10 departments. one clock.</span></h1>
+        <h1 class="ou-h1" id="org-h1">the org chart.<br><span class="ou-soft">10 departments. one clock.</span></h1>
         <p class="ou-lede">{{STAFF}} on staff. hired one a day. seniority is by start date.</p>
         <div class="org-clock" role="img" aria-label="the clock, to which day 1 reports">the clock</div>
       </div>
-    </header>
+    </section>
     <div class="ou-section gray">
       <main class="ou-wrap org-main">
 {{SECTIONS}}

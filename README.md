@@ -42,6 +42,8 @@ Planned posts live in `data/posts-plan.json`, an array of `{ "time": "HH:MM", "t
 <body class="ou">
 ```
 
+`/today/`, `/org/` and `/kit/` are built on it too (their templates in `src/` link the kit and add only a small scoped `<style>`; `test/kit-pages.test.mjs` keeps them that way).
+
 Everything is scoped under `.ou` and themed with `--ou-*` custom properties. The script only adds tabs (`data-ou-tabs` / `data-ou-tab` / `data-ou-panel`), two-tap buttons (`data-ou-arm`, fires `ou:confirm`) and the hearth (`data-ou-hearth` + `data-ou-light`); it makes no network calls and inserts nothing as HTML.
 
 ## Tezos desk kit

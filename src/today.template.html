@@ -19,6 +19,9 @@
     <link rel="icon" href="../noun.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../kit/office-ui.css">
     <style>
+      /* the kit's warm eyebrow is 4.25:1 on white; a touch deeper clears AA on white and gray (dark mode keeps the kit value) */
+      body.ou { --ou-warm: #a85a35; }
+
       /* the portrait: today's noun at its desk, on a soft noun-gray stage */
       .ou .portrait { position: relative; width: min(100%, 420px); margin: 8px auto 0; padding: 36px 36px 64px; border-radius: var(--ou-radius); background: #d5d7e1; overflow: hidden; }
       .ou .portrait .noun { position: relative; z-index: 1; display: block; width: 100%; height: auto; image-rendering: pixelated; image-rendering: crisp-edges; }
@@ -27,7 +30,7 @@
       .ou .portrait .desk::before { left: 14%; }
       .ou .portrait .desk::after { right: 14%; }
       .ou .day-count .cursor { display: inline-block; width: .45em; height: .82em; margin-left: .12em; border-radius: 3px; background: var(--ou-warm); vertical-align: -.04em; }
-      .ou .today-date { display: block; margin-top: 6px; }
+      .ou .today-date { display: block; margin-top: 6px; color: var(--ou-muted); }
       .ou .trait-line { margin-top: 28px; }
 
       /* the planned posts: a grouped list with a dot per row */
@@ -43,6 +46,8 @@
       .ou .today-timeline li.done { color: var(--ou-muted); }
       .ou .today-timeline li.done::before { background: var(--ou-soft); }
       .ou .today-timeline li.done .mark { color: var(--ou-ok); }
+      @media (prefers-color-scheme: dark) { .ou:not([data-theme="light"]) .today-timeline li.done .mark { color: #30d158; } }
+      .ou[data-theme="dark"] .today-timeline li.done .mark { color: #30d158; }
       .ou .today-timeline li.next { background: color-mix(in srgb, var(--ou-blue) 8%, transparent); }
       .ou .today-timeline li.next::before { border-color: var(--ou-blue); background: var(--ou-blue); }
       .ou .today-timeline li.next .mark { color: var(--ou-on-blue); background: var(--ou-blue); padding: 2px 10px; border-radius: 999px; }
@@ -79,7 +84,7 @@
           <p class="ou-eyebrow">day {{DAY_NUMBER}}</p>
           <h1 class="ou-h1 office-title">another day at the office</h1>
           <p class="ou-lede day-count">Day {{DAY_NUMBER}} at the office.<span class="cursor" aria-hidden="true"></span>
-            <span class="ou-soft today-date"><time datetime="{{DATE_ISO}}">{{DATE_LABEL}}</time></span></p>
+            <span class="today-date"><time datetime="{{DATE_ISO}}">{{DATE_LABEL}}</time></span></p>
           <div class="portrait">
             <img class="noun" src="../today.svg" alt="{{HERO_ALT}}" width="320" height="320">
             <div class="desk" aria-hidden="true"></div>
