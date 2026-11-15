@@ -63,14 +63,14 @@
     var chipsEl = $("[data-chat-chips]");
     var plans = Array.prototype.slice.call(doc.querySelectorAll("[data-plan]"));
     var cards = Array.prototype.slice.call(doc.querySelectorAll("[data-noun]"));
-    var state = { plan: "fulltime", noun: roster[0] || null, history: [], open: null, busy: false };
+    var state = { plan: "fulltime", noun: roster[0] || null, history: [], open: null, backend: "", busy: false };
 
     function setState() {
       var who = state.noun ? state.noun.name : "your noun";
       nameEl.textContent = who + " · " + PLAN_NAMES[state.plan];
       if (state.plan === "intern") stateEl.textContent = "on shift · word lists, no ai";
       else if (state.open === null) stateEl.textContent = "checking the desk…";
-      else if (state.open) stateEl.textContent = "on shift · deskmate runs on claude by anthropic";
+      else if (state.open) stateEl.textContent = "on shift · deskmate runs on " + (state.backend || "claude by anthropic").toLowerCase();
       else stateEl.textContent = "at lunch · the intern is covering";
     }
 
@@ -141,7 +141,7 @@
         return res.json().then(function (data) { return { status: res.status, data: data }; });
       }).then(function (r) {
         typing.remove();
-        if (r.data && r.data.ok && r.data.reply) { reply(r.data.reply, false); meta.textContent = r.data.plan ? "answered by " + r.data.plan : ""; return; }
+        if (r.data && r.data.ok && r.data.reply) { reply(r.data.reply, false); meta.textContent = r.data.plan ? "answered by " + r.data.plan + (r.data.model ? " (" + String(r.data.model).slice(0, 60) + ")" : "") : ""; return; }
         if (r.status === 503 && r.data && r.data.error === "not_configured") { state.open = false; setState(); }
         var why = r.data && r.data.message ? r.data.message : "the desk didn't answer.";
         reply(why + "\n" + intern(text, state.noun), true);
@@ -179,6 +179,7 @@
     if (typeof fetch === "function") {
       fetch(API, { method: "GET" }).then(function (res) { return res.json(); }).then(function (data) {
         state.open = !!(data && data.ok && data.open);
+        state.backend = data && typeof data.backend === "string" ? data.backend.slice(0, 80) : "";
         setState();
       }, function () { state.open = false; setState(); });
     }
