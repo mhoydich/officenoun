@@ -1,84 +1,83 @@
-/* office rent. CC0. rent an office noun by the shift: pick a noun from your desk tag, pick a plan,
-   talk to it. noggles 1 / noggles mini answer through pointcast.xyz/api/noggles (claude by anthropic);
-   the intern answers from the doors' word lists in the browser and never goes online.
+/* office rent. CC0. the temp pool: rent an office noun by the shift. pick a noun from the roster,
+   pick a shift, talk to it. deskmate 1 / deskmate mini answer through pointcast.xyz/api/deskmate
+   (claude by anthropic); the intern answers from the doors' word lists in the browser and never goes
+   online. the roster is embedded in the page as json (#rn-roster-data), built from data/roster.json.
    needs office-traits.js, office-noun.js and office-doors.js first. user text only ever goes in via
    textContent. nothing is stored. */
 (function () {
   "use strict";
 
-  var API = "https://pointcast.xyz/api/noggles";
+  var API = "https://pointcast.xyz/api/deskmate";
   var MAX_TURNS = 12;
-  var NAMES = { fulltime: "Noggles 1", temp: "Noggles Mini", intern: "the intern" };
+  var PLAN_NAMES = { fulltime: "Deskmate 1", temp: "Deskmate Mini", intern: "the intern" };
+  var GENERAL_CHIPS = ["what are you good at?", "write me five lines about monday", "lunch from eggs, rice and scallions"];
 
   function doors() { return globalThis.OfficeDoors; }
 
-  // same desk tag, same noun. never change the seed recipe, or rented nouns change.
-  function nounForTag(tag, roll) {
-    var key = "rent:" + String(tag || "").trim().toLowerCase() + ":" + (roll || 0);
-    var no = 11 + (doors().hash(key) % 9989);
-    var noun = globalThis.OfficeNoun.forDay(no);
-    return {
-      no: no,
-      noun: noun,
-      head: noun.parts ? noun.parts.head.label.replace(/ head$/, "") : "stapler",
-      glasses: noun.parts ? noun.parts.glasses.label : "noggles",
-      description: noun.description
-    };
-  }
-
-  // the intern: word lists only. picks a door from the words it hears.
-  function intern(text, who) {
+  // the intern: word lists only. leans on the noun's own door, then on the words it hears.
+  function intern(text, noun) {
     var t = String(text || "").toLowerCase();
-    var seed = t.replace(/^(write me|pitch me|make me|give me|lunch from|a poem about|five lines about)\s+/, "").slice(0, 80) || "the office";
-    if (/outcome|done when|goal/.test(t)) {
-      var goal = seed.replace(/^.*?:\s*/, "") || "the thing";
+    var name = noun && noun.name ? noun.name : "the intern";
+    var lead = name + "'s intern here (word lists, no ai).";
+    if (/what are you good at|who are you|what do you do/.test(t)) {
+      return lead + " " + (noun ? noun.name + " is " + noun.title + ": " + noun.specialty + "." : "") + " i cover when the desk is out.";
+    }
+    var door = /lunch|recipe|fridge|cook|eat|eggs|rice/.test(t) ? "recipe"
+      : /show|sketch|tv|episode|pitch|game/.test(t) ? "show"
+      : /outcome|done when|goal|plan|requisition|paperwork/.test(t) ? "outcome"
+      : /poem|lines|haiku|name/.test(t) ? "poem"
+      : (noun && noun.door) || "poem";
+    var seed = t.replace(/^.*?(about|from|for|:)\s+/, "").slice(0, 80) || "the office";
+    if (door === "outcome") {
       return [
-        "intern here (word lists, no ai). my best shot:",
-        "outcome: " + goal + ".",
+        lead + " my best shot:",
+        "outcome: " + seed + ".",
         "done when: someone who isn't you can see it happened, and says so on the board.",
         "next: take it to officenoun.xyz/doors and fill in the requisition."
       ].join("\n");
     }
-    var door = /lunch|recipe|fridge|cook|eat|eggs|rice/.test(t) ? "recipe" : /show|sketch|tv|episode|pitch|union/.test(t) ? "show" : "poem";
-    var card = doors().make(door, door === "recipe" ? seed.replace(/^.*?from\s+/, "") : seed);
-    return ["intern here (word lists, no ai). " + card.title + ":"].concat(card.lines).join("\n");
+    var card = doors().make(door, seed);
+    return [lead + " " + card.title + ":"].concat(card.lines).join("\n");
+  }
+
+  function readRoster(doc) {
+    try {
+      var el = doc.getElementById("rn-roster-data");
+      var list = JSON.parse(el ? el.textContent : "[]");
+      return Array.isArray(list) ? list : [];
+    } catch (e) { return []; }
   }
 
   function mount(doc) {
     var $ = function (sel) { return doc.querySelector(sel); };
     var log = $("[data-chat-log]");
     if (!log) return;
+    var roster = readRoster(doc);
+    var bySlug = {};
+    roster.forEach(function (n) { bySlug[n.slug] = n; });
     var input = $("[data-chat-input]");
     var form = $("[data-chat-form]");
     var stateEl = $("[data-chat-state]");
     var nameEl = $("[data-chat-name]");
     var meta = $("[data-chat-meta]");
-    var tagInput = $("[data-desk-tag]");
+    var chipsEl = $("[data-chat-chips]");
     var plans = Array.prototype.slice.call(doc.querySelectorAll("[data-plan]"));
-    var state = { plan: "fulltime", roll: 0, who: null, history: [], open: null, busy: false };
-
-    function setNoun() {
-      state.who = nounForTag(tagInput.value || "a visitor", state.roll);
-      var src = globalThis.OfficeNoun.src(state.who.noun, "..");
-      $("[data-noun-art]").src = src;
-      $("[data-noun-art]").alt = "office noun no. " + state.who.no + ": " + state.who.description;
-      $("[data-chat-avatar]").src = src;
-      $("[data-noun-no]").textContent = String(state.who.no);
-      $("[data-noun-desc]").textContent = state.who.description + ".";
-    }
+    var cards = Array.prototype.slice.call(doc.querySelectorAll("[data-noun]"));
+    var state = { plan: "fulltime", noun: roster[0] || null, history: [], open: null, busy: false };
 
     function setState() {
-      nameEl.textContent = NAMES[state.plan] + " · noun no. " + state.who.no;
+      var who = state.noun ? state.noun.name : "your noun";
+      nameEl.textContent = who + " · " + PLAN_NAMES[state.plan];
       if (state.plan === "intern") stateEl.textContent = "on shift · word lists, no ai";
       else if (state.open === null) stateEl.textContent = "checking the desk…";
-      else if (state.open) stateEl.textContent = "on shift · runs on claude by anthropic";
+      else if (state.open) stateEl.textContent = "on shift · deskmate runs on claude by anthropic";
       else stateEl.textContent = "at lunch · the intern is covering";
     }
 
     function bubble(role, text) {
       var li = doc.createElement("li");
       li.className = "rn-msg rn-" + role;
-      text.split("\n").forEach(function (line, i) {
+      String(text).split("\n").forEach(function (line, i) {
         if (i) li.appendChild(doc.createElement("br"));
         li.appendChild(doc.createTextNode(line));
       });
@@ -87,8 +86,35 @@
       return li;
     }
 
+    function chips() {
+      chipsEl.textContent = "";
+      var list = (state.noun && state.noun.chip ? [state.noun.chip] : []).concat(GENERAL_CHIPS);
+      list.forEach(function (text, i) {
+        if (list.indexOf(text) !== i) return;
+        var b = doc.createElement("button");
+        b.type = "button";
+        b.textContent = text;
+        b.addEventListener("click", function () { send(text); });
+        chipsEl.appendChild(b);
+      });
+    }
+
     function greet() {
-      bubble("noun", "clocked in. i'm noun no. " + state.who.no + ", " + state.who.description + ". what are we making?");
+      if (!state.noun) return;
+      bubble("noun", "clocked in. " + state.noun.name + ", " + state.noun.title + ", at your desk. job description: " + state.noun.specialty + ". what do you need?");
+    }
+
+    function pick(slug, quiet) {
+      if (!bySlug[slug]) return;
+      state.noun = bySlug[slug];
+      state.history = [];
+      cards.forEach(function (c) { c.setAttribute("aria-checked", c.getAttribute("data-noun") === slug ? "true" : "false"); });
+      var avatar = $("[data-chat-avatar]");
+      avatar.src = "roster/" + slug + ".svg";
+      avatar.alt = state.noun.name;
+      setState();
+      chips();
+      if (!quiet) { log.textContent = ""; greet(); }
     }
 
     function reply(text, viaIntern) {
@@ -99,36 +125,39 @@
 
     function send(text) {
       text = String(text || "").trim().slice(0, 1200);
-      if (!text || state.busy) return;
+      if (!text || state.busy || !state.noun) return;
       bubble("you", text);
       state.history.push({ role: "user", content: text });
       state.history = state.history.slice(-MAX_TURNS);
       input.value = "";
-      if (state.plan === "intern" || state.open === false) { reply(intern(text, state.who), true); return; }
+      if (state.plan === "intern" || state.open === false) { reply(intern(text, state.noun), true); return; }
       state.busy = true;
       var typing = bubble("noun rn-typing", "…");
       fetch(API, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          plan: state.plan,
-          noun: { no: state.who.no, head: state.who.head, glasses: state.who.glasses, desk: tagInput.value },
-          messages: state.history
-        })
+        body: JSON.stringify({ plan: state.plan, noun: state.noun.slug, messages: state.history })
       }).then(function (res) {
         return res.json().then(function (data) { return { status: res.status, data: data }; });
       }).then(function (r) {
         typing.remove();
-        if (r.data && r.data.ok && r.data.reply) { reply(r.data.reply, false); meta.textContent = r.data.model ? "answered by " + r.data.name : ""; return; }
+        if (r.data && r.data.ok && r.data.reply) { reply(r.data.reply, false); meta.textContent = r.data.plan ? "answered by " + r.data.plan : ""; return; }
         if (r.status === 503 && r.data && r.data.error === "not_configured") { state.open = false; setState(); }
         var why = r.data && r.data.message ? r.data.message : "the desk didn't answer.";
-        reply(why + "\n" + intern(text, state.who), true);
+        reply(why + "\n" + intern(text, state.noun), true);
       }, function () {
         typing.remove();
-        reply("can't reach the desk right now.\n" + intern(text, state.who), true);
+        reply("can't reach the desk right now.\n" + intern(text, state.noun), true);
       }).then(function () { state.busy = false; });
     }
 
+    cards.forEach(function (card) {
+      card.addEventListener("click", function () {
+        pick(card.getAttribute("data-noun"));
+        var shift = doc.getElementById("shift");
+        if (shift && shift.scrollIntoView) shift.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
     plans.forEach(function (btn) {
       btn.addEventListener("click", function () {
         state.plan = btn.getAttribute("data-plan");
@@ -136,20 +165,15 @@
         setState();
       });
     });
-    tagInput.addEventListener("change", function () { state.roll = 0; setNoun(); setState(); });
-    $("[data-noun-reroll]").addEventListener("click", function () { state.roll += 1; setNoun(); setState(); });
     form.addEventListener("submit", function (event) { event.preventDefault(); send(input.value); });
-    Array.prototype.slice.call(doc.querySelectorAll("[data-chip]")).forEach(function (chip) {
-      chip.addEventListener("click", function () { send(chip.getAttribute("data-chip")); });
-    });
     $("[data-chat-end]").addEventListener("click", function () {
       state.history = [];
       log.textContent = "";
-      bubble("system", "shift ended. the noun forgot everything.");
+      bubble("system", "shift ended. " + (state.noun ? state.noun.name : "the noun") + " forgot everything.");
       greet();
     });
 
-    setNoun();
+    if (state.noun) pick(state.noun.slug, true);
     setState();
     greet();
     if (typeof fetch === "function") {
@@ -160,7 +184,7 @@
     }
   }
 
-  globalThis.OfficeRent = { nounForTag: nounForTag, intern: intern, api: API, version: "1.0.0" };
+  globalThis.OfficeRent = { intern: intern, api: API, version: "2.0.0" };
   if (typeof document !== "undefined") {
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { mount(document); });
     else mount(document);

@@ -454,8 +454,16 @@ await mkdir(path.join(publicDir, "doors"), { recursive: true });
 await writeFile(path.join(publicDir, "doors/index.html"), doorsTemplate.replaceAll("{{NAV_EXTRA}}", navExtra));
 // ---- /rent/: rent an office noun (noggles); the chat runs in the browser via public/kit/office-rent.js ----
 const rentTemplate = await readFile(path.join(root, "src/rent.template.html"), "utf8");
+const { roster } = JSON.parse(await readFile(path.join(root, "data/roster.json"), "utf8"));
+const rosterCards = roster.map((n, i) => `          <button type="button" class="rn-card" role="radio" aria-checked="${i === 0}" data-noun="${escapeHtml(n.slug)}">
+            <img src="roster/${escapeHtml(n.slug)}.svg" alt="${escapeHtml(n.name)}, ${escapeHtml(n.title)}" width="320" height="320" loading="lazy">
+            <span class="rn-card-name">${escapeHtml(n.name)}</span>
+            <span class="rn-card-title">${escapeHtml(n.title)}</span>
+            <span class="rn-card-desc">${escapeHtml(n.specialty)}.</span>
+          </button>`).join("\n");
+const rosterJson = JSON.stringify(roster.map(({ slug, name, title, specialty, door, chip }) => ({ slug, name, title, specialty, door, chip }))).replace(/</g, "\\u003c");
 await mkdir(path.join(publicDir, "rent"), { recursive: true });
-await writeFile(path.join(publicDir, "rent/index.html"), rentTemplate.replaceAll("{{NAV_EXTRA}}", navExtra));
+await writeFile(path.join(publicDir, "rent/index.html"), rentTemplate.replaceAll("{{NAV_EXTRA}}", navExtra).replace("{{ROSTER}}", rosterCards).replace("{{ROSTER_JSON}}", rosterJson));
 // shelf.json: the same packages the page offers, for agents. read from the script the page loads.
 await import(pathToFileURL(path.join(publicDir, "kit/office-doors.js")));
 const shelf = Object.entries(globalThis.OfficeDoors.packages).map(([id, p]) => ({ id, name: p.name, kind: p.kind, gives: p.gives, desks: p.desks, est_value_usd: p.value, est_value_note: p.est, charged_usd: 0, needs_mike_ok: p.needsOk ?? null }));
