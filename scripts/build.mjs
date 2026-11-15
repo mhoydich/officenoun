@@ -448,6 +448,15 @@ const loomTemplate = await readFile(path.join(root, "src/loom.template.html"), "
 await mkdir(path.join(publicDir, "loom"), { recursive: true });
 await writeFile(path.join(publicDir, "loom/index.html"), loomTemplate.replaceAll("{{NAV_EXTRA}}", navExtra));
 
+// ---- /doors/: static page; the doors and the shelf run in the browser via public/kit/office-doors.js ----
+const doorsTemplate = await readFile(path.join(root, "src/doors.template.html"), "utf8");
+await mkdir(path.join(publicDir, "doors"), { recursive: true });
+await writeFile(path.join(publicDir, "doors/index.html"), doorsTemplate.replaceAll("{{NAV_EXTRA}}", navExtra));
+// shelf.json: the same packages the page offers, for agents. read from the script the page loads.
+await import(pathToFileURL(path.join(publicDir, "kit/office-doors.js")));
+const shelf = Object.entries(globalThis.OfficeDoors.packages).map(([id, p]) => ({ id, name: p.name, kind: p.kind, gives: p.gives, desks: p.desks, est_value_usd: p.value, est_value_note: p.est, charged_usd: 0, needs_mike_ok: p.needsOk ?? null }));
+await writeFile(path.join(publicDir, "doors/shelf.json"), JSON.stringify({ kind: "officenoun.doors.shelf", version: 1, note: "free for now. est. value is a rough guess of what the work would cost to hire done, not a quote.", papers: Object.keys(globalThis.OfficeDoors.papers), request_at: "https://pointcast.xyz/loom?to=%23officenoun-tasks", packages: shelf }, null, 2) + "\n");
+
 // ---- /bench/: static page; the scorecard is filled in the browser by public/kit/office-bench.js ----
 const benchTemplate = await readFile(path.join(root, "src/bench.template.html"), "utf8");
 await mkdir(path.join(publicDir, "bench"), { recursive: true });
