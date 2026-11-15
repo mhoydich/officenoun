@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#d5d7e1">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
     <meta name="description" content="A small CC0 widget that shows a Tezos wallet's latest mints.">
     <title>tezos desk kit</title>
 <meta property="og:type" content="website">
@@ -16,101 +17,189 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://officenoun.xyz/card.png">
     <link rel="icon" href="../noun.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="office-ui.css">
     <link rel="stylesheet" href="tezos-desk.css">
-  </head>
-  <body>
-    <main class="kit-page">
-      <h1>tezos desk kit</h1>
-      <p><strong>new:</strong> <a href="./ui/">office ui kit</a>, the look behind doors, faucets and pools as one stylesheet. one link tag, cc0.</p>
-      <p>one script and one stylesheet. point it at a tezos address and it shows the balance, the counts, and the latest mints, each linked to its objkt page. no dependencies, no build step. it renders a snapshot first if you give it one, then asks the chain.</p>
+    <style>
+      /* the kit's warm eyebrow is 4.25:1 on white; a touch deeper clears AA on white and gray (dark mode keeps the kit value) */
+      body.ou { --ou-warm: #a85a35; }
+      .ou .kit-head .ou-h1 { font-size: clamp(44px, 8vw, 76px); }
+      .ou pre { margin: 0 0 8px; padding: 16px; border-radius: 14px; background: var(--ou-card); overflow: auto; font: 12.5px/1.55 var(--ou-mono); letter-spacing: 0; white-space: pre-wrap; word-break: break-word; }
+      .ou .ou-section:not(.gray) pre { background: var(--ou-gray); }
+      .ou code { font-family: var(--ou-mono); font-size: .88em; letter-spacing: 0; overflow-wrap: anywhere; }
+      .ou .kit-new a { text-decoration: underline; text-underline-offset: .18em; }
+      .ou .kit-new { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; margin: 0 0 22px; font-size: 15px; }
+      .ou .kit-copy { max-width: 680px; margin: 0 0 16px; color: var(--ou-muted); }
+      .ou .ou-center .kit-copy { margin-left: auto; margin-right: auto; }
+      .ou .kit-sub { margin: 40px 0 12px; }
 
-      <h2>install</h2>
+      /* option lists: grouped rows, the attribute on top, what it does below */
+      .ou .kit-list li { padding: 12px; }
+      .ou .kit-list li > code:first-child { display: inline-block; margin-right: 6px; color: var(--ou-ink); font-weight: 600; }
+      .ou .kit-list li { color: var(--ou-muted); font-size: 15px; line-height: 1.45; }
+      .ou .kit-list li code { color: var(--ou-ink); }
+      .ou ol.kit-list { list-style: none; counter-reset: kit; }
+      .ou ol.kit-list li { counter-increment: kit; display: flex; gap: 12px; }
+      .ou ol.kit-list li::before { content: counter(kit); flex: 0 0 26px; height: 26px; border-radius: 50%; background: var(--ou-ink); color: var(--ou-bg); display: grid; place-items: center; font-size: 13px; font-weight: 700; }
+
+      .ou .kit-cards { margin-top: 28px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); align-items: start; }
+      .ou h3.ou-group-h { margin: 0; }
+
+      /* the live demos keep tezos-desk.css; the kit only lends them its colours */
+      .ou .kit-demo { margin: 0 0 8px; padding: 22px; border-radius: var(--ou-radius); background: var(--ou-card); box-shadow: var(--ou-shadow); --td-ink: var(--ou-ink); --td-muted: var(--ou-muted); --td-paper: var(--ou-card); --td-line: var(--ou-line); --td-accent: var(--ou-blue); }
+      .ou .ou-section.gray .kit-demo { box-shadow: none; }
+      .ou .kit-demo .tezos-desk a { color: inherit; }
+      .ou .kit-demo + .ou-fine { margin-top: 12px; }
+
+      .ou .ou-foot { padding: 28px var(--ou-gutter) 48px; border-top: 1px solid var(--ou-line); color: var(--ou-muted); font-size: 13px; text-align: center; }
+      @media (max-width: 480px) { .ou .kit-demo { padding: 16px; } }
+    </style>
+  </head>
+  <body class="ou">
+    <header class="ou-bar">
+      <div class="ou-wrap">
+        <a class="ou-brand" href="../../index.html"><img src="../noun.svg" alt="" width="22" height="22">Office Noun</a>
+        <nav aria-label="kits"><a href="#install">install</a><a href="#demo">demo</a><a href="#door">the door</a><a href="./ui/">office ui kit</a></nav>
+      </div>
+    </header>
+
+    <main class="kit-page">
+      <section class="ou-section ou-center kit-head">
+        <div class="ou-wrap">
+          <p class="kit-new"><span class="ou-tag new">new</span><span><a href="./ui/">office ui kit</a>, the look behind doors, faucets and pools as one stylesheet. one link tag, cc0.</span></p>
+          <p class="ou-eyebrow">tezos desk kit · cc0</p>
+          <h1 class="ou-h1">tezos desk kit<br><span class="ou-soft">one script, one stylesheet.</span></h1>
+          <p class="ou-lede">one script and one stylesheet. point it at a tezos address and it shows the balance, the counts, and the latest mints, each linked to its objkt page. no dependencies, no build step. it renders a snapshot first if you give it one, then asks the chain.</p>
+          <div class="ou-ctas"><a class="ou-pill fill" href="#install">install</a><a class="ou-pill" href="#demo">see the demo ›</a></div>
+        </div>
+      </section>
+
+      <section class="ou-section gray" id="install">
+        <div class="ou-wrap">
+          <p class="ou-eyebrow">install</p>
+          <h2 class="ou-h2">three lines.<br><span class="ou-soft">paste them anywhere.</span></h2>
 <pre><code>&lt;link rel="stylesheet" href="https://officenoun.xyz/kit/tezos-desk.css"&gt;
 &lt;script src="https://officenoun.xyz/kit/tezos-desk.js"&gt;&lt;/script&gt;
 &lt;div data-tezos-desk data-wallet="{{WALLET}}"&gt;&lt;/div&gt;</code></pre>
 
-      <h2>options</h2>
-      <ul>
-        <li><code>data-wallet</code> required. a tz1 to tz4 address.</li>
-        <li><code>data-title</code> heading. default "the wallet".</li>
-        <li><code>data-limit</code> how many mints to show. default 12, from 1 to 48.</li>
-        <li><code>data-snapshot</code> id of a <code>&lt;script type="application/json"&gt;</code> holding a fallback snapshot.</li>
-        <li><code>data-api</code> indexer base url. default https://api.tzkt.io.</li>
-        <li><code>data-images</code> set to "ipfs" to show only ipfs images. other cards get the placeholder.</li>
-      </ul>
+          <div class="ou-cards kit-cards">
+            <div class="ou-group">
+              <h3 class="ou-group-h">options</h3>
+              <ul class="kit-list">
+                <li><code>data-wallet</code> required. a tz1 to tz4 address.</li>
+                <li><code>data-title</code> heading. default "the wallet".</li>
+                <li><code>data-limit</code> how many mints to show. default 12, from 1 to 48.</li>
+                <li><code>data-snapshot</code> id of a <code>&lt;script type="application/json"&gt;</code> holding a fallback snapshot.</li>
+                <li><code>data-api</code> indexer base url. default https://api.tzkt.io.</li>
+                <li><code>data-images</code> set to "ipfs" to show only ipfs images. other cards get the placeholder.</li>
+              </ul>
+            </div>
+            <div class="ou-group">
+              <h3 class="ou-group-h">theming</h3>
+              <ul class="kit-list">
+                <li>set these on the element or any parent. all are optional.</li>
+                <li><code>--td-ink</code> text and rules.</li>
+                <li><code>--td-muted</code> labels and small print.</li>
+                <li><code>--td-paper</code> card background.</li>
+                <li><code>--td-line</code> borders and empty image boxes.</li>
+                <li><code>--td-accent</code> accent colour. the focus ring uses the ink colour.</li>
+                <li><code>--td-font</code> font stack.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <h2>theming</h2>
-      <p>set these on the element or any parent. all are optional.</p>
-      <ul>
-        <li><code>--td-ink</code> text and rules.</li>
-        <li><code>--td-muted</code> labels and small print.</li>
-        <li><code>--td-paper</code> card background.</li>
-        <li><code>--td-line</code> borders and empty image boxes.</li>
-        <li><code>--td-accent</code> accent colour. the focus ring uses the ink colour.</li>
-        <li><code>--td-font</code> font stack.</li>
-      </ul>
+      <section class="ou-section" id="demo">
+        <div class="ou-wrap">
+          <p class="ou-eyebrow">demo</p>
+          <h2 class="ou-h2">the collector.<br><span class="ou-soft">live from the chain.</span></h2>
+          <div class="kit-demo">
+            <div data-tezos-desk data-wallet="{{WALLET}}" data-title="the collector" data-limit="6" data-snapshot="desk-snapshot"></div>
+            <script type="application/json" id="desk-snapshot">{{SNAPSHOT}}</script>
+          </div>
+          <p class="ou-fine">this demo sets the --td-* colours from the page, so it follows light and dark.</p>
+        </div>
+      </section>
 
-      <h2>demo</h2>
-      <div class="kit-demo">
-        <div data-tezos-desk data-wallet="{{WALLET}}" data-title="the collector" data-limit="6" data-snapshot="desk-snapshot"></div>
-        <script type="application/json" id="desk-snapshot">{{SNAPSHOT}}</script>
-      </div>
+      <section class="ou-section gray" id="door">
+        <div class="ou-wrap">
+          <p class="ou-eyebrow">the door</p>
+          <h2 class="ou-h2">sign in.<br><span class="ou-soft">move nothing.</span></h2>
+          <p class="kit-copy">a second script. connect a tezos wallet and sign in with a plain text message. connecting shares the address. signing in moves nothing.</p>
+          <div class="kit-demo">
+            <div data-tezos-door data-app="office noun"></div>
+          </div>
 
-      <h2>the door</h2>
-      <p>a second script. connect a tezos wallet and sign in with a plain text message. connecting shares the address. signing in moves nothing.</p>
-      <div class="kit-demo">
-        <div data-tezos-door data-app="office noun"></div>
-      </div>
-
-      <h3>install the door</h3>
+          <h3 class="ou-h3 kit-sub">install the door</h3>
 <pre><code>&lt;link rel="stylesheet" href="https://officenoun.xyz/kit/tezos-desk.css"&gt;
 &lt;script src="https://officenoun.xyz/kit/tezos-door.js"&gt;&lt;/script&gt;
 &lt;div data-tezos-door&gt;&lt;/div&gt;</code></pre>
-      <p>the wallet library (beacon sdk 4.8.1, about 4 mb) is not loaded with the page. it loads from unpkg.com on the first click, and not before. after that the sdk talks to beacon's relay servers and, for some wallets, walletconnect servers.</p>
-      <p>who gets contacted: on load the desk asks api.tzkt.io and the image hosts in the token metadata. the door contacts nobody on load.</p>
+          <p class="kit-copy">the wallet library (beacon sdk 4.8.1, about 4 mb) is not loaded with the page. it loads from unpkg.com on the first click, and not before. after that the sdk talks to beacon's relay servers and, for some wallets, walletconnect servers.</p>
+          <p class="kit-copy">who gets contacted: on load the desk asks api.tzkt.io and the image hosts in the token metadata. the door contacts nobody on load.</p>
 
-      <h3>door options</h3>
-      <ul>
-        <li><code>data-app</code> name shown in the wallet prompt. default the page hostname.</li>
-        <li><code>data-network</code> default "mainnet".</li>
-        <li><code>data-statement</code> the one line the user signs. default "sign in to {host}. this moves nothing."</li>
-        <li><code>data-sdk</code> url of the beacon sdk browser bundle. default a pinned unpkg url. https only (http for localhost). refused with "no fingerprint for that sdk." unless <code>data-sdk-integrity</code> is also set. a beacon already on the page is ignored.</li>
-        <li><code>data-sdk-integrity</code> sha-384 integrity for a custom <code>data-sdk</code>. the default url ships with its own.</li>
-        <li><code>data-nonce</code> a nonce your server issued, 8 to 128 characters of letters, digits, _ and -. used as the nonce line. anything else shows "bad nonce.".</li>
-      </ul>
+          <div class="ou-cards kit-cards">
+            <div class="ou-group">
+              <h3 class="ou-group-h">door options</h3>
+              <ul class="kit-list">
+                <li><code>data-app</code> name shown in the wallet prompt. default the page hostname.</li>
+                <li><code>data-network</code> default "mainnet".</li>
+                <li><code>data-statement</code> the one line the user signs. default "sign in to {host}. this moves nothing."</li>
+                <li><code>data-sdk</code> url of the beacon sdk browser bundle. default a pinned unpkg url. https only (http for localhost). refused with "no fingerprint for that sdk." unless <code>data-sdk-integrity</code> is also set. a beacon already on the page is ignored.</li>
+                <li><code>data-sdk-integrity</code> sha-384 integrity for a custom <code>data-sdk</code>. the default url ships with its own.</li>
+                <li><code>data-nonce</code> a nonce your server issued, 8 to 128 characters of letters, digits, _ and -. used as the nonce line. anything else shows "bad nonce.".</li>
+              </ul>
+            </div>
+            <div class="ou-group">
+              <h3 class="ou-group-h">door events</h3>
+              <ul class="kit-list">
+                <li>all bubble from the element. <code>detail</code> is below.</li>
+                <li><code>tezosdoor:connect</code> address, publicKey, network.</li>
+                <li><code>tezosdoor:disconnect</code> address.</li>
+                <li><code>tezosdoor:signin</code> the session: address, publicKey, message, payloadHex, signature, issued, expires.</li>
+                <li><code>tezosdoor:signout</code> address.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <h3>door events</h3>
-      <p>all bubble from the element. <code>detail</code> is below.</p>
-      <ul>
-        <li><code>tezosdoor:connect</code> address, publicKey, network.</li>
-        <li><code>tezosdoor:disconnect</code> address.</li>
-        <li><code>tezosdoor:signin</code> the session: address, publicKey, message, payloadHex, signature, issued, expires.</li>
-        <li><code>tezosdoor:signout</code> address.</li>
-      </ul>
+      <section class="ou-section">
+        <div class="ou-wrap">
+          <p class="ou-eyebrow">the fine print</p>
+          <h2 class="ou-h2">a sign-in is a claim.<br><span class="ou-soft">until your server checks it.</span></h2>
+          <div class="ou-cards kit-cards">
+            <div class="ou-group">
+              <h3 class="ou-group-h">what the door does not do</h3>
+              <ul class="kit-list">
+                <li>no transactions. it asks the wallet for the sign permission only and never builds or sends an operation.</li>
+                <li>no signature verification. the session is only a claim.</li>
+                <li>no keys. it never asks for a secret key or a seed phrase.</li>
+              </ul>
+            </div>
+            <article class="ou-card">
+              <h3 class="ou-h3">restored sessions</h3>
+              <p>a session left in the tab by an earlier load is never shown as signed in. if it looks valid and is under 12 hours old, the door says "connected earlier as tz1abc…wxyz. not checked." and offers "sign in again" or "forget". getSession() returns null until a fresh sign-in on this page load.</p>
+            </article>
+          </div>
 
-      <h3>what the door does not do</h3>
-      <ul>
-        <li>no transactions. it asks the wallet for the sign permission only and never builds or sends an operation.</li>
-        <li>no signature verification. the session is only a claim.</li>
-        <li>no keys. it never asks for a secret key or a seed phrase.</li>
-      </ul>
-
-      <h3>restored sessions</h3>
-      <p>a session left in the tab by an earlier load is never shown as signed in. if it looks valid and is under 12 hours old, the door says "connected earlier as tz1abc…wxyz. not checked." and offers "sign in again" or "forget". getSession() returns null until a fresh sign-in on this page load.</p>
-
-      <h3>before you trust a sign-in</h3>
-      <p>a site that wants to trust a sign-in has to do all four of these on its server:</p>
-      <ol>
-        <li>recompute the payload from the message and check the signature.</li>
-        <li>derive the tz address from the public key itself, or fetch the key from the chain. never trust the session's address field.</li>
-        <li>issue the nonce on the server (data-nonce) and accept it once.</li>
-        <li>check that the host and uri lines match your site, and that now is before expires.</li>
-      </ol>
-      <p>until all four are done, a session is only a claim.</p>
-
-      <p>CC0 — copy it.</p>
+          <h3 class="ou-h3 kit-sub">before you trust a sign-in</h3>
+          <p class="kit-copy">a site that wants to trust a sign-in has to do all four of these on its server:</p>
+          <div class="ou-group">
+            <ol class="kit-list">
+              <li>recompute the payload from the message and check the signature.</li>
+              <li>derive the tz address from the public key itself, or fetch the key from the chain. never trust the session's address field.</li>
+              <li>issue the nonce on the server (data-nonce) and accept it once.</li>
+              <li>check that the host and uri lines match your site, and that now is before expires.</li>
+            </ol>
+          </div>
+          <p class="ou-fine">until all four are done, a session is only a claim.</p>
+        </div>
+      </section>
     </main>
+
+    <footer class="ou-foot">
+      <p>CC0 — copy it.</p>
+    </footer>
 
     <script src="tezos-desk.js"></script>
     <script src="tezos-door.js"></script>
