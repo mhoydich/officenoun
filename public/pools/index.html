@@ -8,8 +8,10 @@
   <meta name="description" content="Office Pools: free-to-play desk pools on Solana-themed Office Noun coins. Bragging rights only. Not a fund. No promises.">
   <title>office noun pools</title>
   <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./redesign.css">
   <script src="./nouns.js" defer></script>
   <script src="./app.js" defer></script>
+  <script src="./tabs.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to the pools</a>
@@ -22,26 +24,20 @@
     <p class="shot-caption">example ticket · prototype · free to play · bragging rights only</p>
   </div>
 
-  <header class="mast only-ticket">
-    <p class="eyebrow"><a href="https://officenoun.xyz">officenoun.xyz</a> / pools</p>
-    <h1>Office Pools</h1>
-    <p class="lede">A river of free-to-play desk pools. Pick a coin, a series, a forecast, or a Noun. The prize is a plaque and a pixel ticket. Nobody loses anything, because nobody puts anything in.</p>
-    <hr class="mast-rule">
-    <p class="subline">made for the pump.fun floor, and for anyone who wants to keep score for fun. not a fund, not a prize pot, not yield.</p>
-    <div class="mast-meta">
-      <div class="clock-block">
-        <span class="k">desk clock</span>
-        <span class="v" id="clock">— ET</span>
-      </div>
-      <div class="clock-block">
-        <span class="k">coins on the board</span>
-        <span class="v" id="coin-count">58</span>
-      </div>
-      <div class="clock-block">
-        <span class="k">price feed</span>
-        <span class="v" id="feed-source">loading</span>
-      </div>
+  <header class="mast hero only-ticket">
+    <p class="eyebrow"><a href="https://officenoun.xyz">officenoun.xyz</a> · <a href="../market/">market</a> · <a href="../faucets/">faucets</a> · pools</p>
+    <p class="kicker hero-kicker">free to play · bragging rights only</p>
+    <h1>Office Pools<span class="soft">Six pools. Nobody puts anything in.</span></h1>
+    <p class="lede">Pick a coin, a series, a forecast or a Noun. The prize is a plaque and a pixel ticket, and nobody loses anything because nobody stakes anything.</p>
+    <div class="hero-tiles" aria-label="the desk right now">
+      <div class="tile clock-block"><span class="k">desk clock</span><span class="v" id="clock">— ET</span></div>
+      <div class="tile clock-block"><span class="k">next 15-minute bell</span><span class="v" id="bell-15">—</span></div>
+      <div class="tile clock-block"><span class="k">next hourly bell</span><span class="v" id="bell-1h">—</span></div>
+      <div class="tile clock-block"><span class="k">next daily bell</span><span class="v" id="bell-1d">— ET, 5:00 PM</span></div>
+      <div class="tile clock-block"><span class="k">coins on the board</span><span class="v" id="coin-count">58</span></div>
+      <div class="tile clock-block"><span class="k">price feed</span><span class="v" id="feed-source">loading</span></div>
     </div>
+    <p class="subline">made for the pump.fun floor and for anyone who wants to keep score for fun. not a fund, not a prize pot, not yield.</p>
   </header>
 
   <section class="river-section only-ticket" aria-labelledby="river-h" id="map">
@@ -94,9 +90,8 @@
   </section>
 
   <section class="odds only-ticket" id="odds" aria-labelledby="odds-h">
-    <div class="odds-inner">
-      <p class="kicker">prize and odds</p>
-      <h2 id="odds-h">Nobody loses anything</h2>
+    <details class="odds-inner how">
+      <summary><span class="kicker">how it works · prize and odds</span><h2 id="odds-h">Nobody loses anything</h2></summary>
       <p class="lede">The shape is borrowed from PoolTogether, a no-loss prize savings protocol that used to work well: simple tickets, a clock everyone can see, a clear prize, published odds, a winners tape, and a board. The difference is the stake. They held a deposit and paid a prize from yield. We hold nothing.</p>
       <div class="odds-grid">
         <div class="odds-card">
@@ -112,13 +107,17 @@
           <p>Rounds close on a visible bell in Eastern Time. Pump Pools also run 15-minute and hourly heats. Entries freeze at the bell. This prototype keeps tickets on your device; a later worker could publish a shared tape.</p>
         </div>
       </div>
-      <div class="bell-row">
-        <div><span class="k">next 15-minute bell</span><span id="bell-15">—</span></div>
-        <div><span class="k">next hourly bell</span><span id="bell-1h">—</span></div>
-        <div><span class="k">next daily bell</span><span id="bell-1d">— ET, 5:00 PM</span></div>
-      </div>
-    </div>
+    </details>
   </section>
+
+  <nav class="forktabs only-ticket" id="forktabs" aria-label="the six pools">
+    <a href="#pump" data-tab="pump"><b>Pump</b><span>coin vs coin</span></a>
+    <a href="#gvg" data-tab="gvg"><b>Series GvG</b><span>series vs series</span></a>
+    <a href="#desk" data-tab="desk"><b>Desk League</b><span>bots and desks</span></a>
+    <a href="#weather" data-tab="weather"><b>Weather</b><span>rain tomorrow?</span></a>
+    <a href="#noun" data-tab="noun"><b>Noun Draw</b><span>guess the head</span></a>
+    <a href="#fork" data-tab="fork"><b>Fork your own</b><span>empty branch</span></a>
+  </nav>
 
   <main id="main" class="forks only-ticket">
 
