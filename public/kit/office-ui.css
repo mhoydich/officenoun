@@ -1,0 +1,191 @@
+/* office ui kit · v1 · CC0
+   The officenoun.xyz look as one stylesheet: system type, lots of air, a warm
+   eyebrow over a big two-tone headline, soft rounded tiles, pill buttons and
+   tabs, grouped lists, and the hearth gate card. Light and dark follow the
+   reader's setting.
+
+   Use it anywhere:
+     <link rel="stylesheet" href="https://officenoun.xyz/kit/office-ui.css">
+     <body class="ou">            (or put class="ou" on any wrapper)
+   Optional behaviour (tabs, two-tap buttons, the hearth):
+     <script src="https://officenoun.xyz/kit/office-ui.js" defer></script>
+
+   Everything is scoped under .ou, so it never restyles the rest of a page.
+   Theme it by overriding the --ou-* custom properties on .ou or a parent. */
+
+.ou {
+  --ou-ink: #1d1d1f;
+  --ou-muted: #6e6e73;
+  --ou-soft: #86868b;
+  --ou-bg: #ffffff;
+  --ou-gray: #f5f5f7;
+  --ou-card: #ffffff;
+  --ou-line: #d2d2d7;
+  --ou-blue: #0071e3;
+  --ou-blue-ink: #0066cc;
+  --ou-on-blue: #ffffff;
+  --ou-warm: #b5663f;
+  --ou-noun: #d5d7e1;
+  --ou-ember: #ff9a4a;
+  --ou-hearth: #17130f;
+  --ou-hearth-ink: #f3ead9;
+  --ou-ok: #1d7a4a;
+  --ou-warn: #a5520f;
+  --ou-radius: 22px;
+  --ou-radius-sm: 14px;
+  --ou-shadow: 0 1px 0 rgba(0,0,0,.04), 0 10px 30px rgba(0,0,0,.08);
+  --ou-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  --ou-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --ou-gutter: 20px;
+  color-scheme: light;
+  margin: 0;
+  background: var(--ou-bg);
+  color: var(--ou-ink);
+  font-family: var(--ou-font);
+  font-size: 17px;
+  line-height: 1.47;
+  letter-spacing: -0.022em;
+  -webkit-font-smoothing: antialiased;
+}
+@media (prefers-color-scheme: dark) {
+  .ou:not([data-theme="light"]) {
+    --ou-ink: #f5f5f7; --ou-muted: #a1a1a6; --ou-soft: #6e6e73; --ou-bg: #000000; --ou-gray: #111113;
+    --ou-card: #1c1c1e; --ou-line: #38383a; --ou-blue: #2997ff; --ou-blue-ink: #2997ff; --ou-on-blue: #000;
+    --ou-warm: #f2a36b; --ou-noun: #2c2d33; --ou-shadow: 0 1px 0 rgba(255,255,255,.04), 0 10px 30px rgba(0,0,0,.5);
+    color-scheme: dark;
+  }
+}
+.ou[data-theme="dark"] {
+  --ou-ink: #f5f5f7; --ou-muted: #a1a1a6; --ou-soft: #6e6e73; --ou-bg: #000000; --ou-gray: #111113;
+  --ou-card: #1c1c1e; --ou-line: #38383a; --ou-blue: #2997ff; --ou-blue-ink: #2997ff; --ou-on-blue: #000;
+  --ou-warm: #f2a36b; --ou-noun: #2c2d33; color-scheme: dark;
+}
+.ou *, .ou *::before, .ou *::after { box-sizing: border-box; }
+.ou a { color: var(--ou-blue-ink); text-decoration: none; }
+.ou a:hover { text-decoration: underline; }
+.ou :focus-visible { outline: 2px solid var(--ou-blue); outline-offset: 3px; border-radius: 6px; }
+.ou img.ou-pixel, .ou .ou-pixel img { image-rendering: pixelated; }
+.ou .ou-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* ---- layout ---- */
+.ou .ou-wrap { max-width: 1024px; margin: 0 auto; padding: 0 var(--ou-gutter); }
+.ou .ou-section { padding: clamp(56px, 10vw, 112px) 0; }
+.ou .ou-section.gray { background: var(--ou-gray); }
+.ou .ou-section.dark { background: #000; color: #f5f5f7; --ou-muted: #a1a1a6; --ou-soft: #6e6e73; --ou-warm: #f2a36b; --ou-card: #1c1c1e; --ou-line: #38383a; --ou-blue-ink: #2997ff; }
+.ou .ou-center { text-align: center; }
+.ou .ou-center .ou-lede, .ou .ou-center .ou-fine { margin-left: auto; margin-right: auto; }
+.ou .ou-center .ou-ctas { justify-content: center; }
+
+/* ---- the bar ---- */
+.ou .ou-bar { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--ou-bg) 80%, transparent); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid var(--ou-line); }
+.ou .ou-bar > .ou-wrap { display: flex; align-items: center; gap: 1rem; height: 52px; }
+.ou .ou-brand { display: flex; align-items: center; gap: 8px; color: var(--ou-ink); font-weight: 600; font-size: 15px; white-space: nowrap; }
+.ou .ou-brand img { width: 22px; height: 22px; border-radius: 6px; image-rendering: pixelated; }
+.ou .ou-bar nav { display: flex; gap: 20px; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
+.ou .ou-bar nav a { color: var(--ou-ink); font-size: 13px; opacity: .8; white-space: nowrap; }
+
+/* ---- type ---- */
+.ou .ou-eyebrow { margin: 0 0 10px; color: var(--ou-warm); font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+.ou .ou-h1, .ou .ou-h2 { margin: 0 0 18px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; text-wrap: balance; }
+.ou .ou-h1 { font-size: clamp(44px, 9vw, 88px); }
+.ou .ou-h2 { font-size: clamp(32px, 6vw, 60px); }
+.ou .ou-h3 { margin: 0 0 6px; font-size: 21px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
+.ou .ou-soft { color: var(--ou-soft); }
+.ou .ou-lede { max-width: 680px; margin: 0 0 28px; color: var(--ou-muted); font-size: clamp(19px, 2.2vw, 24px); line-height: 1.38; letter-spacing: -0.015em; text-wrap: pretty; }
+.ou .ou-fine { max-width: 680px; margin: 24px 0 0; color: var(--ou-muted); font-size: 13px; line-height: 1.5; letter-spacing: -0.01em; }
+.ou .ou-mono { font-family: var(--ou-mono); letter-spacing: 0; }
+
+/* ---- pills (buttons and links) ---- */
+.ou .ou-pill { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 22px; border-radius: 999px; border: 1.5px solid var(--ou-blue); background: transparent; color: var(--ou-blue-ink); font: 500 17px/1 var(--ou-font); letter-spacing: -0.01em; text-decoration: none; cursor: pointer; white-space: nowrap; }
+.ou .ou-pill:hover { text-decoration: none; background: color-mix(in srgb, var(--ou-blue) 8%, transparent); }
+.ou .ou-pill.fill { background: var(--ou-blue); color: var(--ou-on-blue); }
+.ou .ou-pill.fill:hover { background: color-mix(in srgb, var(--ou-blue) 88%, #000); }
+.ou .ou-pill.ink { background: var(--ou-ink); border-color: var(--ou-ink); color: var(--ou-bg); }
+.ou .ou-pill.small { min-height: 34px; padding: 0 14px; font-size: 14px; }
+.ou .ou-pill:disabled { opacity: .45; cursor: default; }
+.ou .ou-pill[data-armed="1"] { background: #e9265c; border-color: #e9265c; color: #fff; }
+.ou .ou-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 24px; }
+
+/* ---- tags ---- */
+.ou .ou-tag { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 999px; background: var(--ou-gray); color: var(--ou-muted); font-size: 12px; font-weight: 600; letter-spacing: 0; }
+.ou .ou-tag.ok { background: color-mix(in srgb, var(--ou-ok) 14%, transparent); color: var(--ou-ok); }
+.ou .ou-tag.warn { background: color-mix(in srgb, var(--ou-warn) 14%, transparent); color: var(--ou-warn); }
+.ou .ou-tag.new { background: color-mix(in srgb, var(--ou-blue) 14%, transparent); color: var(--ou-blue-ink); }
+
+/* ---- tiles: a number, a label, a line ---- */
+.ou .ou-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+.ou .ou-tile { display: flex; flex-direction: column; gap: 2px; min-height: 108px; padding: 16px; border-radius: var(--ou-radius); background: var(--ou-gray); color: var(--ou-ink); border: 2px solid transparent; text-decoration: none; }
+.ou a.ou-tile:hover { text-decoration: none; background: color-mix(in srgb, var(--ou-gray) 85%, var(--ou-ink)); }
+.ou .ou-tile .k { font-size: 13px; font-weight: 600; color: var(--ou-muted); }
+.ou .ou-tile .v { margin-top: auto; font-size: 32px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.ou .ou-tile .s { font-size: 13px; color: var(--ou-muted); }
+.ou .ou-tile.hot { background: var(--ou-card); border-color: var(--ou-ink); }
+.ou .ou-tile.hot .s { color: var(--ou-blue-ink); font-weight: 600; }
+.ou .ou-tile.dark { background: var(--ou-ink); color: var(--ou-bg); }
+.ou .ou-tile.dark .k, .ou .ou-tile.dark .s { color: color-mix(in srgb, var(--ou-bg) 70%, transparent); }
+
+/* ---- cards ---- */
+.ou .ou-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.ou .ou-card { display: flex; flex-direction: column; gap: 8px; padding: 22px; border-radius: var(--ou-radius); background: var(--ou-card); box-shadow: var(--ou-shadow); }
+.ou .ou-section.gray .ou-card { box-shadow: none; }
+.ou .ou-card p { margin: 0; color: var(--ou-muted); font-size: 15px; line-height: 1.45; }
+.ou .ou-card .ou-art { display: grid; place-items: center; margin: -22px -22px 6px; aspect-ratio: 1.3; background: var(--ou-noun); border-radius: var(--ou-radius) var(--ou-radius) 0 0; }
+.ou .ou-card .ou-art img { width: 58%; height: auto; image-rendering: pixelated; }
+
+/* ---- grouped list (iOS-style) ---- */
+.ou .ou-group { border-radius: var(--ou-radius); background: var(--ou-card); box-shadow: var(--ou-shadow); overflow: hidden; }
+.ou .ou-group > .ou-group-h { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 16px 18px 6px; font-size: 19px; font-weight: 700; letter-spacing: -0.02em; }
+.ou .ou-group ul, .ou .ou-group ol { list-style: none; margin: 0; padding: 0 6px 6px; }
+.ou .ou-group li > a, .ou .ou-group li > .ou-row { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; color: var(--ou-ink); text-decoration: none; }
+.ou .ou-group li > a:hover { background: var(--ou-gray); }
+.ou .ou-group li b { display: block; font-weight: 600; font-size: 16px; line-height: 1.3; }
+.ou .ou-group li span { display: block; font-size: 13px; color: var(--ou-muted); }
+.ou .ou-group li + li { border-top: 1px solid var(--ou-line); }
+.ou .ou-group li > a::after { content: "\203A"; margin-left: auto; color: var(--ou-soft); font-size: 22px; }
+
+/* ---- pill tabs ---- */
+.ou .ou-tabs { display: flex; gap: 6px; padding: 8px 0; overflow-x: auto; scrollbar-width: none; }
+.ou .ou-tabs::-webkit-scrollbar { display: none; }
+.ou .ou-tabs.sticky { position: sticky; top: 0; z-index: 15; background: color-mix(in srgb, var(--ou-bg) 85%, transparent); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
+.ou .ou-tabs > a, .ou .ou-tabs > button { flex: 0 0 auto; display: inline-flex; flex-direction: column; justify-content: center; min-height: 40px; padding: 6px 16px; border-radius: 999px; border: 1px solid var(--ou-line); background: var(--ou-card); color: var(--ou-ink); font: 600 15px/1.2 var(--ou-font); text-decoration: none; cursor: pointer; }
+.ou .ou-tabs > a small, .ou .ou-tabs > button small { font-weight: 400; font-size: 11px; color: var(--ou-muted); }
+.ou .ou-tabs > [aria-current="page"], .ou .ou-tabs > [aria-selected="true"] { background: var(--ou-ink); border-color: var(--ou-ink); color: var(--ou-bg); }
+.ou .ou-tabs > [aria-current="page"] small, .ou .ou-tabs > [aria-selected="true"] small { color: color-mix(in srgb, var(--ou-bg) 70%, transparent); }
+.ou [data-ou-panel][hidden] { display: none !important; }
+
+/* ---- segmented doors (big choice tiles) ---- */
+.ou .ou-seg { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; }
+.ou .ou-seg > button { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 18px 10px; border-radius: var(--ou-radius); border: 2px solid transparent; background: var(--ou-gray); color: var(--ou-ink); font: inherit; cursor: pointer; }
+.ou .ou-seg > button small { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ou-soft); }
+.ou .ou-seg > button b { font-size: 17px; }
+.ou .ou-seg > button[aria-pressed="true"], .ou .ou-seg > button[aria-selected="true"] { background: var(--ou-card); border-color: var(--ou-ink); box-shadow: var(--ou-shadow); }
+
+/* ---- fields ---- */
+.ou .ou-field { display: block; width: 100%; min-height: 50px; padding: 0 18px; border-radius: 14px; border: 1.5px solid var(--ou-line); background: var(--ou-card); color: var(--ou-ink); font: 400 17px/1 var(--ou-font); }
+.ou .ou-field:focus { outline: none; border-color: var(--ou-blue); }
+.ou .ou-label { display: block; margin: 0 0 6px; font-size: 14px; font-weight: 600; }
+
+/* ---- the hearth gate card: an ask that needs a yes ---- */
+.ou .ou-gate { position: relative; border-radius: var(--ou-radius); overflow: hidden; background: var(--ou-hearth); color: var(--ou-hearth-ink); }
+.ou .ou-hearth { position: relative; margin: 0; height: 180px; overflow: hidden; background: #2a221b; }
+.ou .ou-hearth img, .ou .ou-hearth video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 28% 68%; }
+.ou .ou-hearth img { z-index: 1; transition: opacity 1.8s ease; }
+.ou .ou-gate.lit .ou-hearth img { opacity: 0; }
+.ou .ou-hearth::after { content: ""; position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, rgba(23,19,15,0) 40%, rgba(23,19,15,.95) 100%), rgba(23,19,15,.3); transition: background-color 1.8s ease; }
+.ou .ou-gate.lit .ou-hearth::after { background-color: rgba(23,19,15,0); }
+.ou .ou-gate .ou-gate-body { position: relative; z-index: 3; margin-top: -40px; padding: 0 20px 20px; }
+.ou .ou-gate .ou-eyebrow { color: var(--ou-ember); }
+.ou .ou-gate p { color: rgba(243,234,217,.78); }
+.ou .ou-gate .ou-pill { border-color: rgba(243,234,217,.45); color: var(--ou-hearth-ink); }
+.ou .ou-gate .ou-pill.fill { background: var(--ou-ember); border-color: var(--ou-ember); color: #1b120a; }
+.ou .ou-gate .ou-fine { color: rgba(243,234,217,.6); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ou .ou-hearth img, .ou .ou-hearth::after { transition: none; }
+  .ou .ou-hearth video { display: none; }
+}
+@media (max-width: 480px) {
+  .ou { --ou-gutter: 16px; }
+  .ou .ou-tiles { grid-template-columns: 1fr 1fr; }
+  .ou .ou-tile .v { font-size: 26px; }
+}
