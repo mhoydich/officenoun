@@ -448,6 +448,11 @@ const loomTemplate = await readFile(path.join(root, "src/loom.template.html"), "
 await mkdir(path.join(publicDir, "loom"), { recursive: true });
 await writeFile(path.join(publicDir, "loom/index.html"), loomTemplate.replaceAll("{{NAV_EXTRA}}", navExtra));
 
+// ---- /doors/: static page; the doors and the shelf run in the browser via public/kit/office-doors.js ----
+const doorsTemplate = await readFile(path.join(root, "src/doors.template.html"), "utf8");
+await mkdir(path.join(publicDir, "doors"), { recursive: true });
+await writeFile(path.join(publicDir, "doors/index.html"), doorsTemplate.replaceAll("{{NAV_EXTRA}}", navExtra));
+
 // ---- /bench/: static page; the scorecard is filled in the browser by public/kit/office-bench.js ----
 const benchTemplate = await readFile(path.join(root, "src/bench.template.html"), "utf8");
 await mkdir(path.join(publicDir, "bench"), { recursive: true });
