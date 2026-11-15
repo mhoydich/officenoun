@@ -452,6 +452,10 @@ await writeFile(path.join(publicDir, "loom/index.html"), loomTemplate.replaceAll
 const doorsTemplate = await readFile(path.join(root, "src/doors.template.html"), "utf8");
 await mkdir(path.join(publicDir, "doors"), { recursive: true });
 await writeFile(path.join(publicDir, "doors/index.html"), doorsTemplate.replaceAll("{{NAV_EXTRA}}", navExtra));
+// ---- /rent/: rent an office noun (noggles); the chat runs in the browser via public/kit/office-rent.js ----
+const rentTemplate = await readFile(path.join(root, "src/rent.template.html"), "utf8");
+await mkdir(path.join(publicDir, "rent"), { recursive: true });
+await writeFile(path.join(publicDir, "rent/index.html"), rentTemplate.replaceAll("{{NAV_EXTRA}}", navExtra));
 // shelf.json: the same packages the page offers, for agents. read from the script the page loads.
 await import(pathToFileURL(path.join(publicDir, "kit/office-doors.js")));
 const shelf = Object.entries(globalThis.OfficeDoors.packages).map(([id, p]) => ({ id, name: p.name, kind: p.kind, gives: p.gives, desks: p.desks, est_value_usd: p.value, est_value_note: p.est, charged_usd: 0, needs_mike_ok: p.needsOk ?? null }));

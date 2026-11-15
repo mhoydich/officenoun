@@ -247,6 +247,10 @@
 @keyframes dn-print { from { clip-path: inset(0 0 100% 0); transform: translateY(-8px); } to { clip-path: inset(0 0 0 0); transform: none; } }
 .receipt-card figcaption { margin-top: 10px; }
 
+.dn-postas { display: flex; align-items: center; gap: 10px; margin: 20px 0 0; color: var(--dn-muted); font-size: 14px; }
+.doors-body .dn-postas input { max-width: 220px; min-height: 40px; border-radius: 980px; font-size: 15px; }
+.door-status a { margin-left: 4px; }
+
 /* ---- footer ---- */
 .doors-body footer { background: var(--dn-gray); color: var(--dn-muted); font-family: var(--dn-font); font-size: 12px; border-top: 1px solid var(--dn-line); }
 .doors-body footer a { color: var(--dn-muted); }
