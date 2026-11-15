@@ -164,6 +164,8 @@ a:focus-visible {
 }
 
 .gallery-card {
+  /* contains the card's visually-hidden label, which would otherwise widen the page on a phone */
+  position: relative;
   flex: 0 0 clamp(92px, 12vw, 116px);
   margin: 0;
   overflow: hidden;
