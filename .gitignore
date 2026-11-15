@@ -1,6 +1,6 @@
 .DS_Store
 dist/
-index.html
+/index.html
 node_modules/
 .wrangler/
 public/today.svg
@@ -19,3 +19,4 @@ public/doors/shelf.json
 public/rent/index.html
 public/bench/index.html
 public/bench/study/index.html
+public/kit/index.html
