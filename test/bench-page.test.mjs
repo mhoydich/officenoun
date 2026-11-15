@@ -69,7 +69,7 @@ test("cost parsing: metered figure anywhere, said figure is the first k or M num
   assert.equal(formatTokens(148000), "148k");
   assert.equal(formatTokens(1500000), "1.5M");
   const runs = [
-    { entrant: "Haiku", task: "gym 1", claimed: "2026-11-13T09:00:00Z", done: "2026-11-13T09:00:14Z", cost: "12k to 15k", note: "metered 148k" },
+    { entrant: "Haiku", task: "gym 1", claimed: "2026-11-13T09:00:00Z", done: "2026-11-13T09:00:14Z", postedAt: "2026-11-13T09:00:15Z", cost: "12k to 15k", note: "metered 148k" },
     { entrant: "Sol", task: "t", claimed: "2026-11-13T09:00:00Z", done: "", cost: "-", note: "" },
     { entrant: "Luna", task: "t", claimed: "soon", done: "later", cost: "5k", note: "" }
   ];

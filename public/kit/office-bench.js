@@ -20,11 +20,31 @@ export function parseRunLine(body, entrants = ENTRANTS) {
 
 export const isFinished = (run) => present(run.done);
 export const checksGreen = (run) => /^(green|pass|passed|ok|yes|success)\b/i.test(run.checks.trim());
-export function durationMs(run) {
-  const a = Date.parse(run.claimed);
-  const b = Date.parse(run.done);
-  return Number.isFinite(a) && Number.isFinite(b) && b >= a ? b - a : null;
+// Require a complete ISO timestamp with timezone; Date.parse alone also accepts
+// ambiguous strings such as "1" and silently rolls February 30 into March.
+function timestamp(value) {
+  if (typeof value !== "string") return null;
+  const m = /^(\d{4})-(\d{2})-(\d{2})T([01]\d|2[0-3]):([0-5]\d):([0-5]\d)(?:\.\d{1,9})?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)$/.exec(value);
+  if (!m) return null;
+  const year = Number(m[1]), month = Number(m[2]), day = Number(m[3]);
+  const leap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+  const days = [31, leap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  if (month < 1 || month > 12 || day < 1 || day > days[month - 1]) return null;
+  const ms = Date.parse(value);
+  return Number.isFinite(ms) ? ms : null;
 }
+
+export function assessTiming(run) {
+  const a = timestamp(run.claimed), b = timestamp(run.done);
+  // postedAt comes from the Loom envelope, never from fields in a run line.
+  const posted = timestamp(run.postedAt);
+  if (a === null || b === null) return { ms: null, reason: "Missing or invalid claim/completion timestamp" };
+  if (posted === null) return { ms: null, reason: "Missing or invalid server post timestamp" };
+  if (b < a) return { ms: null, reason: "Completion precedes claim" };
+  if (b > posted) return { ms: null, reason: "Completion is later than the server post" };
+  return { ms: b - a, reason: null };
+}
+export const durationMs = (run) => assessTiming(run).ms;
 export function median(nums) {
   if (!nums.length) return null;
   const s = [...nums].sort((x, y) => x - y);
@@ -43,20 +63,23 @@ export function formatDuration(ms) {
 
 // messages: array of { body, at, from: { name } }. Oldest first in the result's notes ordering.
 export function summarize(messages, entrants = ENTRANTS) {
-  const rows = new Map(entrants.map((e) => [e, { entrant: e, runs: 0, finished: 0, green: 0, times: [], note: "", noteAt: -Infinity }]));
+  const rows = new Map(entrants.map((e) => [e, { entrant: e, runs: 0, finished: 0, green: 0, times: [], timingIssues: [], note: "", noteAt: -Infinity }]));
   let total = 0;
   let fastest = null;
   const runs = [];
   for (const msg of Array.isArray(messages) ? messages : []) {
     const run = parseRunLine(msg && msg.body, entrants);
     if (!run) continue;
+    run.postedAt = msg.at;
     total += 1;
     runs.push(run);
     const row = rows.get(run.entrant);
     row.runs += 1;
     if (isFinished(run)) row.finished += 1;
     if (checksGreen(run)) row.green += 1;
-    const d = durationMs(run);
+    const timing = assessTiming(run);
+    const d = timing.ms;
+    if (isFinished(run) && timing.reason) row.timingIssues.push(timing.reason);
     if (d !== null) {
       row.times.push(d);
       if (!fastest || d < fastest.ms) fastest = { entrant: run.entrant, ms: d, task: run.task };
@@ -70,7 +93,8 @@ export function summarize(messages, entrants = ENTRANTS) {
   }
   const list = [...rows.values()].map((r) => ({ ...r, median: median(r.times) }));
   const mostFinished = list.reduce((best, r) => (r.finished > 0 && (!best || r.finished > best.finished) ? r : best), null);
-  return { total, rows: list, fastest, mostFinished, runs };
+  const timingExcluded = list.reduce((n, r) => n + r.timingIssues.length, 0);
+  return { total, rows: list, fastest, mostFinished, runs, timingExcluded };
 }
 
 // ---- cost parsing and chart series (pure) ----
@@ -185,12 +209,13 @@ export function renderScorecard(summary, table, status) {
       el("td", has ? String(r.runs) : "—"),
       el("td", has ? String(r.finished) : "—"),
       el("td", has ? String(r.green) : "—"),
-      el("td", has ? formatDuration(r.median) : "—"),
+      el("td", (has ? formatDuration(r.median) : "—") + (r.timingIssues.length ? ` (${r.timingIssues.length} excluded)` : ""), { title: [...new Set(r.timingIssues)].join("; ") }),
       el("td", r.note || "—")
     );
     body.append(tr);
   }
   status.textContent = summary.total ? `${summary.total} ${summary.total === 1 ? "run" : "runs"} logged.` : "No runs logged yet.";
+  if (summary.timingExcluded) status.textContent += ` Timing withheld for ${summary.timingExcluded} reported ${summary.timingExcluded === 1 ? "completion" : "completions"}: missing/invalid timestamps, reversed times, or completion later than the server post. These timings are excluded from medians, time charts and speed records. Original run reports remain visible.`;
 }
 
 export function renderRecords(summary, fastestEl, finishedEl) {
