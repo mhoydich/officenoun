@@ -294,6 +294,85 @@
     } }
   };
 
+
+  // ---- the receipt card: a thermal-paper receipt as an svg, with the task's own noun on top ----
+  function xml(text) {
+    return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  function wrap(text, width) {
+    var out = [];
+    var line = "";
+    String(text).split(" ").forEach(function (word) {
+      while (word.length > width) { if (line) { out.push(line); line = ""; } out.push(word.slice(0, width)); word = word.slice(width); }
+      if (!word) return;
+      if ((line + " " + word).trim().length > width) { out.push(line); line = word; } else { line = (line + " " + word).trim(); }
+    });
+    if (line) out.push(line);
+    return out.length ? out : [""];
+  }
+
+  function receiptCard(fields, picked) {
+    var b = brief(fields, picked);
+    var who = nounFor(b.task + "|" + b.outcome, "receipt", 0);
+    var W = 360, PAD = 24, COLS = 34, LH = 17;
+    var rows = [];
+    var push = function (text, opts) { rows.push({ text: text, opts: opts || {} }); };
+    var rule = function () { push("- - - - - - - - - - - - - - - - -", { muted: true, center: true }); };
+
+    push("OFFICE NOUN", { center: true, bold: true, big: true });
+    push("the doors · receipt", { center: true, muted: true });
+    push(b.task + " · " + b.date, { center: true, muted: true });
+    rule();
+    wrap(b.outcome, COLS).forEach(function (line) { push(line, { bold: true }); });
+    wrap("done when " + b.done, COLS).forEach(function (line) { push(line, { muted: true }); });
+    rule();
+    if (b.keys.length) {
+      b.keys.forEach(function (k) {
+        var name = PACKAGES[k].name;
+        var amount = "$" + PACKAGES[k].value.toLocaleString("en-US");
+        push(name, { value: amount });
+      });
+    } else {
+      push("(nothing from the shelf)", { muted: true });
+    }
+    rule();
+    var row = function (label, value, opts) { opts = opts || {}; opts.value = value; push(label, opts); };
+    row("est. value", "$" + b.total.toLocaleString("en-US"));
+    row("charged", "$0.00", { bold: true, big: true });
+    rule();
+    wrap("by " + b.desks.filter(function (d) { return d !== "mike"; }).join(", "), COLS).forEach(function (line) { push(line, { muted: true }); });
+    push("closed by " + b.lead.slice(0, COLS - 10), { muted: true });
+    push("starring noun no. " + who.no, { muted: true });
+    rule();
+    push("thank you for closing.", { center: true, bold: true });
+    push("free for now · CC0 · not signed", { center: true, muted: true });
+    push("officenoun.xyz/doors", { center: true, muted: true });
+
+    var NOUN = 132;
+    var top = PAD + NOUN + 14;
+    var H = top + rows.length * LH + PAD + 16;
+    var nounSrc = who.noun ? "data:image/svg+xml;base64," + (typeof btoa === "function" ? btoa(globalThis.OfficeNoun.svg(who.noun)) : Buffer.from(globalThis.OfficeNoun.svg(who.noun)).toString("base64")) : "";
+    // a torn bottom edge
+    var teeth = "";
+    for (var x = W; x >= 0; x -= 12) teeth += " L" + x + " " + (H - (x % 24 === 0 ? 0 : 8));
+    var out = '<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + " " + H + '" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" role="img">' +
+      "<title>" + xml("Office Noun receipt, " + b.task + ": " + b.outcome) + "</title>" +
+      '<path d="M0 0 L' + W + " 0 L" + W + " " + (H - 8) + teeth + ' L0 ' + (H - 8) + ' Z" fill="#fbfaf6"/>' +
+      (nounSrc ? '<image href="' + nounSrc + '" x="' + (W - NOUN) / 2 + '" y="' + PAD + '" width="' + NOUN + '" height="' + NOUN + '" style="image-rendering:pixelated"/>' : "");
+    rows.forEach(function (r, i) {
+      var y = top + (i + 1) * LH - 4;
+      var o = r.opts;
+      out += '<text x="' + (o.center ? W / 2 : PAD) + '" y="' + y + '"' + (o.center ? ' text-anchor="middle"' : "") +
+        ' font-size="' + (o.big ? 15 : 12.5) + '" fill="' + (o.muted ? "#6e6e73" : "#1d1d1f") + '"' + (o.bold ? ' font-weight="700"' : "") +
+        ' xml:space="preserve">' + xml(r.text) + "</text>";
+      if (o.value) {
+        out += '<text x="' + (W - PAD) + '" y="' + y + '" text-anchor="end" font-size="' + (o.big ? 15 : 12.5) + '" fill="#1d1d1f"' + (o.bold ? ' font-weight="700"' : "") + ">" + xml(o.value) + "</text>";
+      }
+    });
+    return { svg: out + "</svg>", no: who.no, task: b.task, width: W, height: H };
+  }
+
   function paper(kind, fields, picked) {
     return (PAPERS[kind] || PAPERS.requisition).render(brief(fields, picked));
   }
@@ -397,6 +476,9 @@
     var paperTabs = Array.prototype.slice.call(doc.querySelectorAll("[data-paper]"));
     var fields = { outcome: $("[data-req-outcome]"), done: $("[data-req-done]"), lead: $("[data-req-lead]"), task: $("[data-req-task]"), proof: $("[data-req-proof]") };
     var current = "requisition";
+    var receiptBox = $("[data-receipt]");
+    var receiptImg = $("[data-receipt-img]");
+    var wasReceipt = false;
 
     function picked() {
       return boxes.filter(function (b) { return b.checked; }).map(function (b) { return b.value; });
@@ -419,6 +501,17 @@
       $("[data-shelf-count]").textContent = String(keys.length);
       $("[data-shelf-total]").textContent = money(total);
       preview.textContent = paper(current, values(), keys);
+      if (receiptBox) {
+        receiptBox.hidden = current !== "receipt";
+        if (current === "receipt") {
+          var rc = receiptCard(values(), keys);
+          receiptImg.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(rc.svg);
+          receiptImg.alt = "receipt card for " + rc.task + ", starring office noun no. " + rc.no;
+          receiptImg.width = rc.width;
+          receiptImg.height = rc.height;
+          state.receipt = rc;
+        }
+      }
       links.textContent = "";
       connections(brief(values(), keys)).forEach(function (c) {
         var li = doc.createElement("li");
@@ -438,7 +531,16 @@
     }
 
     paperTabs.forEach(function (tab) {
-      tab.addEventListener("click", function () { current = tab.getAttribute("data-paper"); update(); });
+      tab.addEventListener("click", function () {
+        current = tab.getAttribute("data-paper");
+        update();
+        if (receiptBox && current === "receipt" && !wasReceipt) {
+          receiptBox.classList.remove("is-printing");
+          void receiptBox.offsetWidth;
+          receiptBox.classList.add("is-printing");
+        }
+        wasReceipt = current === "receipt";
+      });
     });
     boxes.forEach(function (b) { b.addEventListener("change", update); });
     Object.keys(fields).forEach(function (key) { if (fields[key]) fields[key].addEventListener("input", update); });
@@ -457,6 +559,19 @@
       setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
       reqStatus.textContent = "saved " + a.download + ".";
     });
+    var saveCard = $("[data-receipt-save]");
+    if (saveCard) saveCard.addEventListener("click", function () {
+      if (!state.receipt) return;
+      var url = URL.createObjectURL(new Blob([state.receipt.svg], { type: "image/svg+xml" }));
+      var a = doc.createElement("a");
+      a.href = url;
+      a.download = "officenoun-receipt-" + state.receipt.task.toLowerCase().replace(/[^a-z0-9-]/g, "") + ".svg";
+      doc.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      reqStatus.textContent = "saved " + a.download + ".";
+    });
     $("[data-req-post]").addEventListener("click", function () {
       window.open(composeUrl(TASKS_TOPIC), "_blank", "noopener,noreferrer");
       copy(preview.textContent).then(function (ok) {
@@ -466,7 +581,7 @@
     update();
   }
 
-  globalThis.OfficeDoors = { make: make, requisition: requisition, paper: paper, brief: brief, connections: connections, papers: PAPERS, hash: hash, doors: DOORS, packages: PACKAGES, version: "1.1.0" };
+  globalThis.OfficeDoors = { make: make, requisition: requisition, paper: paper, brief: brief, connections: connections, papers: PAPERS, receiptCard: receiptCard, hash: hash, doors: DOORS, packages: PACKAGES, version: "1.2.0" };
   if (typeof document !== "undefined") {
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { mount(document); });
     else mount(document);

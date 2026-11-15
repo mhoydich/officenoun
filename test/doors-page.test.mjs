@@ -106,3 +106,25 @@ test("lite connections always start at the loom desk and skip junk links", () =>
   assert.equal(b.task, "OFF-??");
   assert.deepEqual(connections(b).map((c) => c.to), ["loom desk"]);
 });
+
+test("the receipt card is an svg with the task's noun, $0 and escaped text", () => {
+  const { receiptCard } = globalThis.OfficeDoors;
+  const card = receiptCard({ ...fields, outcome: "tea & <biscuits> for \"everyone\"" }, ["board", "doors"]);
+  assert.match(card.svg, /^<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg"/);
+  assert.match(card.svg, /<image href="data:image\/svg\+xml;base64,/);
+  assert.match(card.svg, /\$0\.00/);
+  assert.match(card.svg, /OFF-66/);
+  assert.ok(card.svg.includes("tea &amp; &lt;biscuits&gt;"));
+  assert.ok(!card.svg.includes("<biscuits>"));
+  assert.ok(card.height > 300);
+});
+
+test("same task, same receipt noun", () => {
+  const { receiptCard } = globalThis.OfficeDoors;
+  assert.equal(receiptCard(fields, ["board"]).no, receiptCard(fields, ["qa"]).no);
+});
+
+test("the page has a receipt card slot", () => {
+  assert.match(page, /data-receipt hidden/);
+  assert.match(page, /data-receipt-save/);
+});
