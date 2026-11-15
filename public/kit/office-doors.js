@@ -396,6 +396,53 @@
     return Promise.resolve(false);
   }
 
+  // post straight to the loom (its api allows cross-site posts). falls back to copy + open.
+  var LOOM_API = "https://pointcast.xyz/api/loom";
+
+  function postToLoom(topic, body, name) {
+    var sender = clean(name).slice(0, 40) || "a visitor";
+    if (body.length > 2000 || typeof fetch !== "function") return Promise.resolve({ ok: false, reason: "too_long" });
+    return fetch(LOOM_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "append", to: topic, from: { name: sender, kind: "human" }, kind: "note", body: body })
+    }).then(function (res) {
+      return res.json().then(function (data) { return { ok: res.ok && data && data.ok !== false, data: data, status: res.status }; }, function () { return { ok: false, status: res.status }; });
+    }, function () { return { ok: false, reason: "network" }; });
+  }
+
+  function threadUrl(topic) {
+    return LOOM + "?to=" + encodeURIComponent(topic) + "#thread";
+  }
+
+  function say(el, text, href, linkText) {
+    el.textContent = text;
+    if (href) {
+      el.appendChild(el.ownerDocument.createTextNode(" "));
+      var a = el.ownerDocument.createElement("a");
+      a.href = href;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.textContent = linkText || "open the thread";
+      el.appendChild(a);
+    }
+  }
+
+  function postOrFallback(opts) {
+    // opts: { topic, body, name, statusEl, button }
+    opts.button.disabled = true;
+    say(opts.statusEl, "posting…");
+    return postToLoom(opts.topic, opts.body, opts.name).then(function (r) {
+      opts.button.disabled = false;
+      if (r.ok) { say(opts.statusEl, "posted to " + opts.topic + " ✓", threadUrl(opts.topic), "see it on the loom ›"); return; }
+      if (r.status === 429) { say(opts.statusEl, "the loom says slow down a little. try again in a few minutes."); return; }
+      window.open(composeUrl(opts.topic), "_blank", "noopener,noreferrer");
+      copy(opts.body).then(function (ok) {
+        say(opts.statusEl, ok ? "couldn't post from here, so it's copied and the loom is open: paste and send." : "couldn't post from here. the loom is open: copy the text and paste it there.");
+      });
+    });
+  }
+
   function mount(doc) {
     var $ = function (sel) { return doc.querySelector(sel); };
     var form = $("[data-doors-form]");
@@ -459,13 +506,14 @@
       if (!state.result) return;
       copy(state.result.text).then(function (ok) { status.textContent = ok ? "copied." : "select the card text to copy it."; });
     });
-    $("[data-doors-post]").addEventListener("click", function () {
+    var nameInputs = Array.prototype.slice.call(doc.querySelectorAll("[data-post-name]"));
+    nameInputs.forEach(function (el) {
+      el.addEventListener("input", function () { nameInputs.forEach(function (other) { if (other !== el) other.value = el.value; }); });
+    });
+    var postName = function () { return nameInputs.length ? nameInputs[0].value : ""; };
+    $("[data-doors-post]").addEventListener("click", function (event) {
       if (!state.result) return;
-      var win = window.open(composeUrl(DOORS_TOPIC), "_blank", "noopener,noreferrer");
-      copy(state.result.text).then(function (ok) {
-        status.textContent = ok ? "copied. paste it in the loom and send." : "the loom is open. copy the card text and paste it there.";
-        if (!win) status.textContent += " (pop-up blocked: open pointcast.xyz/loom, #officenoun-doors.)";
-      });
+      postOrFallback({ topic: DOORS_TOPIC, body: state.result.text, name: postName(), statusEl: status, button: event.currentTarget });
     });
 
     // shelf + lite connections + paperwork
@@ -572,16 +620,13 @@
       setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
       reqStatus.textContent = "saved " + a.download + ".";
     });
-    $("[data-req-post]").addEventListener("click", function () {
-      window.open(composeUrl(TASKS_TOPIC), "_blank", "noopener,noreferrer");
-      copy(preview.textContent).then(function (ok) {
-        reqStatus.textContent = ok ? "copied. paste it on the task board and send." : "the task board is open. copy the text above and paste it there.";
-      });
+    $("[data-req-post]").addEventListener("click", function (event) {
+      postOrFallback({ topic: TASKS_TOPIC, body: preview.textContent, name: postName() || clean(fields.lead.value), statusEl: reqStatus, button: event.currentTarget });
     });
     update();
   }
 
-  globalThis.OfficeDoors = { make: make, requisition: requisition, paper: paper, brief: brief, connections: connections, papers: PAPERS, receiptCard: receiptCard, hash: hash, doors: DOORS, packages: PACKAGES, version: "1.2.0" };
+  globalThis.OfficeDoors = { make: make, requisition: requisition, paper: paper, brief: brief, connections: connections, papers: PAPERS, receiptCard: receiptCard, postToLoom: postToLoom, hash: hash, doors: DOORS, packages: PACKAGES, version: "1.3.0" };
   if (typeof document !== "undefined") {
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { mount(document); });
     else mount(document);
