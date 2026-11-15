@@ -11,7 +11,7 @@ test("five supreme office noun faucets on solana, one a day, mints not created y
   assert.equal(data.chain.name, "solana");
   assert.equal(data.drip.amount, 1);
   for (const f of data.faucets) assert.equal(f.mint, null, f.slug);
-  assert.deepEqual(data.faucets.map((f) => f.slug), ["stapler", "mug", "clip", "lamp", "chair"]);
+  assert.deepEqual(data.faucets.map((f) => f.slug), ["stapler", "mug", "clip", "couch", "fax"]);
 });
 
 test("every noun has its art in the kit", async () => {

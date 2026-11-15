@@ -15,8 +15,8 @@
     { slug: "stapler", name: "supreme stapler", ticker: "STAPLE", art: "./nouns/stapler.svg" },
     { slug: "mug", name: "supreme mug", ticker: "MUG", art: "./nouns/mug.svg" },
     { slug: "clip", name: "supreme clip", ticker: "CLIP", art: "./nouns/clip.svg" },
-    { slug: "lamp", name: "supreme lamp", ticker: "LAMP", art: "./nouns/lamp.svg" },
-    { slug: "chair", name: "supreme chair", ticker: "CHAIR", art: "./nouns/chair.svg" }
+    { slug: "couch", name: "supreme couch", ticker: "COUCH", art: "./nouns/couch.svg" },
+    { slug: "fax", name: "supreme fax", ticker: "FAX", art: "./nouns/fax.svg" }
   ];
   var $ = function (id) { return document.getElementById(id); };
   var el = function (tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
