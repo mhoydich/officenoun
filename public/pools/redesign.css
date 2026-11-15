@@ -1,0 +1,81 @@
+/* Office Pools · redesign layer (Nov 15). Loaded after styles.css; only restyles.
+   Direction: the officenoun.xyz/doors look. A big two-tone headline, soft
+   rounded tiles, pill tabs, one pool on screen at a time, lots of air. */
+
+:root { --r: 18px; --r-sm: 12px; --soft: #e6e7ee; --card: #fbf8f0; --shadow: 0 1px 0 rgba(23,23,27,.06), 0 8px 24px rgba(23,23,27,.08); }
+
+/* hero */
+.hero { text-align: center; padding-top: 2.6rem; padding-bottom: 1.2rem; }
+.hero .eyebrow a { text-decoration: none; } .hero .eyebrow a:hover { text-decoration: underline; }
+.hero-kicker { color: var(--water); letter-spacing: .14em; }
+.hero h1 { margin: .2rem 0 .7rem; font-size: clamp(2.4rem, 8vw, 4.4rem); line-height: 1.02; letter-spacing: -.035em; }
+.hero h1 .soft { display: block; margin-top: .35rem; font-size: .42em; letter-spacing: -.015em; color: var(--muted); font-weight: 400; }
+.hero .lede { margin: 0 auto 1.4rem; text-align: center; }
+.hero .subline { margin: 1.1rem auto 0; font-size: .82rem; max-width: 36rem; }
+.hero-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: .6rem; max-width: 64rem; margin: 0 auto; text-align: left; }
+.hero-tiles .tile { display: flex; flex-direction: column; gap: .2rem; padding: .9rem 1rem; border-radius: var(--r); background: var(--paper); box-shadow: var(--shadow); }
+.hero-tiles .k { font-family: var(--mono); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.hero-tiles .v { font-family: var(--mono); font-size: .95rem; font-weight: 600; line-height: 1.35; overflow-wrap: anywhere; }
+
+/* the river: a softer frame, and its chips double as tabs */
+.river-section { padding-top: 1.4rem; }
+.river-frame { border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow); }
+.river-chip { border-radius: 10px; transition: transform .12s ease, box-shadow .12s ease; }
+.river-chip.on { box-shadow: 0 0 0 3px var(--water); transform: translateX(-4px); }
+
+/* clock-in: a compact card */
+.clockin-inner { border-radius: var(--r); box-shadow: var(--shadow); }
+.identity input, .fork input, .fork select { border-radius: 10px; }
+button { border-radius: 999px; padding-left: 1rem; padding-right: 1rem; }
+button.primary { box-shadow: 0 2px 0 rgba(23,23,27,.25); }
+
+/* how it works: folded by default */
+details.how > summary { list-style: none; cursor: pointer; display: flex; flex-direction: column; gap: .2rem; padding: .2rem 0; }
+details.how > summary::-webkit-details-marker { display: none; }
+details.how > summary h2 { display: flex; align-items: center; gap: .6rem; margin: 0; }
+details.how > summary h2::after { content: "+"; display: inline-grid; place-items: center; width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 1px solid var(--ink); font-family: var(--mono); font-size: 1rem; }
+details.how[open] > summary h2::after { content: "−"; }
+details.how[open] > summary { margin-bottom: 1rem; }
+.odds-card { border-radius: var(--r-sm); }
+
+/* the tab bar */
+.forktabs { display: none; }
+body.tabbed .forktabs {
+  position: sticky; top: 0; z-index: 30; display: flex; gap: .4rem; overflow-x: auto; scrollbar-width: none;
+  padding: .6rem var(--gutter); margin: 1.4rem 0 0; background: color-mix(in srgb, var(--cool) 88%, transparent);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--paper-line);
+  scroll-snap-type: x proximity;
+}
+body.tabbed .forktabs::-webkit-scrollbar { display: none; }
+.forktabs a { flex: 0 0 auto; display: flex; flex-direction: column; gap: .05rem; padding: .5rem .95rem; border-radius: 999px; background: var(--paper); color: var(--ink); text-decoration: none; border: 1px solid var(--paper-line); scroll-snap-align: start; }
+.forktabs a b { font-family: var(--sans); font-size: .9rem; font-weight: 600; line-height: 1.2; }
+.forktabs a span { font-family: var(--mono); font-size: .66rem; color: var(--muted); line-height: 1.2; }
+.forktabs a:hover { border-color: var(--ink); }
+.forktabs a[aria-current="page"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.forktabs a[aria-current="page"] span { color: color-mix(in srgb, var(--paper) 70%, transparent); }
+@media (min-width: 1000px) { body.tabbed .forktabs { justify-content: center; } }
+
+/* one pool at a time */
+body.tabbed .fork[hidden] { display: none !important; }
+body.tabbed .fork { border-top: 0; padding-top: 1.6rem; }
+.fork-head h2 { font-size: clamp(1.6rem, 4.6vw, 2.4rem); letter-spacing: -.03em; }
+.coin-card, .enter, .board-card, .series-board, .formula, .ticket-stage { border-radius: var(--r); }
+.coin-card, .enter, .board-card { box-shadow: var(--shadow); border-color: transparent !important; }
+.coin-card canvas, .coin-card .noun-slot { border-radius: 12px; overflow: hidden; }
+.series-board { box-shadow: var(--shadow); background: var(--paper); }
+.picks label.pick { border-radius: 999px; }
+.cadence button { border-radius: 999px; }
+.board-card li { border-radius: 8px; }
+
+/* reduced motion: no slide on the active river chip */
+@media (prefers-reduced-motion: reduce) { .river-chip { transition: none; } .river-chip.on { transform: none; } }
+
+/* phones: stack the coin card so the name gets the full width; keep the noun crisp but smaller */
+@media (max-width: 560px) {
+  .hero-tiles { grid-template-columns: 1fr 1fr; }
+  .hero-tiles .tile { padding: .75rem .8rem; }
+  .hero-tiles .v { font-size: .8rem; }
+  .coin-card { flex-direction: column; align-items: flex-start; }
+  .coin-card canvas, .coin-card .noun-slot { width: min(168px, 100%) !important; height: auto !important; }
+  .coin-card h3 { font-size: 1.05rem; }
+}
