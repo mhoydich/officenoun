@@ -89,6 +89,9 @@ main { padding: .6rem .8rem 2rem; display: grid; gap: .7rem; }
   align-items: stretch;
 }
 .panel { border: 1px solid var(--line); background: var(--panel); }
+/* grid items default to min-width:auto, so a nowrap table or the ticker would widen the page on a phone */
+main > *, .top-grid > *, .panel { min-width: 0; }
+.tape-wrap, .tape { max-width: 100vw; }
 .panel-head {
   display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem 1rem;
   padding: .3rem .55rem; border-bottom: 1px solid var(--line);
