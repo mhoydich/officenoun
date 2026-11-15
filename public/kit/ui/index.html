@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>office ui kit</title>
+  <meta name="description" content="the officenoun.xyz look as one stylesheet: big two-tone headlines, soft tiles, pill buttons and tabs, grouped lists and the hearth gate card. one link tag. cc0.">
+  <link rel="canonical" href="https://officenoun.xyz/kit/ui/">
+  <meta property="og:title" content="office ui kit">
+  <meta property="og:description" content="the officenoun.xyz look as one stylesheet. one link tag. cc0.">
+  <meta property="og:url" content="https://officenoun.xyz/kit/ui/">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="../../noun.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../office-ui.css">
+  <script src="../office-ui.js" defer></script>
+  <style>
+    .ou pre { margin: 14px 0 0; padding: 16px; border-radius: 14px; background: var(--ou-gray); overflow: auto; font: 12.5px/1.55 var(--ou-mono); letter-spacing: 0; white-space: pre-wrap; word-break: break-word; }
+    .ou .demo { margin: 28px 0 0; padding: 28px 0 0; border-top: 1px solid var(--ou-line); }
+    .ou .demo > .ou-eyebrow { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+    .ou .stage { padding: 24px; border-radius: var(--ou-radius); background: var(--ou-gray); }
+    .ou .stage.white { background: var(--ou-card); box-shadow: var(--ou-shadow); }
+    .ou .copy { margin-top: 10px; }
+  </style>
+</head>
+<body class="ou">
+  <header class="ou-bar">
+    <div class="ou-wrap">
+      <a class="ou-brand" href="https://officenoun.xyz"><img src="../../noun.svg" alt="">Office Noun</a>
+      <nav aria-label="kits"><a href="../">tezos desk kit</a><a href="../../doors/">doors</a><a href="../../faucets/">faucets</a><a href="../../pools/">pools</a></nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="ou-section ou-center">
+      <div class="ou-wrap">
+        <p class="ou-eyebrow">office ui kit · v1 · cc0</p>
+        <h1 class="ou-h1">One link tag.<br><span class="ou-soft">The whole office look.</span></h1>
+        <p class="ou-lede">The look behind doors, faucets and pools, as one stylesheet anyone can use: big two-tone headlines, soft tiles, pill buttons and tabs, grouped lists and the hearth gate card. Light and dark follow the reader.</p>
+        <div class="ou-ctas"><a class="ou-pill fill" href="#start">Start in a minute</a><a class="ou-pill" href="#parts">See every part ›</a></div>
+      </div>
+    </section>
+
+    <section class="ou-section gray" id="start">
+      <div class="ou-wrap">
+        <p class="ou-eyebrow">start</p>
+        <h2 class="ou-h2">Paste two lines.<br><span class="ou-soft">Add one class.</span></h2>
+        <p class="ou-lede">Everything is scoped under <span class="ou-mono">.ou</span>, so it never restyles the rest of your page. The script is optional: it only adds the tabs, the two-tap buttons and the hearth.</p>
+<pre id="s-start">&lt;link rel="stylesheet" href="https://officenoun.xyz/kit/office-ui.css"&gt;
+&lt;script src="https://officenoun.xyz/kit/office-ui.js" defer&gt;&lt;/script&gt;
+
+&lt;body class="ou"&gt;  &lt;!-- or class="ou" on any wrapper --&gt;</pre>
+        <button class="ou-pill small copy" type="button" data-copy="s-start">Copy</button>
+        <p class="ou-fine">Theme it by overriding the custom properties on .ou: --ou-blue, --ou-warm, --ou-radius, --ou-font and the rest. Force a theme with data-theme="light" or "dark". No build step, no packages, nothing phones home.</p>
+      </div>
+    </section>
+
+    <section class="ou-section" id="parts">
+      <div class="ou-wrap">
+        <p class="ou-eyebrow">the parts</p>
+        <h2 class="ou-h2">Eight parts.<br><span class="ou-soft">Each one copy and paste.</span></h2>
+
+        <div class="demo">
+          <p class="ou-eyebrow">1 · headline</p>
+          <div class="stage white">
+            <p class="ou-eyebrow">side a · the doors</p>
+            <h2 class="ou-h2" style="margin-bottom:0">Walk in with a word.<br><span class="ou-soft">Walk out with a noun.</span></h2>
+          </div>
+<pre id="s-head">&lt;p class="ou-eyebrow"&gt;side a · the doors&lt;/p&gt;
+&lt;h2 class="ou-h2"&gt;Walk in with a word.&lt;br&gt;&lt;span class="ou-soft"&gt;Walk out with a noun.&lt;/span&gt;&lt;/h2&gt;
+&lt;p class="ou-lede"&gt;One sentence that says what this is.&lt;/p&gt;</pre>
+          <button class="ou-pill small copy" type="button" data-copy="s-head">Copy</button>
+        </div>
+
+        <div class="demo">
+          <p class="ou-eyebrow">2 · pills</p>
+          <div class="stage white"><div class="ou-ctas" style="margin:0"><a class="ou-pill fill" href="#parts">Open a door</a><a class="ou-pill" href="#parts">Be the lead ›</a><button class="ou-pill ink" type="button">Ink</button><button class="ou-pill small" type="button">Small</button></div></div>
+<pre id="s-pill">&lt;div class="ou-ctas"&gt;
+  &lt;a class="ou-pill fill" href="#"&gt;Open a door&lt;/a&gt;
+  &lt;a class="ou-pill" href="#"&gt;Be the lead ›&lt;/a&gt;
+  &lt;button class="ou-pill ink"&gt;Ink&lt;/button&gt;
+  &lt;button class="ou-pill small"&gt;Small&lt;/button&gt;
+&lt;/div&gt;</pre>
+          <button class="ou-pill small copy" type="button" data-copy="s-pill">Copy</button>
+        </div>
+
+        <div class="demo">
+          <p class="ou-eyebrow">3 · tiles</p>
+          <div class="ou-tiles">
+            <a class="ou-tile hot" href="#parts"><span class="k">Needs your yes</span><span class="v">2</span><span class="s">2 new</span></a>
+            <div class="ou-tile"><span class="k">Weather · NWS</span><span class="v">63°</span><span class="s">mostly cloudy</span></div>
+            <div class="ou-tile"><span class="k">Coins on the board</span><span class="v">58</span><span class="s">latest 2m ago</span></div>
+            <a class="ou-tile dark" href="#parts"><span class="k">Everything live</span><span class="v" style="font-size:22px">Right now ›</span><span class="s">tides, sky, air</span></a>
+          </div>
+<pre id="s-tile">&lt;div class="ou-tiles"&gt;
+  &lt;a class="ou-tile hot" href="#"&gt;&lt;span class="k"&gt;Needs your yes&lt;/span&gt;&lt;span class="v"&gt;2&lt;/span&gt;&lt;span class="s"&gt;2 new&lt;/span&gt;&lt;/a&gt;
+  &lt;div class="ou-tile"&gt;&lt;span class="k"&gt;Weather&lt;/span&gt;&lt;span class="v"&gt;63°&lt;/span&gt;&lt;span class="s"&gt;mostly cloudy&lt;/span&gt;&lt;/div&gt;
+  &lt;a class="ou-tile dark" href="#"&gt;…&lt;/a&gt;
+&lt;/div&gt;</pre>
+          <button class="ou-pill small copy" type="button" data-copy="s-tile">Copy</button>
+        </div>
+
+        <div class="demo">
+          <p class="ou-eyebrow">4 · cards</p>
+          <div class="ou-cards">
+            <article class="ou-card"><div class="ou-art"><img src="../../faucets/nouns/mug.svg" alt="Supreme Mug, a pixel office noun"></div><h3 class="ou-h3">Supreme Mug</h3><p>The first thing on the desk every morning.</p><span><span class="ou-tag ok">no ok needed</span></span></article>
+            <article class="ou-card"><div class="ou-art"><img src="../../faucets/nouns/lamp.svg" alt="Supreme Lamp, a pixel office noun"></div><h3 class="ou-h3">Supreme Lamp</h3><p>Stays on after everyone else goes home.</p><span><span class="ou-tag warn">mike's ok</span></span></article>
+            <article class="ou-card"><div class="ou-art"><img src="../../faucets/nouns/chair.svg" alt="Supreme Chair, a pixel office noun"></div><h3 class="ou-h3">Supreme Chair</h3><p>Somewhere to sit while the work happens.</p><span><span class="ou-tag new">new</span></span></article>
+          </div>
+<pre id="s-card">&lt;div class="ou-cards"&gt;
+  &lt;article class="ou-card"&gt;
+    &lt;div class="ou-art"&gt;&lt;img src="noun.svg" alt="…"&gt;&lt;/div&gt;
+    &lt;h3 class="ou-h3"&gt;Supreme Mug&lt;/h3&gt;
+    &lt;p&gt;The first thing on the desk every morning.&lt;/p&gt;
+    &lt;span&gt;&lt;span class="ou-tag ok"&gt;no ok needed&lt;/span&gt;&lt;/span&gt;
+  &lt;/article&gt;
+&lt;/div&gt;</pre>
+          <button class="ou-pill small copy" type="button" data-copy="s-card">Copy</button>
+        </div>
+
+        <div class="demo">
+          <p class="ou-eyebrow">5 · grouped list</p>
+          <div class="ou-group">
+            <div class="ou-group-h">The desks <a class="ou-pill small" href="#parts">All ›</a></div>
+            <ul>
+              <li><a href="#parts"><span><b>loom desk</b><span>Routing. Turns an ask into a numbered task.</span></span></a></li>
+              <li><a href="#parts"><span><b>ada · sid · tess · lou</b><span>Building. Pages, cards, fixes as draft pull requests.</span></span></a></li>
+              <li><a href="#parts"><span><b>manus</b><span>A real browser: logins, screenshots, phone checks.</span></span></a></li>
+            </ul>
+          </div>
+<pre id="s-group">&lt;div class="ou-group"&gt;
+  &lt;div class="ou-group-h"&gt;The desks&lt;/div&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#"&gt;&lt;span&gt;&lt;b&gt;loom desk&lt;/b&gt;&lt;span&gt;Routing.&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</pre>
+          <button class="ou-pill small copy" type="button" data-copy="s-group">Copy</button>
+        </div>
+
+        <div class="demo">
+          <p class="ou-eyebrow">6 · pill tabs (with the script)</p>
+          <nav class="ou-tabs" data-ou-tabs aria-label="demo tabs">
+            <a href="#t-poem" data-ou-tab="t-poem">Poem<small>a feeling in</small></a>
+            <a href="#t-show" data-ou-tab="t-show">Show<small>a topic in</small></a>
+            <a href="#t-lunch" data-ou-tab="t-lunch">Lunch<small>the fridge in</small></a>
+          </nav>
+          <div class="stage">
+            <div data-ou-panel="t-poem"><p class="ou-h3">Five lines out.</p></div>
+            <div data-ou-panel="t-show"><p class="ou-h3">A tiny show out.</p></div>
+            <div data-ou-panel="t-lunch"><p class="ou-h3">Lunch out.</p></div>
+          </div>
+<pre id="s-tabs">&lt;nav class="ou-tabs sticky" data-ou-tabs&gt;
+  &lt;a href="#poem" data-ou-tab="poem"&gt;Poem&lt;small&gt;a feeling in&lt;/small&gt;&lt;/a&gt;
+  &lt;a href="#show" data-ou-tab="show"&gt;Show&lt;small&gt;a topic in&lt;/small&gt;&lt;/a&gt;
+&lt;/nav&gt;
+&lt;section data-ou-panel="poem"&gt;…&lt;/section&gt;
+&lt;section data-ou-panel="show"&gt;…&lt;/section&gt;</pre>
+          <button class="ou-pill small copy" type="button" data-copy="s-tabs">Copy</button>
+        </div>
+
+        <div class="demo">
+          <p class="ou-eyebrow">7 · doors and fields</p>
+          <div class="stage white">
+            <div class="ou-seg" role="group" aria-label="pick a door">
+              <button type="button" aria-pressed="true"><small>door 1</small><b>Poem</b></button>
+              <button type="button" aria-pressed="false"><small>door 2</small><b>Show</b></button>
+              <button type="button" aria-pressed="false"><small>door 3</small><b>Recipe</b></button>
+            </div>
+            <label class="ou-label" for="demo-field" style="margin-top:16px">A word or a feeling</label>
+            <input class="ou-field" id="demo-field" placeholder="sunday coffee">
+          </div>
+<pre id="s-seg">&lt;div class="ou-seg" role="group" aria-label="pick a door"&gt;
+  &lt;button aria-pressed="true"&gt;&lt;small&gt;door 1&lt;/small&gt;&lt;b&gt;Poem&lt;/b&gt;&lt;/button&gt;
+  &lt;button aria-pressed="false"&gt;&lt;small&gt;door 2&lt;/small&gt;&lt;b&gt;Show&lt;/b&gt;&lt;/button&gt;
+&lt;/div&gt;
+&lt;label class="ou-label" for="w"&gt;A word&lt;/label&gt;
+&lt;input class="ou-field" id="w"&gt;</pre>
+          <button class="ou-pill small copy" type="button" data-copy="s-seg">Copy</button>
+        </div>
+
+        <div class="demo">
+          <p class="ou-eyebrow">8 · the hearth gate card (with the script)</p>
+          <article class="ou-gate" data-ou-hearth="https://pointcast.xyz/baby-bonfire/prayer/media/hearth-loop.mp4">
+            <figure class="ou-hearth" aria-hidden="true">
+              <img src="https://pointcast.xyz/baby-bonfire/prayer/media/hearth-unlit.jpg" alt="" loading="lazy">
+              <video muted loop playsinline preload="none" poster="https://pointcast.xyz/baby-bonfire/prayer/media/hearth-poster.jpg"></video>
+            </figure>
+            <div class="ou-gate-body">
+              <p class="ou-eyebrow">needs your yes</p>
+              <h3 class="ou-h3">Publish the faucets page?</h3>
+              <div class="ou-ctas" style="margin:14px 0 0"><button class="ou-pill fill" type="button" data-ou-light>Light it</button><button class="ou-pill" type="button" data-ou-arm="Tap again to hold">Hold</button></div>
+              <p class="ou-fine">An answer here is a public note, not the permission. Anything that spends, signs or posts waits for the owner.</p>
+            </div>
+          </article>
+<pre id="s-gate">&lt;article class="ou-gate" data-ou-hearth="https://pointcast.xyz/baby-bonfire/prayer/media/hearth-loop.mp4"&gt;
+  &lt;figure class="ou-hearth" aria-hidden="true"&gt;
+    &lt;img src="https://pointcast.xyz/baby-bonfire/prayer/media/hearth-unlit.jpg" alt=""&gt;
+    &lt;video muted loop playsinline preload="none"&gt;&lt;/video&gt;
+  &lt;/figure&gt;
+  &lt;div class="ou-gate-body"&gt;
+    &lt;p class="ou-eyebrow"&gt;needs your yes&lt;/p&gt;
+    &lt;h3 class="ou-h3"&gt;Publish the faucets page?&lt;/h3&gt;
+    &lt;button class="ou-pill fill" data-ou-light&gt;Light it&lt;/button&gt;
+    &lt;button class="ou-pill" data-ou-arm="Tap again to hold"&gt;Hold&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</pre>
+          <button class="ou-pill small copy" type="button" data-copy="s-gate">Copy</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="ou-section dark ou-center">
+      <div class="ou-wrap">
+        <p class="ou-eyebrow">where it's used</p>
+        <h2 class="ou-h2">Already at work.<br><span class="ou-soft">Take it anywhere.</span></h2>
+        <p class="ou-lede">officenoun.xyz/doors, /faucets and /pools wear this look, and so does the Loom's For you dashboard on pointcast.xyz. The hearth photo and film come from PointCast's Baby Bonfire.</p>
+        <div class="ou-ctas"><a class="ou-pill fill" href="../office-ui.css">office-ui.css</a><a class="ou-pill" href="../office-ui.js">office-ui.js</a></div>
+        <p class="ou-fine">CC0: use it, change it, ship it, no credit needed. The system font stack means no font downloads.</p>
+      </div>
+    </section>
+  </main>
+  <script>
+    document.querySelectorAll("[data-copy]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var t = document.getElementById(b.getAttribute("data-copy")).textContent;
+        (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { b.textContent = "Copied"; }, function () { b.textContent = "Select to copy"; });
+      });
+    });
+    document.querySelectorAll(".ou-seg > button").forEach(function (b, _, all) {
+      b.addEventListener("click", function () { all.forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); }); });
+    });
+  </script>
+</body>
+</html>
