@@ -49,6 +49,33 @@ test("valid timezone offsets, leap dates and exact post-time boundary are accept
   assert.equal(durationMs({ ...valid, done: valid.claimed }), 0);
 });
 
+test("sub-millisecond input cannot produce a speed record through truncation", () => {
+  const cases = [
+    // Reversed claim/completion collapse to the same millisecond in Date.parse.
+    { claimed: "2026-11-14T01:56:15.0009Z", done: "2026-11-14T01:56:15.0001Z", postedAt: "2026-11-14T01:56:15.001Z" },
+    // Completion after the server post also collapses to an apparently valid boundary.
+    { claimed: "2026-11-14T01:56:15.000Z", done: "2026-11-14T01:56:15.0009Z", postedAt: "2026-11-14T01:56:15.0001Z" },
+    // Apply the same precision contract to the server envelope independently.
+    { ...valid, postedAt: "2026-11-14T01:56:36.5551Z" }
+  ];
+  for (const run of cases) {
+    const s = summarize([{ at: run.postedAt, body: `Sol · precision fixture · ${run.claimed} · ${run.done} · - · - · - · retained note` }]);
+    const sol = s.rows.find(r => r.entrant === "Sol");
+    assert.equal(s.total, 1);
+    assert.equal(sol.finished, 1);
+    assert.equal(sol.note, "retained note");
+    assert.equal(s.timingExcluded, 1);
+    assert.equal(sol.median, null);
+    assert.equal(s.fastest, null);
+    assert.deepEqual(timeSeries(s.runs), []);
+  }
+});
+
+test("one to three fractional digits retain their millisecond timing", () => {
+  assert.equal(durationMs({ claimed: "2026-11-14T01:56:15.1Z", done: "2026-11-14T01:56:15.12Z", postedAt: "2026-11-14T01:56:15.123Z" }), 20);
+  assert.equal(durationMs({ claimed: "2026-11-13T20:56:15.001-05:00", done: "2026-11-14T01:56:15.002Z", postedAt: "2026-11-14T01:56:15.002Z" }), 1);
+});
+
 test("an untimed pickup miss is not described as a bad completion", () => {
   const s = summarize([{ at: valid.postedAt, body: "Astra · pickup · - · - · - · - · - · no claim" }]);
   assert.equal(s.total, 1);

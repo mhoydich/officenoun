@@ -22,9 +22,10 @@ export const isFinished = (run) => present(run.done);
 export const checksGreen = (run) => /^(green|pass|passed|ok|yes|success)\b/i.test(run.checks.trim());
 // Require a complete ISO timestamp with timezone; Date.parse alone also accepts
 // ambiguous strings such as "1" and silently rolls February 30 into March.
+// Limit fractions to milliseconds so Date.parse cannot erase the event ordering.
 function timestamp(value) {
   if (typeof value !== "string") return null;
-  const m = /^(\d{4})-(\d{2})-(\d{2})T([01]\d|2[0-3]):([0-5]\d):([0-5]\d)(?:\.\d{1,9})?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)$/.exec(value);
+  const m = /^(\d{4})-(\d{2})-(\d{2})T([01]\d|2[0-3]):([0-5]\d):([0-5]\d)(?:\.\d{1,3})?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)$/.exec(value);
   if (!m) return null;
   const year = Number(m[1]), month = Number(m[2]), day = Number(m[3]);
   const leap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
