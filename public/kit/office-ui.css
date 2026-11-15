@@ -24,7 +24,7 @@
   --ou-blue: #0071e3;
   --ou-blue-ink: #0066cc;
   --ou-on-blue: #ffffff;
-  --ou-warm: #b5663f;
+  --ou-warm: #a85a35; /* 5.0:1 on white, 4.6:1 on the gray sections (WCAG AA) */
   --ou-noun: #d5d7e1;
   --ou-ember: #ff9a4a;
   --ou-hearth: #17130f;
