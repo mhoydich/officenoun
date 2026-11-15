@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#d5d7e1">
+  <meta name="description" content="supreme one · november. five supreme office nouns on solana, each a faucet: one token a day to any solana address. sign up with phantom or paste an address. cc0.">
+  <title>office noun faucets · supreme one</title>
+  <link rel="canonical" href="https://officenoun.xyz/faucets/">
+  <meta property="og:title" content="office noun faucets · supreme one">
+  <meta property="og:description" content="five supreme office nouns on solana. one a day, to any address. the water cooler is open for sign-ups.">
+  <meta property="og:url" content="https://officenoun.xyz/faucets/">
+  <link rel="icon" href="./nouns/mug.svg" type="image/svg+xml">
+  <link rel="alternate" type="application/json" href="./faucets.json" title="faucets as data">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="mast">
+      <p class="eyebrow"><a href="https://officenoun.xyz">officenoun.xyz</a> · <a href="../market/">market</a> · faucets</p>
+      <p class="kicker">supreme one · november · on solana</p>
+      <h1>the water cooler<br><span>five taps. one a day each.</span></h1>
+      <p class="lede">five supreme office nouns, each a faucet. sign up and every noun you pick drips one token a day to any solana address you name. the taps are installed; the water isn't on yet. sign up now and you're first in line.</p>
+
+      <div class="cooler" aria-label="the five taps">
+        <div class="jug" aria-hidden="true"><i></i></div>
+        <ul class="taps" id="taps">
+          <!-- filled by app.js from faucets.json; a plain list stays for no-js -->
+          <li><a href="#signup">supreme stapler</a></li>
+          <li><a href="#signup">supreme mug</a></li>
+          <li><a href="#signup">supreme clip</a></li>
+          <li><a href="#signup">supreme lamp</a></li>
+          <li><a href="#signup">supreme chair</a></li>
+        </ul>
+        <div class="tray" aria-hidden="true"></div>
+      </div>
+      <p class="hint" id="tapHint">tap a noun to taste the water. (sound only plays when you tap.)</p>
+    </header>
+
+    <section class="panel" id="signup" aria-labelledby="h-signup">
+      <div class="inner">
+        <h2 id="h-signup">sign up for drips</h2>
+        <ol class="steps">
+          <li>
+            <p class="step-h">1 · where should they go</p>
+            <div class="row">
+              <button type="button" id="phantom" class="phantom"><span class="ghost" aria-hidden="true"></span><span id="phantomLabel">connect phantom</span></button>
+              <span class="or">or paste any solana address</span>
+            </div>
+            <label class="sr" for="addr">solana address</label>
+            <input id="addr" type="text" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="a solana address, like 8eR2…8UKu">
+            <p class="note" id="addrNote" role="status"></p>
+          </li>
+          <li>
+            <p class="step-h">2 · which taps</p>
+            <div class="pick" id="pick" role="group" aria-label="which nouns"></div>
+          </li>
+          <li>
+            <p class="step-h">3 · sign up</p>
+            <label class="sr" for="who">a name for the line (optional)</label>
+            <input id="who" type="text" maxlength="40" autocomplete="nickname" placeholder="a name for the line (optional)">
+            <label class="check"><input type="checkbox" id="prove"> prove the address is mine with phantom (signs a note, moves nothing)</label>
+            <div class="row"><button type="button" id="go" class="go" data-label="sign up for drips">sign up for drips</button></div>
+            <p class="note strong" id="goNote" role="status" aria-live="polite"></p>
+          </li>
+        </ol>
+        <p class="fine">signing up posts one public line to the loom at <a href="https://pointcast.xyz/loom?to=%23supreme-one#thread" target="_blank" rel="noopener noreferrer">#supreme-one</a>: your nouns, your address and the name you give. anyone can read it. the faucet reads that line to know where drips go. we never hold funds, never see your keys, and connecting phantom only shares your public address.</p>
+      </div>
+    </section>
+
+    <section class="panel alt" aria-labelledby="h-water">
+      <div class="inner">
+        <h2 id="h-water">when the water comes on</h2>
+        <ul class="facts" id="facts">
+          <li><b>one a day</b> per noun you picked, to the address you named. drips reset at midnight pacific.</li>
+          <li><b>on solana</b>: one spl token per noun, whole tokens only. the faucet opens your token account on the first drip, so you don't pay anything.</li>
+          <li><b>not on yet</b>: the five mints don't exist. they go live only when mike says go, and then the addresses show here.</li>
+          <li><b>for fun</b>: no price, no promises, no roadmap. a drip is a hello from the desk, like everything else here.</li>
+        </ul>
+        <p class="clock">next drip window opens in <b id="countdown">—</b></p>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="h-kit">
+      <div class="inner">
+        <h2 id="h-kit">take the kit · cc0</h2>
+        <p class="lede-s">five pixel nouns and the faucet list as data. use them anywhere.</p>
+        <div class="kit" id="kit"></div>
+        <p class="fine"><a href="./faucets.json">faucets.json</a> · art also at <a href="https://pointcast.xyz/supreme-one" target="_blank" rel="noopener noreferrer">pointcast.xyz/supreme-one</a> · "supreme" is the plain word for the highest kind, not a brand.</p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <a href="https://officenoun.xyz">home</a> · <a href="../market/">market</a> · <a href="../doors/">doors</a> · <a href="../pools/">pools</a> · <a href="https://pointcast.xyz/loom?to=%23supreme-one#thread" target="_blank" rel="noopener noreferrer">the line</a>
+  </footer>
+</body>
+</html>
