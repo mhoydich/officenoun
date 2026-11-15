@@ -13,11 +13,11 @@
     "proof": "optional: phantom signMessage over the exact text 'officenoun.xyz faucet sign-up\\naddress: <address>\\nnouns: <slugs>\\ndate: <YYYY-MM-DD>\\nthis moves nothing.' — the line carries the signature in base58"
   },
   "faucets": [
-    { "slug": "stapler", "name": "supreme stapler", "ticker": "STAPLE", "line": "holds the day together. one staple at a time.", "art": "https://officenoun.xyz/faucets/nouns/stapler.svg", "mint": null },
-    { "slug": "mug", "name": "supreme mug", "ticker": "MUG", "line": "the first thing on the desk every morning.", "art": "https://officenoun.xyz/faucets/nouns/mug.svg", "mint": null },
-    { "slug": "clip", "name": "supreme clip", "ticker": "CLIP", "line": "small, bent wire. keeps the pile in order.", "art": "https://officenoun.xyz/faucets/nouns/clip.svg", "mint": null },
-    { "slug": "lamp", "name": "supreme lamp", "ticker": "LAMP", "line": "stays on after everyone else goes home.", "art": "https://officenoun.xyz/faucets/nouns/lamp.svg", "mint": null },
-    { "slug": "chair", "name": "supreme chair", "ticker": "CHAIR", "line": "somewhere to sit while the work happens.", "art": "https://officenoun.xyz/faucets/nouns/chair.svg", "mint": null }
+    { "slug": "stapler", "name": "supreme stapler", "ticker": "STAPLE", "line": "holds the day together. one staple at a time.", "art": "https://officenoun.xyz/faucets/nouns/stapler.svg", "png": "https://officenoun.xyz/faucets/nouns/stapler.png", "mint": null },
+    { "slug": "mug", "name": "supreme mug", "ticker": "MUG", "line": "the first thing on the desk every morning.", "art": "https://officenoun.xyz/faucets/nouns/mug.svg", "png": "https://officenoun.xyz/faucets/nouns/mug.png", "mint": null },
+    { "slug": "clip", "name": "supreme clip", "ticker": "CLIP", "line": "small, bent wire. keeps the pile in order.", "art": "https://officenoun.xyz/faucets/nouns/clip.svg", "png": "https://officenoun.xyz/faucets/nouns/clip.png", "mint": null },
+    { "slug": "lamp", "name": "supreme lamp", "ticker": "LAMP", "line": "stays on after everyone else goes home.", "art": "https://officenoun.xyz/faucets/nouns/lamp.svg", "png": "https://officenoun.xyz/faucets/nouns/lamp.png", "mint": null },
+    { "slug": "chair", "name": "supreme chair", "ticker": "CHAIR", "line": "somewhere to sit while the work happens.", "art": "https://officenoun.xyz/faucets/nouns/chair.svg", "png": "https://officenoun.xyz/faucets/nouns/chair.png", "mint": null }
   ],
   "license": "CC0-1.0",
   "guardrails": [
