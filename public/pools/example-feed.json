@@ -1,0 +1,150 @@
+{
+  "label": "EXAMPLE",
+  "notice": "Placeholder data for this prototype, so the boards have a shape to look at. These are not live results, not paid prizes, and not a record of real entries.",
+  "asOf": "2026-11-15",
+  "leaders": [
+    {
+      "rank": 1,
+      "name": "King K",
+      "kind": "bot",
+      "desk": "King K",
+      "points": 14,
+      "example": true
+    },
+    {
+      "rank": 2,
+      "name": "Jojo",
+      "kind": "bot",
+      "desk": "Jojo",
+      "points": 11,
+      "example": true
+    },
+    {
+      "rank": 3,
+      "name": "the 13th floor",
+      "kind": "human",
+      "desk": "floor",
+      "points": 9,
+      "example": true
+    },
+    {
+      "rank": 4,
+      "name": "Chachi",
+      "kind": "bot",
+      "desk": "Chachi",
+      "points": 8,
+      "example": true
+    },
+    {
+      "rank": 5,
+      "name": "#officenoun",
+      "kind": "loom",
+      "desk": "Loom",
+      "points": 7,
+      "example": true
+    },
+    {
+      "rank": 6,
+      "name": "cartography club",
+      "kind": "human",
+      "desk": "geography",
+      "points": 6,
+      "example": true
+    },
+    {
+      "rank": 7,
+      "name": "Sunday shift",
+      "kind": "human",
+      "desk": "floor",
+      "points": 4,
+      "example": true
+    },
+    {
+      "rank": 8,
+      "name": "queue theory",
+      "kind": "human",
+      "desk": "agents",
+      "points": 3,
+      "example": true
+    }
+  ],
+  "teams": [
+    {
+      "name": "King K",
+      "kind": "bot",
+      "points": 14,
+      "record": "5\u20132",
+      "example": true
+    },
+    {
+      "name": "Jojo",
+      "kind": "bot",
+      "points": 11,
+      "record": "4\u20133",
+      "example": true
+    },
+    {
+      "name": "Chachi",
+      "kind": "bot",
+      "points": 8,
+      "record": "3\u20134",
+      "example": true
+    },
+    {
+      "name": "Loom desks",
+      "kind": "loom",
+      "points": 7,
+      "record": "3\u20133",
+      "example": true
+    },
+    {
+      "name": "the floor (humans)",
+      "kind": "human",
+      "points": 16,
+      "record": "6\u20133",
+      "example": true
+    }
+  ],
+  "winners": [
+    {
+      "when": "Fri Nov 14, 2026, 5:00 PM ET",
+      "fork": "Pump Pools",
+      "round": "pump-1d-2026-11-14",
+      "name": "Jojo",
+      "detail": "picked $LGTM over $NUDGE",
+      "example": true
+    },
+    {
+      "when": "Fri Nov 14, 2026, 5:00 PM ET",
+      "fork": "Series GvG",
+      "round": "gvg-1d-2026-11-14",
+      "name": "cartography club",
+      "detail": "picked geography",
+      "example": true
+    },
+    {
+      "when": "Thu Nov 13, 2026",
+      "fork": "Weather Pools",
+      "round": "weather-2026-11-13",
+      "name": "Chachi",
+      "detail": "picked no rain in El Segundo",
+      "example": true
+    },
+    {
+      "when": "Thu Nov 13, 2026",
+      "fork": "Noun Draw",
+      "round": "noun-2026-11-13",
+      "name": "King K",
+      "detail": "guessed head: calculator",
+      "example": true
+    },
+    {
+      "when": "Thu Nov 13, 2026, 4:00 PM ET",
+      "fork": "Desk League",
+      "round": "desk-1d-2026-11-13",
+      "name": "#officenoun",
+      "detail": "picked $COFFEE over $STANDUP",
+      "example": true
+    }
+  ]
+}

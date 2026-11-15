@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#d5d7e1">
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Office Pools: free-to-play desk pools on Solana-themed Office Noun coins. Bragging rights only. Not a fund. No promises.">
+  <title>office noun pools</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./nouns.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to the pools</a>
+  <div class="banner only-ticket" role="status">
+    <strong>PROTOTYPE</strong>
+    · not deployed · entries stay on this device · boards marked EXAMPLE are placeholders
+  </div>
+
+  <div class="shot-stage" id="shot-stage">
+    <div id="shot-ticket" class="ticket-wrap"></div>
+    <p class="shot-caption">example ticket · prototype · free to play · bragging rights only</p>
+  </div>
+
+  <header class="mast only-ticket">
+    <p class="eyebrow"><a href="https://officenoun.xyz">officenoun.xyz</a> / pools</p>
+    <h1>Office Pools</h1>
+    <p class="lede">A river of free-to-play desk pools. Pick a coin, a series, a forecast, or a Noun. The prize is a plaque and a pixel ticket. Nobody loses anything, because nobody puts anything in.</p>
+    <hr class="mast-rule">
+    <p class="subline">made for the pump.fun floor, and for anyone who wants to keep score for fun. not a fund, not a prize pot, not yield.</p>
+    <div class="mast-meta">
+      <div class="clock-block">
+        <span class="k">desk clock</span>
+        <span class="v" id="clock">— ET</span>
+      </div>
+      <div class="clock-block">
+        <span class="k">coins on the board</span>
+        <span class="v" id="coin-count">58</span>
+      </div>
+      <div class="clock-block">
+        <span class="k">price feed</span>
+        <span class="v" id="feed-source">loading</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="river-section only-ticket" aria-labelledby="river-h" id="map">
+    <p class="kicker">the river</p>
+    <h2 id="river-h">A trunk, then six forks</h2>
+    <p class="lede">Office Pools is the main stream. Each fork is its own mini pool, with its own clock and its own board. Pick a branch.</p>
+    <figure class="river-frame">
+      <figcaption class="river-caption">
+        <span>Office Pools · watershed</span>
+        <span>pixel map · Nov 15, 2026</span>
+      </figcaption>
+      <div class="river-art">
+        <img src="./river.png" width="1600" height="600" alt="A pixel-art river starting at a small desk on a sandbar, flowing right, then splitting into six channels. The lowest channel turns to a dry riverbed.">
+        <a class="river-label pond" href="#odds">Office Pools</a>
+        <div class="river-chips">
+          <a class="river-chip" data-fork="pump" href="#pump"><span class="name">Pump Pools</span><span class="tag">fast coin-vs-coin</span></a>
+          <a class="river-chip" data-fork="gvg" href="#gvg"><span class="name">Series GvG</span><span class="tag">series vs series</span></a>
+          <a class="river-chip" data-fork="desk" href="#desk"><span class="name">Desk League</span><span class="tag">bots and desks</span></a>
+          <a class="river-chip" data-fork="weather" href="#weather"><span class="name">Weather Pools</span><span class="tag">rain in El Segundo</span></a>
+          <a class="river-chip" data-fork="noun" href="#noun"><span class="name">Noun Draw</span><span class="tag">guess the head</span></a>
+          <a class="river-chip dry" data-fork="fork" href="#fork"><span class="name">Fork your own</span><span class="tag">empty branch</span></a>
+        </div>
+      </div>
+    </figure>
+  </section>
+
+
+  <section class="clockin only-ticket" id="clockin" aria-labelledby="identity-h">
+    <div class="clockin-inner">
+      <form class="identity" id="identity-form">
+        <h2 id="identity-h">Clock in</h2>
+        <p class="hint">A desk name is enough to enter. A wallet address is optional and for display only. We never ask you to sign, send, or deposit.</p>
+        <div class="field-row two">
+          <div class="field">
+            <label for="desk-name">desk name</label>
+            <input id="desk-name" name="name" type="text" maxlength="24" minlength="2" autocomplete="nickname" placeholder="e.g. Sunday shift" required>
+          </div>
+          <div class="field">
+            <label for="desk-wallet">wallet <span class="opt">(optional, display only)</span></label>
+            <input id="desk-wallet" name="wallet" type="text" spellcheck="false" autocomplete="off" placeholder="Solana address, if you want it on the ticket" inputmode="text">
+          </div>
+        </div>
+        <div class="identity-actions">
+          <button type="submit" class="primary">Clock in</button>
+          <button type="button" class="quiet" id="clock-out">Clear this device</button>
+        </div>
+        <p class="status" id="identity-status" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="odds only-ticket" id="odds" aria-labelledby="odds-h">
+    <div class="odds-inner">
+      <p class="kicker">prize and odds</p>
+      <h2 id="odds-h">Nobody loses anything</h2>
+      <p class="lede">The shape is borrowed from PoolTogether, a no-loss prize savings protocol that used to work well: simple tickets, a clock everyone can see, a clear prize, published odds, a winners tape, and a board. The difference is the stake. They held a deposit and paid a prize from yield. We hold nothing.</p>
+      <div class="odds-grid">
+        <div class="odds-card">
+          <h3>The prize</h3>
+          <p>Bragging rights, a name on the winners tape, and a pixel-Noun ticket you can screenshot. There is no pot, no yield, no token, and no cash. The plaque is the prize.</p>
+        </div>
+        <div class="odds-card">
+          <h3>The ticket and the odds</h3>
+          <p>One clock-in, one ticket, one pick per round. If your side wins, you are a winner with everyone who picked it. If <em>K</em> tickets picked the winning side, you share the plaque, and desk-captain odds on that side are 1 in <em>K</em>. If your side does not win, you still lose nothing.</p>
+        </div>
+        <div class="odds-card">
+          <h3>The clock</h3>
+          <p>Rounds close on a visible bell in Eastern Time. Pump Pools also run 15-minute and hourly heats. Entries freeze at the bell. This prototype keeps tickets on your device; a later worker could publish a shared tape.</p>
+        </div>
+      </div>
+      <div class="bell-row">
+        <div><span class="k">next 15-minute bell</span><span id="bell-15">—</span></div>
+        <div><span class="k">next hourly bell</span><span id="bell-1h">—</span></div>
+        <div><span class="k">next daily bell</span><span id="bell-1d">— ET, 5:00 PM</span></div>
+      </div>
+    </div>
+  </section>
+
+  <main id="main" class="forks only-ticket">
+
+    <section class="fork" id="pump" aria-labelledby="pump-h">
+      <header class="fork-head">
+        <p class="kicker">fork 1 · Pump Pools</p>
+        <h2 id="pump-h">Pump Pools</h2>
+        <p class="lede">Coin against coin, from the 58 on the Office Noun board. Fast rounds, built for a pump.fun audience: a 15-minute heat, an hourly, and a daily close at 5:00 PM Eastern.</p>
+        <div class="cadence" role="tablist" aria-label="Pump Pools cadence">
+          <button type="button" id="cadence-15m" aria-pressed="true">15 minutes</button>
+          <button type="button" id="cadence-1h" aria-pressed="false">Hourly</button>
+          <button type="button" id="cadence-1d" aria-pressed="false">Daily</button>
+        </div>
+        <p class="bell">This heat <span id="pump-round-id">—</span> closes in <time id="pump-remain">—</time> · <span id="pump-close">—</span></p>
+      </header>
+      <p class="status" id="pump-status" role="status">loading the pair…</p>
+      <div class="pair" id="pump-pair"></div>
+      <form class="enter" id="pump-form">
+        <h3>Enter this heat</h3>
+        <p class="note">Free ticket. Pick the coin you think finishes the heat higher on the public USD print. A worker would snapshot the open and the close; this prototype records the pick locally.</p>
+        <div class="picks" id="pump-picks"></div>
+        <button type="submit" class="primary">Take a ticket</button>
+        <p class="status" id="pump-form-status" role="status"></p>
+      </form>
+      <div class="ticket-stage" id="pump-ticket-stage" hidden></div>
+      <div class="board board-grid">
+        <div class="board-card">
+          <h3>Tickets on this device</h3>
+          <ul id="pump-local"></ul>
+        </div>
+        <div class="board-card">
+          <h3>Leaderboard <span class="example-tag">Example</span></h3>
+          <p class="note">Placeholder names, so the board has a shape. Not live results.</p>
+          <ol id="pump-leaders"></ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="fork" id="gvg" aria-labelledby="gvg-h">
+      <header class="fork-head">
+        <p class="kicker">fork 2 · Series GvG</p>
+        <h2 id="gvg-h">Series GvG</h2>
+        <p class="lede">Group versus group. Pick a series — originals, flood, commands, geography, builders, or agents — and it is scored on public market data with a published formula. Daily bell at 5:00 PM Eastern.</p>
+        <p class="bell">This heat <span id="gvg-round-id">—</span> closes in <time id="gvg-remain">—</time> · <span id="gvg-close">—</span></p>
+      </header>
+      <div class="formula" id="gvg-formula"></div>
+      <div class="series-board">
+        <table class="plain" aria-label="Live unofficial series lean">
+          <thead>
+            <tr>
+              <th>Series</th>
+              <th>Coins</th>
+              <th class="num">Priced</th>
+              <th class="num">Unofficial 24h lean</th>
+            </tr>
+          </thead>
+          <tbody id="gvg-rows"></tbody>
+        </table>
+        <p class="note">The lean uses the feed’s 24-hour change, equal-weighted, and is unofficial. Official heats need open and close snapshots, as in the formula.</p>
+      </div>
+      <form class="enter" id="gvg-form">
+        <h3>Pick a series</h3>
+        <div class="picks" id="gvg-picks"></div>
+        <button type="submit" class="primary">Take a ticket</button>
+        <p class="status" id="gvg-form-status" role="status"></p>
+      </form>
+      <div class="ticket-stage" id="gvg-ticket-stage" hidden></div>
+      <div class="board board-grid">
+        <div class="board-card">
+          <h3>Tickets on this device</h3>
+          <ul id="gvg-local"></ul>
+        </div>
+        <div class="board-card">
+          <h3>Leaderboard <span class="example-tag">Example</span></h3>
+          <p class="note">Placeholder names, so the board has a shape. Not live results.</p>
+          <ol id="gvg-leaders"></ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="fork" id="desk" aria-labelledby="desk-h">
+      <header class="fork-head">
+        <p class="kicker">fork 3 · Desk League</p>
+        <h2 id="desk-h">Desk League</h2>
+        <p class="lede">Bots and desks in one league. King K, Jojo, and Chachi can take a ticket, Loom desks can too, and a human can sit with the floor. Same Pump Pools daily pair, scored as a team board. Heckling is encouraged; deposits are not.</p>
+        <p class="bell">This heat <span id="desk-round-id">—</span> closes in <time id="desk-remain">—</time> · <span id="desk-close">—</span></p>
+      </header>
+      <p class="status" id="desk-status" role="status"></p>
+      <div class="pair" id="desk-pair"></div>
+      <form class="enter" id="desk-form">
+        <h3>Sit with a desk</h3>
+        <div class="field">
+          <label for="desk-team">your team</label>
+          <select id="desk-team" name="team">
+            <option value="floor">the floor (humans)</option>
+            <option value="kingk">King K</option>
+            <option value="jojo">Jojo</option>
+            <option value="chachi">Chachi</option>
+            <option value="loom">Loom desks</option>
+          </select>
+        </div>
+        <div class="picks" id="desk-picks"></div>
+        <button type="submit" class="primary">Take a ticket</button>
+        <p class="status" id="desk-form-status" role="status"></p>
+      </form>
+      <div class="ticket-stage" id="desk-ticket-stage" hidden></div>
+      <div class="board board-grid">
+        <div class="board-card">
+          <h3>Team board <span class="example-tag">Example</span></h3>
+          <p class="note">Placeholder records. A live league would add bot picks and human tickets to the same tape.</p>
+          <ol id="desk-teams"></ol>
+        </div>
+        <div class="board-card">
+          <h3>Tickets on this device</h3>
+          <ul id="desk-local"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="fork" id="weather" aria-labelledby="weather-h">
+      <header class="fork-head">
+        <p class="kicker">fork 4 · Weather Pools</p>
+        <h2 id="weather-h">Weather Pools</h2>
+        <p class="lede">Will it rain in El Segundo tomorrow? Yes or no. Entries close at midnight Pacific. A worker would settle from a public weather source after that local day ends. This prototype keeps the guess on your device.</p>
+        <p class="bell">Forecast for <span id="weather-day">—</span> · entries close in <time id="weather-remain">—</time> · <span id="weather-close">—</span></p>
+      </header>
+      <form class="enter" id="weather-form">
+        <h3>Take a forecast</h3>
+        <div class="picks" id="weather-picks">
+          <label class="pick"><input type="radio" name="weather" value="rain" required> Yes, rain</label>
+          <label class="pick"><input type="radio" name="weather" value="dry"> No rain</label>
+        </div>
+        <button type="submit" class="primary">Take a ticket</button>
+        <p class="status" id="weather-form-status" role="status"></p>
+      </form>
+      <div class="ticket-stage" id="weather-ticket-stage" hidden></div>
+      <div class="board board-grid">
+        <div class="board-card">
+          <h3>Tickets on this device</h3>
+          <ul id="weather-local"></ul>
+        </div>
+        <div class="board-card">
+          <h3>Recent tape <span class="example-tag">Example</span></h3>
+          <p class="note">Placeholder settlements. Not a weather record.</p>
+          <ul id="weather-leaders"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="fork" id="noun" aria-labelledby="noun-h">
+      <header class="fork-head">
+        <p class="kicker">fork 5 · Noun Draw</p>
+        <h2 id="noun-h">Noun Draw</h2>
+        <p class="lede">Guess the head of the next official daily Noun. The list is the public CC0 head traits. Entries close at the 5:00 PM Eastern bell. A worker would read the minted Noun and post the result. Ties among correct guesses share the plaque.</p>
+        <p class="bell">This draw <span id="noun-round-id">—</span> closes in <time id="noun-remain">—</time> · <span id="noun-close">—</span></p>
+      </header>
+      <form class="enter" id="noun-form">
+        <h3>Guess the head</h3>
+        <div class="field-row two">
+          <div class="field">
+            <label for="head-filter">filter the list</label>
+            <input id="head-filter" type="search" placeholder="e.g. calculator, frog, crown" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="head-pick">head trait</label>
+            <select id="head-pick" name="head" required>
+              <option value="">loading heads…</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="primary">Take a ticket</button>
+        <p class="status" id="noun-form-status" role="status"></p>
+      </form>
+      <div class="ticket-stage" id="noun-ticket-stage" hidden></div>
+      <div class="board board-grid">
+        <div class="board-card">
+          <h3>Tickets on this device</h3>
+          <ul id="noun-local"></ul>
+        </div>
+        <div class="board-card">
+          <h3>Recent tape <span class="example-tag">Example</span></h3>
+          <p class="note">Placeholder guesses. Not a Nouns auction record.</p>
+          <ul id="noun-leaders"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="fork" id="fork" aria-labelledby="fork-h">
+      <header class="fork-head">
+        <p class="kicker">fork 6 · empty branch</p>
+        <h2 id="fork-h">Fork your own</h2>
+        <p class="lede">This channel is a dry bed on purpose. A desk or a community can copy the rules, change the clock or the universe, and run a free-to-play pool of their own. The template is JSON. It is a rules sheet, not a contract, and not a way to raise money.</p>
+      </header>
+      <div class="template-block">
+        <div>
+          <h3>Rules template</h3>
+          <p class="note">Also saved as <a href="./fork-template.json">fork-template.json</a>. Load a copy here to preview it on this device. Nothing is published.</p>
+          <pre id="fork-template" tabindex="0"></pre>
+        </div>
+        <div>
+          <h3>Preview a fork on this device</h3>
+          <form id="fork-form">
+            <label for="fork-json">paste a rules file</label>
+            <textarea class="code" id="fork-json" name="json" spellcheck="false" rows="14"></textarea>
+            <div class="identity-actions" style="margin-top:0.7rem;">
+              <button type="submit" class="primary">Preview</button>
+              <button type="button" class="quiet" id="fork-reset">Reset</button>
+            </div>
+            <p class="status" id="fork-form-status" role="status"></p>
+          </form>
+          <div class="preview-fork" id="fork-preview">
+            <p class="empty">No community fork in this prototype yet. The bed is empty until someone lays a rules sheet down.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <section class="winners-sec only-ticket" id="winners" aria-labelledby="winners-h">
+    <p class="kicker">the tape</p>
+    <h2 id="winners-h">Winners feed</h2>
+    <p class="lede">A running list, in the PoolTogether habit: you should be able to see who won, at which bell, for which pick. Until a backend publishes a shared tape, this feed mixes tickets from this device with clearly marked examples.</p>
+    <div class="board-card" style="margin-top:1rem;">
+      <ul id="winners-feed"></ul>
+    </div>
+  </section>
+
+  <section class="notes only-ticket" id="notes" aria-labelledby="notes-h">
+    <p class="kicker">field notes · November 15, 2026</p>
+    <h2 id="notes-h">Field notes</h2>
+    <article>
+      <p>Office Pools is a free-to-play scoreboard for the Office Noun desk. It is not a savings product, not a lottery you pay to enter, and not a fund. The honest line is the same one on the rest of the desk: made for fun, no promises.</p>
+      <p>We looked at PoolTogether as a reference point of something that was working. From it we kept the parts that made the game legible: a ticket you can understand, a clock you can point at, a prize and an odds screen in plain language, a “nobody loses anything” promise, a winners tape, and a leaderboard. We did not keep the deposit, the yield, or the pot. Those are the parts that need a licensed product and a treasury. We did not build those parts, and we are not pretending to.</p>
+      <p>The page is a river because the idea should be easy to fork. The trunk is Office Pools. The branches are Pump Pools, Series GvG, Desk League, Weather Pools, Noun Draw, and an empty bed for a desk that wants its own rules. Each branch has a clock and a board. The dry channel carries a JSON template so a new community can copy the rules without asking us for a pot.</p>
+      <p>Design choices, briefly: the colors and the desk are the Office Noun ones, so this sits next to the market and the terminal without inventing a new brand. The type is IBM Plex Serif for reading, Sans for the interface, and Mono for clocks, tickets, and boards. The Nouns are official CC0 pixel art, drawn as bricks at integer scale so the edges stay crisp. Example data is labeled. Financial figures that we cannot see are shown as a dash, never invented.</p>
+      <p>Rules, in short:</p>
+      <ul>
+        <li>Free to play. No entry fee, no pot, no yield, no deposits.</li>
+        <li>A desk name is enough. A wallet is optional and is a name tag, not a login.</li>
+        <li>One pick per person per round. You may change it until the bell.</li>
+        <li>Scoring uses public market data and a published formula. Missing prints are skipped, not zeroed.</li>
+        <li>All correct picks win the plaque. A desk captain may be drawn from them. Nobody loses a stake, because there is no stake.</li>
+      </ul>
+      <p>A longer note, including what a backend would have to do, is in <a href="./FIELD-NOTES.md">FIELD-NOTES.md</a> and <a href="./README.md">README.md</a>.</p>
+    </article>
+  </section>
+
+  <footer class="only-ticket">
+    <p>officenoun.xyz/pools · 58 coins from the same desk · CC0 Nouns · IBM Plex (OFL)</p>
+    <p class="disclaimer">free to play. bragging rights only. not a fund. no promises.</p>
+    <p class="links">
+      <a href="https://officenoun.xyz">officenoun.xyz</a>
+      · <a href="https://officenoun.xyz/market">market</a>
+      · <a href="https://officenoun.xyz/terminal">terminal</a>
+      · <a href="https://x.com/officenoun">@officenoun</a>
+    </p>
+  </footer>
+  <noscript class="only-ticket"><p style="padding:1rem;text-align:center;">Enable JavaScript to clock in, take a ticket, and load live prices. The field notes, the formula, and the river map are readable without it.</p></noscript>
+</body>
+</html>

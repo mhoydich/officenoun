@@ -247,6 +247,167 @@
       "pool": "BW6mPdVx74YMXG6JsEoyhLXEcXkHytwJXiBZZHJe6zhT",
       "tradeUrl": "https://jup.ag/swap/SOL-5DFTo4BxSFms8eCvEak8YE7yYBSw1gdEBbBvwJpx5DcJ",
       "meteoraUrl": "https://www.meteora.ag/pools/BW6mPdVx74YMXG6JsEoyhLXEcXkHytwJXiBZZHJe6zhT"
+    },
+    {
+      "name": "Orange Farm",
+      "ticker": "ORANGEFARM",
+      "mint": "6pbjF3vi4NMh4yvApUxVY9h2XX1ygSVvSg8VtRQL7REK",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/orangefarm.png",
+      "blurb": "the desk draws an orange farm. the trees are still on the page."
+    },
+    {
+      "name": "Oceanfront Anywhere",
+      "ticker": "OCEANFRONT",
+      "mint": "8NR8KBJRgcmAXcXJHhXo6CGSqwaewyd9Nd4kN13jT1yY",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/oceanfront.png",
+      "blurb": "oceanfront real estate, anywhere on the page."
+    },
+    {
+      "name": "Public Goods Factory",
+      "ticker": "PUBGOODS",
+      "mint": "9DHk2mRL93ceDcvN3Pkj2wht6KoLWvnv1cAXusNPEGth",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/pubgoods.png",
+      "blurb": "a public goods factory, drawn at the desk."
+    },
+    {
+      "name": "Empty Lot",
+      "ticker": "EMPTYLOT",
+      "mint": "4fw9etnagogybZxGyyZ5nucmrEZDvqjJRRqzNPZbUvCj",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/emptylot.png",
+      "blurb": "an empty lot. the desk is still deciding what goes here."
+    },
+    {
+      "name": "The Commons",
+      "ticker": "COMMONS",
+      "mint": "8jhv9jyQKTM2sQQ2FgRJgkqzQpSb3voED82yYpqrTyS1",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/commons.png",
+      "blurb": "the commons. a shared place, drawn for anyone who wants to look."
+    },
+    {
+      "name": "Harbor Plans",
+      "ticker": "HARBOR",
+      "mint": "CEjhZtxnG2m95Wak7DSWFUobyUdediBLDbet9kWkEwqS",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/harbor.png",
+      "blurb": "harbor plans. ships and docks, still on the page."
+    },
+    {
+      "name": "Desert Parcel",
+      "ticker": "DESERT",
+      "mint": "EvNkFK2v2X1oiG2WEepciWnCoHMmry4WyoAvYPbDn2Df",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/desert.png",
+      "blurb": "a desert parcel. sun, sand, and a lot of empty paper."
+    },
+    {
+      "name": "Island Office",
+      "ticker": "ISLAND",
+      "mint": "32EF9WXs9MppoMS7YGkmL61p7YmR9Zfu2Pzs3UmDDBBD",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/island.png",
+      "blurb": "an island office. desks with a view of the water, on the page."
+    },
+    {
+      "name": "Ridge Lot",
+      "ticker": "RIDGE",
+      "mint": "5vuBXx2x5gWKL17S9dshg8EZEoNiFNf3XdLsCqXqSC5y",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/ridge.png",
+      "blurb": "a ridge lot. a view from the hill, drawn at the desk."
+    },
+    {
+      "name": "Cartography",
+      "ticker": "CARTO",
+      "mint": "AuUnvxAfCKTvKvGddNRQhYfXDjj4F2DufK5aZxmHezeC",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/carto.png",
+      "blurb": "cartography at the desk. maps of places that might be built."
+    },
+    {
+      "name": "Architect",
+      "ticker": "ARCHITECT",
+      "mint": "H8CjJQAxzMUYYakZrjPHQWzTq5CjTtHWgoCxx4mLYREM",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/architect.png",
+      "blurb": "the architect desk. drawings and plans, another day at the office."
+    },
+    {
+      "name": "Blueprints",
+      "ticker": "BLUEPRINT",
+      "mint": "BooLjCt9trupHCUYWWGhECz7PhaN5QWt5T4Sc2ZQ3qFf",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/blueprint.png",
+      "blurb": "blueprints on the desk. the plans come first."
+    },
+    {
+      "name": "Zoning Permit",
+      "ticker": "ZONING",
+      "mint": "8VHcuWLMwmmRx4ZgctSAvuxKHLvyoQceFTQGCjxvUCPQ",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/zoning.png",
+      "blurb": "a zoning permit at the desk. the stamp is still on the page."
+    },
+    {
+      "name": "Site Plan",
+      "ticker": "SITEPLAN",
+      "mint": "21aKYsCaLRYr1KDW7DKn83928WMRUwYZ1WSTX6Upv9rY",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/siteplan.png",
+      "blurb": "a site plan. lots, paths, and a little compass rose."
+    },
+    {
+      "name": "Scale Ruler",
+      "ticker": "SCALE",
+      "mint": "3jtBeY25dRmd41aTR3utdA3yaH1WWFUtv1ig6or1wvbJ",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/scale.png",
+      "blurb": "the scale ruler. how big is the drawing, and how big is the desk."
+    },
+    {
+      "name": "The Model",
+      "ticker": "MODEL",
+      "mint": "5xoF6iDxza5ZYsyBfQTvp91CU2EuLk6xJ8BMcfqm4Qbm",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/model.png",
+      "blurb": "the model on the desk. a small building, still made of paper."
+    },
+    {
+      "name": "Drafting",
+      "ticker": "DRAFTING",
+      "mint": "Brs1LtGhnGZyboWeJVd111XsG52BGmNZn9TQFboNimQy",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/drafting.png",
+      "blurb": "drafting at the desk. lines, revisions, and a sharper pencil."
+    },
+    {
+      "name": "Punch List",
+      "ticker": "PUNCHLIST",
+      "mint": "BikvnJTy9fG6X3rXKYLf2VcLUuPWxcng9J5ZDMAcaJAS",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/punchlist.png",
+      "blurb": "the punch list. what is done, and what is still on the page."
+    },
+    {
+      "name": "Handshake",
+      "ticker": "HANDSHAKE",
+      "mint": "79UfvF2FFv628N84129HGPfBS6bW6Vj5KoDnFnb1x7F5",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/handshake.png",
+      "blurb": "a handshake at the desk. two agents, one greeting."
+    },
+    {
+      "name": "Handoff",
+      "ticker": "HANDOFF",
+      "mint": "36ktQKXBXHQpotSesgJShmdnCEFRNuPw8V3LyKYCM9f8",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/handoff.png",
+      "blurb": "a handoff at the desk. one agent passing work to the next."
+    },
+    {
+      "name": "Ticket",
+      "ticker": "TICKET",
+      "mint": "7m23eL1DyVaAAHE8TbpttzUR6jLJEe37UeSk8MbZb3pc",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/ticket.png",
+      "blurb": "a ticket on the desk. someone asked, someone will get to it."
+    },
+    {
+      "name": "Heartbeat",
+      "ticker": "HEARTBEAT",
+      "mint": "52AmhioBsX7EUddzfFgikwNLePxL6mcu6RwFzUftoeiC",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/heartbeat.png",
+      "blurb": "a heartbeat on the desk. the bot is still here."
+    },
+    {
+      "name": "Queue",
+      "ticker": "QUEUE",
+      "mint": "ESHHSVbTzDypPmNpBMAU312J4QKcuZBBfRRyckqbxzM7",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/queue.png",
+      "blurb": "the queue at the desk. everyone waits their turn."
     }
   ]
 }

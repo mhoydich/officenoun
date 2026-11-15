@@ -1,6 +1,6 @@
 {
   "name": "office noun market",
-  "purpose": "34 coins from the same desk: public live market data, visitor-directed trading and a local-only desk game.",
+  "purpose": "58 coins from the same desk: public live market data, visitor-directed trading and a local-only desk game.",
   "coin_list_url": "./coins.json",
   "canonical_coin_list_url": "https://officenoun.xyz/market/coins.json",
   "coin_fields": [

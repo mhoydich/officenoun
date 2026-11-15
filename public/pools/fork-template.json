@@ -1,0 +1,48 @@
+{
+  "$comment": "Office Pools fork template. A desk or community can copy this, change the fields, and run a free-to-play pool of their own. No entry fee, no pot, no yield, no deposits. This file is a rules sheet, not a contract and not a way to raise money.",
+  "name": "your pool name",
+  "forkOf": "office-pools",
+  "version": 1,
+  "freeToPlay": true,
+  "entryFee": 0,
+  "pot": false,
+  "yield": false,
+  "deposits": false,
+  "prize": "bragging rights only",
+  "disclaimer": "free to play. bragging rights only. not a fund. no promises.",
+  "clock": {
+    "timezone": "America/New_York",
+    "round": "15m",
+    "roundsAllowed": [
+      "15m",
+      "1h",
+      "1d"
+    ]
+  },
+  "format": "pvp-pickem",
+  "formatsAllowed": [
+    "pvp-pickem",
+    "gvg-series",
+    "desk-league",
+    "weather",
+    "noun-draw"
+  ],
+  "universe": {
+    "source": "coins.json",
+    "tickers": [
+      "*"
+    ]
+  },
+  "scoring": {
+    "pvp": "The coin with the higher USD price change over the round wins. Change is (close \u2212 open) / open from public market prints snapshotted at open and close. If a print is missing, that pair's round is void. Ties stand as ties. Every correct pick is a winner. A desk captain is drawn from the winning tickets with a published seed (the round id).",
+    "gvg": "Equal-weighted average of each constituent coin's round price change. Coins with no print are skipped, not zeroed. If a series has fewer than two priced coins, it is ineligible for that round.",
+    "weather": "Yes or no: did El Segundo, California record measurable precipitation during the local calendar day? Settled from a public weather source (for example Open-Meteo or NWS).",
+    "nounDraw": "Guess the head trait of the next official daily Noun. Settled from the public Nouns auction result. Ties among correct guesses share the plaque; a desk captain may be drawn from them."
+  },
+  "entry": {
+    "identity": "clock-in name, or optional wallet address for display only",
+    "signing": false,
+    "onChainTx": false
+  },
+  "settlement": "A backend should snapshot prices at open and close, freeze entries at the bell, publish the tape, and write winners. This prototype stores entries in localStorage only."
+}

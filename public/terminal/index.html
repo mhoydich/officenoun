@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="Office Noun public market terminal. Live tickers, prices, market caps and volume, with official CC0 Nouns built as pixel LEGO mosaics. not a fund. no promises.">
+  <title>OFFICENOUN DESK &lt;GO&gt;</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="crt" aria-hidden="true"></div>
+  <header class="mast">
+    <div class="fn-row" aria-label="Function keys">
+      <a href="#tape">F1 TAPE</a>
+      <a href="#board">F2 MKT</a>
+      <a href="#movers">F3 MOVERS</a>
+      <a href="#receipts">F4 BOT</a>
+      <a href="https://officenoun.xyz/market">F5 MARKET</a>
+      <a href="https://officenoun.xyz">F6 DESK</a>
+      <a href="#noun-min">F7 NOUN</a>
+    </div>
+    <div class="title-row">
+      <h1>OFFICENOUN <span class="go">DESK &lt;GO&gt;</span></h1>
+      <p class="clock" id="clock">— ET</p>
+    </div>
+    <div class="wall-wrap" aria-label="Brick wall of Nouns at desks">
+      <canvas id="brick-wall" width="1440" height="126"></canvas>
+      <p class="wall-caption">NOUNS AT THE DESK · official CC0 parts, each pixel a LEGO brick</p>
+    </div>
+    <div class="stats" id="stats">
+      <div class="stat"><span class="k">COINS</span><span class="v" id="coin-count">58</span></div>
+      <div class="stat"><span class="k">PRICED</span><span class="v" id="priced-count">—</span></div>
+      <div class="stat"><span class="k">24H VOL</span><span class="v" id="total-vol">—</span></div>
+      <div class="stat"><span class="k">FEED</span><span class="v" id="feed-source">loading</span></div>
+    </div>
+  </header>
+
+  <section id="tape" class="tape-wrap" aria-label="Scrolling ticker tape">
+    <div class="panel-head">TAPE <span class="go">&lt;GO&gt;</span> <span class="sub">the tape is the coffee · brick heads from official Nouns</span></div>
+    <div class="tape" id="tape-track"><div class="tape-inner" id="tape-inner">loading the tape…</div></div>
+  </section>
+
+  <main>
+    <div class="top-grid">
+      <section id="noun-min" class="panel featured" aria-labelledby="noun-min-h">
+        <div class="panel-head" id="noun-min-h">NOUN OF THE MINUTE <span class="go">&lt;GO&gt;</span> <span class="sub">official CC0 parts · one brick per pixel · advances on the ET minute, or click</span></div>
+        <div class="featured-body">
+          <button type="button" id="featured-btn" class="featured-btn" aria-label="Show the next Noun">
+            <canvas id="featured-canvas" width="408" height="408"></canvas>
+          </button>
+          <div class="featured-meta">
+            <p class="featured-ticker" id="featured-ticker">—</p>
+            <p class="featured-name" id="featured-name"></p>
+            <p class="featured-traits" id="featured-traits"></p>
+            <p class="featured-note" id="featured-note"></p>
+            <p class="featured-link" id="featured-link"></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="movers" class="panel" aria-labelledby="movers-h">
+        <div class="panel-head" id="movers-h">MOVERS <span class="go">&lt;GO&gt;</span> <span class="sub">24h change, only where the feed has it</span></div>
+        <div class="movers" id="movers-box"><p class="muted">loading movers…</p></div>
+      </section>
+    </div>
+
+    <section id="board" class="panel" aria-labelledby="board-h">
+      <div class="panel-head">
+        <span id="board-h">MKT <span class="go">&lt;GO&gt;</span></span>
+        <span class="sub">market cap, highest first · USD · a dash means unavailable · brick Nouns from official parts</span>
+        <button id="refresh" type="button">REFRESH</button>
+      </div>
+      <p id="status" class="status" role="status">loading coin list…</p>
+      <div class="table-wrap">
+        <table class="board">
+          <thead>
+            <tr>
+              <th class="noun-col">NOUN</th>
+              <th>TICKER</th>
+              <th>VENUE</th>
+              <th class="num">PRICE</th>
+              <th class="num">MCAP</th>
+              <th class="num">24H VOL</th>
+              <th class="num">24H</th>
+              <th>MINT</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <noscript><p class="muted">Enable JavaScript to load the coin list and live market data.</p></noscript>
+    </section>
+
+    <section id="receipts" class="panel" aria-labelledby="receipts-h">
+      <div class="panel-head" id="receipts-h">INDEX BOT BUYS <span class="go">&lt;GO&gt;</span> <span class="sub">public receipts only</span></div>
+      <p id="receipts-body" class="muted">no public buy receipts yet. this panel lists on-chain or Loom receipts when they exist.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>officenoun.xyz/terminal · 58 coins from the same desk · Nouns built as pixel LEGO mosaics from official CC0 parts · made for fun, cc0.</p>
+    <p class="disclaimer">not a fund. no promises.</p>
+    <p class="links">
+      <a href="https://officenoun.xyz">officenoun.xyz</a>
+      · <a href="https://officenoun.xyz/market">market</a>
+      · <a href="https://x.com/officenoun">@officenoun</a>
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,105 @@
+{
+  "formula": "A series score is the equal-weighted average of each constituent coin's price change over the round. Change is (close \u2212 open) / open, using public USD prints snapshotted at the open and the close (GeckoTerminal, with DexScreener as fallback). Coins with no print at either bell are skipped, not zeroed. A series with fewer than two priced coins is ineligible for that round. The series with the higher score wins the heat. Ties stand as ties. This prototype can show a live unofficial lean from the feed's 24h change; official open/close snapshots need a small backend, described in README.md.",
+  "series": [
+    {
+      "id": "originals",
+      "label": "originals",
+      "blurb": "the first desk coins, plus Desk Pay on Meteora.",
+      "tickers": [
+        "OFFICENOUN",
+        "FLOOR13",
+        "DRUM",
+        "ALLOW",
+        "PRINT",
+        "TEAMMOON",
+        "TEAMOO",
+        "DESKPAY"
+      ]
+    },
+    {
+      "id": "flood",
+      "label": "flood",
+      "blurb": "the flood kits: reply-all, coffee, standup, and the rest of that week.",
+      "tickers": [
+        "REPLYALL",
+        "OOO",
+        "CASUAL",
+        "COOLER",
+        "COFFEE",
+        "STANDUP",
+        "FIVEPM",
+        "BADGE",
+        "INBOX",
+        "MUTE"
+      ]
+    },
+    {
+      "id": "commands",
+      "label": "commands",
+      "blurb": "pings, nudges, LGTM, Friday deploys, Franklin and Benjamins.",
+      "tickers": [
+        "PING",
+        "NUDGE",
+        "UNMUTE",
+        "SNOOZE",
+        "UNDO",
+        "SHIPIT",
+        "BRB",
+        "LGTM",
+        "KUDOS",
+        "BACON",
+        "PERMYLAST",
+        "CIRCLEBACK",
+        "FRIDAY",
+        "CAMOFF",
+        "REPLYGUY",
+        "FRANKLIN",
+        "BENJAMINS"
+      ]
+    },
+    {
+      "id": "geography",
+      "label": "geography",
+      "blurb": "plans for places: an orange farm, an empty lot, a harbor, a map.",
+      "tickers": [
+        "ORANGEFARM",
+        "OCEANFRONT",
+        "PUBGOODS",
+        "EMPTYLOT",
+        "COMMONS",
+        "HARBOR",
+        "DESERT",
+        "ISLAND",
+        "RIDGE",
+        "CARTO"
+      ]
+    },
+    {
+      "id": "builders",
+      "label": "builders",
+      "blurb": "the architect desk and its drawings.",
+      "tickers": [
+        "ARCHITECT",
+        "BLUEPRINT",
+        "ZONING",
+        "SITEPLAN",
+        "SCALE",
+        "MODEL",
+        "DRAFTING",
+        "PUNCHLIST"
+      ]
+    },
+    {
+      "id": "agents",
+      "label": "agents",
+      "blurb": "handshake, handoff, ticket, heartbeat, queue.",
+      "tickers": [
+        "HANDSHAKE",
+        "HANDOFF",
+        "TICKET",
+        "HEARTBEAT",
+        "QUEUE"
+      ]
+    }
+  ]
+}

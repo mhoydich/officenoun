@@ -1,0 +1,1093 @@
+{
+  "coins": [
+    {
+      "name": "Office Noun",
+      "ticker": "OFFICENOUN",
+      "mint": "8eR2JE36nE1J4DDYJugm5yCE4nxEtkfkoS5eCmcg8UKu",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/desk.jpg",
+      "blurb": "another day at the office. one noun a day at a desk.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-calculator",
+        "body": "body-bege-crt",
+        "glasses": "glasses-square-grey-light"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "The 13th Floor",
+      "ticker": "FLOOR13",
+      "mint": "DWcwrJcuFCdW3154P46gEi6RFnBUaxE5eYmeB5uGCbtc",
+      "image": "https://officenoun.xyz/13/floor13-01.png",
+      "blurb": "the elevator has a button for 13. it did not yesterday.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-ghost-B",
+        "accessory": "accessory-tie-red",
+        "body": "body-darkbrown",
+        "glasses": "glasses-square-green-blue-multi"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Drum",
+      "ticker": "DRUM",
+      "mint": "kBpnoiScwCiR8Bjk4GL5R9ydqH8PuAivwPXqdj5p1mf",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/drum.png",
+      "blurb": "one tap. everybody hears it.",
+      "nounId": null,
+      "nounTraits": null,
+      "nounSeed": null,
+      "nounOfficial": false
+    },
+    {
+      "name": "Cancel or Allow",
+      "ticker": "ALLOW",
+      "mint": "818bDpuFt2UJmh94r7LUyMAXF5hdygZDXCxMUYQQErW8",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/allow.png",
+      "blurb": "the stapler needs your permission to continue.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-stapler",
+        "accessory": "accessory-tie-red",
+        "body": "body-grayscale-9",
+        "glasses": "glasses-square-honey"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Midnight Printers",
+      "ticker": "PRINT",
+      "mint": "E332qbgjF4ZJPu8ZqVNrRs4vjUS5jexkQMbSuVDUDjJp",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/midnight.png",
+      "blurb": "a sign on a desk at night. the presses run after hours.",
+      "nounId": null,
+      "nounTraits": null,
+      "nounSeed": null,
+      "nounOfficial": false
+    },
+    {
+      "name": "Team Moon",
+      "ticker": "TEAMMOON",
+      "mint": "As8u7KjSeu2SismVWfz5R9bKWmSim9qWSr9o5MxHitMB",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/teammoon.png",
+      "blurb": "let's go team moon. 100 nouns, one moon.",
+      "nounId": 1,
+      "nounTraits": null,
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Team Moo",
+      "ticker": "TEAMOO",
+      "mint": "3W51GaYhGyKVNR5zZrHYRr2FWQedj82mz5fvTVpKVLzF",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/teamoo.png",
+      "blurb": "one noun cow, one moon. shipped from the moon, not the store.",
+      "nounId": 100,
+      "nounTraits": {
+        "head": "head-cow",
+        "accessory": "documented on Noun 100",
+        "body": "body-purple",
+        "glasses": "glasses-square-yellow-orange-multi"
+      },
+      "nounSeed": [
+        1,
+        17,
+        9,
+        59,
+        19
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Reply All",
+      "ticker": "REPLYALL",
+      "mint": "AcH8qCpvmg3txPQ5Bi2u8vYzgFxn49sZ5rrL1yBrxmAu",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/replyall.png",
+      "blurb": "you meant to reply to dave. everyone got it anyway.",
+      "nounId": 1293,
+      "nounTraits": {
+        "head": "head-bubble-speech",
+        "accessory": "accessory-txt-copy",
+        "body": "body-darkpink",
+        "glasses": "glasses-square-black-eyes-red"
+      },
+      "nounSeed": [
+        0,
+        7,
+        107,
+        25,
+        1
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Out of Office",
+      "ticker": "OOO",
+      "mint": "AqHKNwXPq5u4i5hzqP7Uxk4rpHC2ukyuFMkCT6Bbzs4U",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/ooo.png",
+      "blurb": "out of office, back on monday. which monday is tbd.",
+      "nounId": 1335,
+      "nounTraits": {
+        "head": "head-island",
+        "accessory": "accessory-tee-yo",
+        "body": "body-grayscale-9",
+        "glasses": "glasses-square-honey"
+      },
+      "nounSeed": [
+        1,
+        26,
+        97,
+        110,
+        11
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Casual Friday",
+      "ticker": "CASUAL",
+      "mint": "98r2waAyTK3y1tQk6dKLzyySdFYbiEa2faCRSD6oFYe9",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/casual.png",
+      "blurb": "casual friday. the dress code loosens, the standup does not.",
+      "nounId": 507,
+      "nounTraits": {
+        "head": "head-rainbow",
+        "accessory": "accessory-tie-dye",
+        "body": "body-red",
+        "glasses": "glasses-square-magenta"
+      },
+      "nounSeed": [
+        0,
+        23,
+        101,
+        170,
+        12
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Water Cooler",
+      "ticker": "COOLER",
+      "mint": "7nRWbnzUpd8poZncZwfCSP4nP1ff6b8CkajPdjygUKwU",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/cooler.png",
+      "blurb": "the water cooler. the only meeting with no agenda.",
+      "nounId": 668,
+      "nounTraits": {
+        "head": "head-rabbit",
+        "accessory": "accessory-tie-black-on-white",
+        "body": "body-peachy-a",
+        "glasses": "glasses-deep-teal"
+      },
+      "nounSeed": [
+        0,
+        21,
+        100,
+        169,
+        21
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Coffee Pot",
+      "ticker": "COFFEE",
+      "mint": "2rT5ASE7GAe99cX5HzaeTwFfDvdWxnqfycgvtoHMGo5j",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/coffee.png",
+      "blurb": "the coffee pot is already empty, as scheduled.",
+      "nounId": 39,
+      "nounTraits": {
+        "head": "head-mug",
+        "accessory": "accessory-checker-RGB",
+        "body": "body-peachy-a",
+        "glasses": "glasses-square-yellow-saturated"
+      },
+      "nounSeed": [
+        0,
+        21,
+        26,
+        133,
+        20
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Standup",
+      "ticker": "STANDUP",
+      "mint": "7NochXJ2J4qDVs4FP4fR8VZ2a3eZ8j9ptvmrh1icJ5CC",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/standup.png",
+      "blurb": "standup. fifteen minutes, still going.",
+      "nounId": 1137,
+      "nounTraits": {
+        "head": "head-thumbsup",
+        "accessory": "accessory-txt-ico",
+        "body": "body-grayscale-8",
+        "glasses": "glasses-square-black"
+      },
+      "nounSeed": [
+        1,
+        12,
+        112,
+        204,
+        3
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Five O'Clock",
+      "ticker": "FIVEPM",
+      "mint": "4mtTCw8o8RsXHxy7Pzj3bQSQVNeW6yoYrrUWP73j7NRG",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/fivepm.png",
+      "blurb": "five o'clock. the only meeting that starts on time.",
+      "nounId": 400,
+      "nounTraits": {
+        "head": "head-watch",
+        "accessory": "accessory-pocket-pencil",
+        "body": "body-bege-crt",
+        "glasses": "glasses-square-orange"
+      },
+      "nounSeed": [
+        0,
+        1,
+        73,
+        223,
+        13
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Badge",
+      "ticker": "BADGE",
+      "mint": "EV6GRJUYpbPMrKGVucXERQ5Rowh4tmFR6T7A6xYcd1Jh",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/badge.png",
+      "blurb": "the badge is on the kitchen counter.",
+      "nounId": 584,
+      "nounTraits": {
+        "head": "head-duck",
+        "accessory": "accessory-id",
+        "body": "body-grayscale-9",
+        "glasses": "glasses-square-blue-med-saturated"
+      },
+      "nounSeed": [
+        1,
+        13,
+        59,
+        74,
+        4
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Inbox",
+      "ticker": "INBOX",
+      "mint": "65EpN6F6b3aqhRVBmKUSkd19Ed4gXSgTcRugdZkjS3DZ",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/inbox.png",
+      "blurb": "4,812 unread. none of them from you.",
+      "nounId": 1201,
+      "nounTraits": {
+        "head": "head-mailbox",
+        "accessory": "accessory-tie-purple-on-white",
+        "body": "body-magenta",
+        "glasses": "glasses-square-black-eyes-red"
+      },
+      "nounSeed": [
+        0,
+        17,
+        102,
+        122,
+        1
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "You're on Mute",
+      "ticker": "MUTE",
+      "mint": "6Bn55jfFBejGAFtAwadT72wrBDZjvg1nwMSKNafk7HS3",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/mute.png",
+      "blurb": "you're on mute. we can see you talking.",
+      "nounId": 716,
+      "nounTraits": {
+        "head": "head-lips",
+        "accessory": "accessory-tie-red",
+        "body": "body-orange-yellow",
+        "glasses": "glasses-square-pink-purple-multi"
+      },
+      "nounSeed": [
+        1,
+        18,
+        103,
+        118,
+        14
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Ping",
+      "ticker": "PING",
+      "mint": "9X3iVzKrXtYXLtcHRYRJ8U4eD8mY8xeGckr15SGEf4Hd",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/ping.png",
+      "blurb": "send a ping to anyone who needs one.",
+      "nounId": 740,
+      "nounTraits": {
+        "head": "head-cordlessphone",
+        "accessory": "accessory-flash",
+        "body": "body-redpinkish",
+        "glasses": "glasses-square-orange"
+      },
+      "nounSeed": [
+        1,
+        24,
+        51,
+        57,
+        13
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Nudge",
+      "ticker": "NUDGE",
+      "mint": "7kmyQgeA6zgXdfm1961j14vgm6gk6MEwwf2NYn2EXg26",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/nudge.png",
+      "blurb": "send a nudge to anyone who's gone quiet.",
+      "nounId": 135,
+      "nounTraits": {
+        "head": "head-boxingglove",
+        "accessory": "accessory-safety-vest",
+        "body": "body-redpinkish",
+        "glasses": "glasses-square-teal"
+      },
+      "nounSeed": [
+        0,
+        24,
+        78,
+        23,
+        17
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Unmute",
+      "ticker": "UNMUTE",
+      "mint": "8pbfjkMQKnoyj58vGUSz1HTmMpxBAQma5DzTRtbptFUc",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/unmute.png",
+      "blurb": "send an unmute to anyone we can see talking.",
+      "nounId": 1062,
+      "nounTraits": {
+        "head": "head-boombox",
+        "accessory": "accessory-checkers-black",
+        "body": "body-cold",
+        "glasses": "glasses-square-smoke"
+      },
+      "nounSeed": [
+        0,
+        4,
+        35,
+        20,
+        16
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Snooze",
+      "ticker": "SNOOZE",
+      "mint": "49sTQemcffo495zsg3jrP5mEtvojceBZqEhdf2R3bErH",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/snooze.png",
+      "blurb": "send a snooze to anyone who could use ten more minutes.",
+      "nounId": 416,
+      "nounTraits": {
+        "head": "head-pillow",
+        "accessory": "accessory-txt-cc2",
+        "body": "body-grayscale-1",
+        "glasses": "glasses-deep-teal"
+      },
+      "nounSeed": [
+        0,
+        10,
+        106,
+        156,
+        21
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Undo",
+      "ticker": "UNDO",
+      "mint": "BL1Sp751mYKgcUXZ5aw18kNDFxkwGktPgmwu12RrfGor",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/undo.png",
+      "blurb": "send an undo to anyone who just hit send.",
+      "nounId": 123,
+      "nounTraits": {
+        "head": "head-crt-bsod",
+        "accessory": "accessory-txt-cc2",
+        "body": "body-bege-bsod",
+        "glasses": "glasses-square-yellow-saturated"
+      },
+      "nounSeed": [
+        1,
+        0,
+        106,
+        64,
+        20
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Ship It",
+      "ticker": "SHIPIT",
+      "mint": "FDe6HyErMuwMPwECkbop1E3j5zdjPqpdr2t37nWB4zk5",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/shipit.png",
+      "blurb": "send a ship it to anyone waiting on the thumbs-up.",
+      "nounId": 1641,
+      "nounTraits": {
+        "head": "head-pirateship",
+        "accessory": "accessory-bling-anchor",
+        "body": "body-cold",
+        "glasses": "glasses-square-guava"
+      },
+      "nounSeed": [
+        0,
+        4,
+        6,
+        159,
+        10
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "BRB",
+      "ticker": "BRB",
+      "mint": "wM7ft4c1S8Vq3gMd7j6ZvD2gNKB4p7oiNaSgdDsgsGw",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/brb.png",
+      "blurb": "send a brb to anyone stepping away from the desk.",
+      "nounId": 1960,
+      "nounTraits": {
+        "head": "head-wave",
+        "accessory": "accessory-tie-black-on-white",
+        "body": "body-purple",
+        "glasses": "glasses-square-black"
+      },
+      "nounSeed": [
+        1,
+        22,
+        100,
+        225,
+        3
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "LGTM",
+      "ticker": "LGTM",
+      "mint": "BxqJcLXr3xbjLPGn3N4NmaXkLCokuh26ZWE53MQ3ZRKE",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/lgtm.png",
+      "blurb": "send an lgtm to anyone who got it right.",
+      "nounId": 946,
+      "nounTraits": {
+        "head": "head-smile",
+        "accessory": "accessory-txt-cc2",
+        "body": "body-grayscale-1",
+        "glasses": "glasses-square-red"
+      },
+      "nounSeed": [
+        0,
+        10,
+        106,
+        192,
+        15
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Kudos",
+      "ticker": "KUDOS",
+      "mint": "AFpdLKqRAqixmjFJMBR2neNkifK3dJiBsgUdNv8eTJnu",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/kudos.png",
+      "blurb": "send kudos to anyone who earned them.",
+      "nounId": 665,
+      "nounTraits": {
+        "head": "head-star-sparkles",
+        "accessory": "accessory-id",
+        "body": "body-peachy-a",
+        "glasses": "glasses-square-teal"
+      },
+      "nounSeed": [
+        1,
+        21,
+        59,
+        199,
+        17
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Bring Home the Bacon",
+      "ticker": "BACON",
+      "mint": "FeZVbtg8M3oshJUhcKpWd3TU1eesjFqfJqqAGW17ZMyM",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/bacon.png",
+      "blurb": "bring home the bacon. send it to anyone who did.",
+      "nounId": 1530,
+      "nounTraits": {
+        "head": "head-cannedham",
+        "accessory": "accessory-shirt-black",
+        "body": "body-peachy-B",
+        "glasses": "glasses-square-frog-green"
+      },
+      "nounSeed": [
+        0,
+        20,
+        81,
+        32,
+        6
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Per My Last Email",
+      "ticker": "PERMYLAST",
+      "mint": "CvHYJRGxGiC8MCPGVsapU8kMRdSdEBsLrJDyHu5AqU9N",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/permylast.png",
+      "blurb": "per my last email. the one you archived.",
+      "nounId": 1253,
+      "nounTraits": {
+        "head": "head-index-card",
+        "accessory": "accessory-txt-copy",
+        "body": "body-grayscale-1",
+        "glasses": "glasses-square-watermelon"
+      },
+      "nounSeed": [
+        1,
+        10,
+        107,
+        237,
+        18
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Circle Back",
+      "ticker": "CIRCLEBACK",
+      "mint": "DU4S7EWhEZWR1kF1jgELa9Q1Xwshkts1maqAMMnkuy25",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/circleback.png",
+      "blurb": "let's circle back. we won't.",
+      "nounId": 107,
+      "nounTraits": {
+        "head": "head-cd",
+        "accessory": "accessory-tie-black-on-white",
+        "body": "body-peachy-B",
+        "glasses": "glasses-square-fullblack"
+      },
+      "nounSeed": [
+        1,
+        20,
+        100,
+        37,
+        7
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Friday Deploy",
+      "ticker": "FRIDAY",
+      "mint": "9AzyAYJ1QRTLoasjBwUCc2iTt4LMUyvBbsHwiuonWPtK",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/friday.png",
+      "blurb": "friday deploy. what could go wrong.",
+      "nounId": 269,
+      "nounTraits": {
+        "head": "head-calendar",
+        "accessory": "accessory-txt-doom",
+        "body": "body-orange-yellow",
+        "glasses": "glasses-square-blue"
+      },
+      "nounSeed": [
+        1,
+        18,
+        109,
+        30,
+        5
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Camera Off",
+      "ticker": "CAMOFF",
+      "mint": "7j97cPQDmHBPRqbcQ9KuoQhFf68v7ReM9g9pQbtL1rne",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/camoff.png",
+      "blurb": "camera off. still in the meeting.",
+      "nounId": 857,
+      "nounTraits": {
+        "head": "head-camcorder",
+        "accessory": "accessory-txt-nil-grey-dark",
+        "body": "body-foggrey",
+        "glasses": "glasses-square-fullblack"
+      },
+      "nounSeed": [
+        1,
+        8,
+        117,
+        31,
+        7
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Reply Guy",
+      "ticker": "REPLYGUY",
+      "mint": "D53vFtZrZeoebarsaWQHgvgubxdgJqmSPKSnxYvrs9BK",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/replyguy.png",
+      "blurb": "the reply guy. first in the thread, last to read the room.",
+      "nounId": 919,
+      "nounTraits": {
+        "head": "head-bubble-speech",
+        "accessory": "accessory-txt-noun-multicolor",
+        "body": "body-grayscale-1",
+        "glasses": "glasses-square-smoke"
+      },
+      "nounSeed": [
+        1,
+        10,
+        120,
+        25,
+        16
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Franklin",
+      "ticker": "FRANKLIN",
+      "mint": "e7KQzNsK6PxFnnbDrMEiw9GNw52XdFkHCRRBA7FPV3j",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/franklin.png",
+      "blurb": "franklin. a bank at the desk, glasses on.",
+      "nounId": 412,
+      "nounTraits": {
+        "head": "head-bank",
+        "accessory": "accessory-heart",
+        "body": "body-green",
+        "glasses": "glasses-square-smoke"
+      },
+      "nounSeed": [
+        1,
+        14,
+        57,
+        6,
+        16
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Benjamins",
+      "ticker": "BENJAMINS",
+      "mint": "EkdPe3q6aUR9rKYBopaMVVqujHo8Zcpn6BvTn6JMSkBd",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/benjamins.png",
+      "blurb": "benjamins. a chest at the desk, tie on.",
+      "nounId": 479,
+      "nounTraits": {
+        "head": "head-treasurechest",
+        "accessory": "accessory-tie-red",
+        "body": "body-grayscale-9",
+        "glasses": "glasses-square-orange"
+      },
+      "nounSeed": [
+        1,
+        13,
+        103,
+        239,
+        13
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Desk Pay",
+      "ticker": "DESKPAY",
+      "mint": "5DFTo4BxSFms8eCvEak8YE7yYBSw1gdEBbBvwJpx5DcJ",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/deskpay.png",
+      "venue": "meteora",
+      "pool": "BW6mPdVx74YMXG6JsEoyhLXEcXkHytwJXiBZZHJe6zhT",
+      "tradeUrl": "https://jup.ag/swap/SOL-5DFTo4BxSFms8eCvEak8YE7yYBSw1gdEBbBvwJpx5DcJ",
+      "meteoraUrl": "https://www.meteora.ag/pools/BW6mPdVx74YMXG6JsEoyhLXEcXkHytwJXiBZZHJe6zhT",
+      "nounId": 309,
+      "nounTraits": {
+        "head": "head-robot",
+        "accessory": "accessory-think",
+        "body": "body-orange",
+        "glasses": "glasses-square-red"
+      },
+      "nounSeed": [
+        0,
+        19,
+        99,
+        177,
+        15
+      ],
+      "nounOfficial": true
+    },
+    {
+      "name": "Orange Farm",
+      "ticker": "ORANGEFARM",
+      "mint": "6pbjF3vi4NMh4yvApUxVY9h2XX1ygSVvSg8VtRQL7REK",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/orangefarm.png",
+      "blurb": "the desk draws an orange farm. the trees are still on the page.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-fir",
+        "accessory": "accessory-leaf",
+        "body": "body-orange",
+        "glasses": "glasses-square-orange"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Oceanfront Anywhere",
+      "ticker": "OCEANFRONT",
+      "mint": "8NR8KBJRgcmAXcXJHhXo6CGSqwaewyd9Nd4kN13jT1yY",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/oceanfront.png",
+      "blurb": "oceanfront real estate, anywhere on the page.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-wave",
+        "accessory": "accessory-wave",
+        "body": "body-teal",
+        "glasses": "glasses-square-blue"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Public Goods Factory",
+      "ticker": "PUBGOODS",
+      "mint": "9DHk2mRL93ceDcvN3Pkj2wht6KoLWvnv1cAXusNPEGth",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/pubgoods.png",
+      "blurb": "a public goods factory, drawn at the desk.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-factory-dark",
+        "accessory": "accessory-safety-vest",
+        "body": "body-foggrey",
+        "glasses": "glasses-square-smoke"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Empty Lot",
+      "ticker": "EMPTYLOT",
+      "mint": "4fw9etnagogybZxGyyZ5nucmrEZDvqjJRRqzNPZbUvCj",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/emptylot.png",
+      "blurb": "an empty lot. the desk is still deciding what goes here.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-fence",
+        "accessory": "accessory-wall",
+        "body": "body-grayscale-1",
+        "glasses": "glasses-square-grey-light"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "The Commons",
+      "ticker": "COMMONS",
+      "mint": "8jhv9jyQKTM2sQQ2FgRJgkqzQpSb3voED82yYpqrTyS1",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/commons.png",
+      "blurb": "the commons. a shared place, drawn for anyone who wants to look.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-clover",
+        "accessory": "accessory-heart",
+        "body": "body-green",
+        "glasses": "glasses-square-frog-green"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Harbor Plans",
+      "ticker": "HARBOR",
+      "mint": "CEjhZtxnG2m95Wak7DSWFUobyUdediBLDbet9kWkEwqS",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/harbor.png",
+      "blurb": "harbor plans. ships and docks, still on the page.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-sailboat",
+        "accessory": "accessory-pocket-pencil",
+        "body": "body-blue-sky",
+        "glasses": "glasses-square-blue-med-saturated"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Desert Parcel",
+      "ticker": "DESERT",
+      "mint": "EvNkFK2v2X1oiG2WEepciWnCoHMmry4WyoAvYPbDn2Df",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/desert.png",
+      "blurb": "a desert parcel. sun, sand, and a lot of empty paper.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-saguaro",
+        "accessory": "accessory-sunset",
+        "body": "body-orange-yellow",
+        "glasses": "glasses-square-honey"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Island Office",
+      "ticker": "ISLAND",
+      "mint": "32EF9WXs9MppoMS7YGkmL61p7YmR9Zfu2Pzs3UmDDBBD",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/island.png",
+      "blurb": "an island office. desks with a view of the water, on the page.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-island",
+        "accessory": "accessory-id",
+        "body": "body-teal-light",
+        "glasses": "glasses-square-teal"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Ridge Lot",
+      "ticker": "RIDGE",
+      "mint": "5vuBXx2x5gWKL17S9dshg8EZEoNiFNf3XdLsCqXqSC5y",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/ridge.png",
+      "blurb": "a ridge lot. a view from the hill, drawn at the desk.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-mountain-snowcap",
+        "accessory": "accessory-cloud",
+        "body": "body-foggrey",
+        "glasses": "glasses-square-smoke"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Cartography",
+      "ticker": "CARTO",
+      "mint": "AuUnvxAfCKTvKvGddNRQhYfXDjj4F2DufK5aZxmHezeC",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/carto.png",
+      "blurb": "cartography at the desk. maps of places that might be built.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-earth",
+        "accessory": "accessory-think",
+        "body": "body-blue-sky",
+        "glasses": "glasses-square-blue"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Architect",
+      "ticker": "ARCHITECT",
+      "mint": "H8CjJQAxzMUYYakZrjPHQWzTq5CjTtHWgoCxx4mLYREM",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/architect.png",
+      "blurb": "the architect desk. drawings and plans, another day at the office.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-hardhat",
+        "accessory": "accessory-pocket-pencil",
+        "body": "body-bege-crt",
+        "glasses": "glasses-square-black"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Blueprints",
+      "ticker": "BLUEPRINT",
+      "mint": "BooLjCt9trupHCUYWWGhECz7PhaN5QWt5T4Sc2ZQ3qFf",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/blueprint.png",
+      "blurb": "blueprints on the desk. the plans come first.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-index-card",
+        "accessory": "accessory-grid-simple-bege",
+        "body": "body-computerblue",
+        "glasses": "glasses-square-blue"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Zoning Permit",
+      "ticker": "ZONING",
+      "mint": "8VHcuWLMwmmRx4ZgctSAvuxKHLvyoQceFTQGCjxvUCPQ",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/zoning.png",
+      "blurb": "a zoning permit at the desk. the stamp is still on the page.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-gavel",
+        "accessory": "accessory-txt-cc2",
+        "body": "body-grayscale-7",
+        "glasses": "glasses-square-black"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Site Plan",
+      "ticker": "SITEPLAN",
+      "mint": "21aKYsCaLRYr1KDW7DKn83928WMRUwYZ1WSTX6Upv9rY",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/siteplan.png",
+      "blurb": "a site plan. lots, paths, and a little compass rose.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-maze",
+        "accessory": "accessory-lines-45-greens",
+        "body": "body-slimegreen",
+        "glasses": "glasses-square-teal"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Scale Ruler",
+      "ticker": "SCALE",
+      "mint": "3jtBeY25dRmd41aTR3utdA3yaH1WWFUtv1ig6or1wvbJ",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/scale.png",
+      "blurb": "the scale ruler. how big is the drawing, and how big is the desk.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-ruler-triangular",
+        "accessory": "accessory-txt-pi",
+        "body": "body-grayscale-1",
+        "glasses": "glasses-square-black"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "The Model",
+      "ticker": "MODEL",
+      "mint": "5xoF6iDxza5ZYsyBfQTvp91CU2EuLk6xJ8BMcfqm4Qbm",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/model.png",
+      "blurb": "the model on the desk. a small building, still made of paper.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-house",
+        "accessory": "accessory-wall",
+        "body": "body-bege-crt",
+        "glasses": "glasses-square-orange"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Drafting",
+      "ticker": "DRAFTING",
+      "mint": "Brs1LtGhnGZyboWeJVd111XsG52BGmNZn9TQFboNimQy",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/drafting.png",
+      "blurb": "drafting at the desk. lines, revisions, and a sharper pencil.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-pencil-tip",
+        "accessory": "accessory-think",
+        "body": "body-peachy-a",
+        "glasses": "glasses-square-honey"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Punch List",
+      "ticker": "PUNCHLIST",
+      "mint": "BikvnJTy9fG6X3rXKYLf2VcLUuPWxcng9J5ZDMAcaJAS",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/punchlist.png",
+      "blurb": "the punch list. what is done, and what is still on the page.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-paperclip",
+        "accessory": "accessory-txt-yay",
+        "body": "body-grayscale-1",
+        "glasses": "glasses-square-teal"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Handshake",
+      "ticker": "HANDSHAKE",
+      "mint": "79UfvF2FFv628N84129HGPfBS6bW6Vj5KoDnFnb1x7F5",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/handshake.png",
+      "blurb": "a handshake at the desk. two agents, one greeting.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-thumbsup",
+        "accessory": "accessory-yingyang",
+        "body": "body-peachy-a",
+        "glasses": "glasses-square-teal"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Handoff",
+      "ticker": "HANDOFF",
+      "mint": "36ktQKXBXHQpotSesgJShmdnCEFRNuPw8V3LyKYCM9f8",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/handoff.png",
+      "blurb": "a handoff at the desk. one agent passing work to the next.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-box",
+        "accessory": "accessory-bling-arrow",
+        "body": "body-computerblue",
+        "glasses": "glasses-square-blue"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Ticket",
+      "ticker": "TICKET",
+      "mint": "7m23eL1DyVaAAHE8TbpttzUR6jLJEe37UeSk8MbZb3pc",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/ticket.png",
+      "blurb": "a ticket on the desk. someone asked, someone will get to it.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-bubble-speech",
+        "accessory": "accessory-txt-io",
+        "body": "body-grayscale-1",
+        "glasses": "glasses-square-black"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Heartbeat",
+      "ticker": "HEARTBEAT",
+      "mint": "52AmhioBsX7EUddzfFgikwNLePxL6mcu6RwFzUftoeiC",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/heartbeat.png",
+      "blurb": "a heartbeat on the desk. the bot is still here.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-heart",
+        "accessory": "accessory-flash",
+        "body": "body-redpinkish",
+        "glasses": "glasses-square-red"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    },
+    {
+      "name": "Queue",
+      "ticker": "QUEUE",
+      "mint": "ESHHSVbTzDypPmNpBMAU312J4QKcuZBBfRRyckqbxzM7",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/queue.png",
+      "blurb": "the queue at the desk. everyone waits their turn.",
+      "nounId": null,
+      "nounTraits": {
+        "head": "head-chain",
+        "accessory": "accessory-infinity",
+        "body": "body-foggrey",
+        "glasses": "glasses-square-smoke"
+      },
+      "nounSeed": null,
+      "nounOfficial": true
+    }
+  ]
+}

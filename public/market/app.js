@@ -228,7 +228,7 @@ async function init() {
     const response = await fetchJSON('./coins.json');
     if (!Array.isArray(response.coins) || !response.coins.length) throw new Error('Missing coin list');
     coins = response.coins;
-    const countWords = {17:'seventeen',32:'thirty-two',34:'thirty-four'};
+    const countWords = {17:'seventeen',32:'thirty-two',34:'thirty-four',35:'thirty-five',58:'fifty-eight'};
     const countLabel = countWords[coins.length] || String(coins.length);
     const lede = document.querySelector('.lede');
     if (lede) lede.textContent = countLabel + ' coins from the same desk. live prices, a trade window vs SOL, and a small clock-in game. another day at the office.';

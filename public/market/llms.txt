@@ -1,6 +1,6 @@
 # office noun market
 
-34 listed coins: ./coins.json (https://officenoun.xyz/market/coins.json).
+58 listed coins: ./coins.json (https://officenoun.xyz/market/coins.json).
 Fields: name, ticker, mint, image, blurb. No private financial data.
 Machine-readable guide: ./agents.json.
 
