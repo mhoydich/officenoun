@@ -1,0 +1,252 @@
+{
+  "coins": [
+    {
+      "name": "Office Noun",
+      "ticker": "OFFICENOUN",
+      "mint": "8eR2JE36nE1J4DDYJugm5yCE4nxEtkfkoS5eCmcg8UKu",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/desk.jpg",
+      "blurb": "another day at the office. one noun a day at a desk."
+    },
+    {
+      "name": "The 13th Floor",
+      "ticker": "FLOOR13",
+      "mint": "DWcwrJcuFCdW3154P46gEi6RFnBUaxE5eYmeB5uGCbtc",
+      "image": "https://officenoun.xyz/13/floor13-01.png",
+      "blurb": "the elevator has a button for 13. it did not yesterday."
+    },
+    {
+      "name": "Drum",
+      "ticker": "DRUM",
+      "mint": "kBpnoiScwCiR8Bjk4GL5R9ydqH8PuAivwPXqdj5p1mf",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/drum.png",
+      "blurb": "one tap. everybody hears it."
+    },
+    {
+      "name": "Cancel or Allow",
+      "ticker": "ALLOW",
+      "mint": "818bDpuFt2UJmh94r7LUyMAXF5hdygZDXCxMUYQQErW8",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/allow.png",
+      "blurb": "the stapler needs your permission to continue."
+    },
+    {
+      "name": "Midnight Printers",
+      "ticker": "PRINT",
+      "mint": "E332qbgjF4ZJPu8ZqVNrRs4vjUS5jexkQMbSuVDUDjJp",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/midnight.png",
+      "blurb": "a sign on a desk at night. the presses run after hours."
+    },
+    {
+      "name": "Team Moon",
+      "ticker": "TEAMMOON",
+      "mint": "As8u7KjSeu2SismVWfz5R9bKWmSim9qWSr9o5MxHitMB",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/teammoon.png",
+      "blurb": "let's go team moon. 100 nouns, one moon."
+    },
+    {
+      "name": "Team Moo",
+      "ticker": "TEAMOO",
+      "mint": "3W51GaYhGyKVNR5zZrHYRr2FWQedj82mz5fvTVpKVLzF",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/teamoo.png",
+      "blurb": "one noun cow, one moon. shipped from the moon, not the store."
+    },
+    {
+      "name": "Reply All",
+      "ticker": "REPLYALL",
+      "mint": "AcH8qCpvmg3txPQ5Bi2u8vYzgFxn49sZ5rrL1yBrxmAu",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/replyall.png",
+      "blurb": "you meant to reply to dave. everyone got it anyway."
+    },
+    {
+      "name": "Out of Office",
+      "ticker": "OOO",
+      "mint": "AqHKNwXPq5u4i5hzqP7Uxk4rpHC2ukyuFMkCT6Bbzs4U",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/ooo.png",
+      "blurb": "out of office, back on monday. which monday is tbd."
+    },
+    {
+      "name": "Casual Friday",
+      "ticker": "CASUAL",
+      "mint": "98r2waAyTK3y1tQk6dKLzyySdFYbiEa2faCRSD6oFYe9",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/casual.png",
+      "blurb": "casual friday. the dress code loosens, the standup does not."
+    },
+    {
+      "name": "Water Cooler",
+      "ticker": "COOLER",
+      "mint": "7nRWbnzUpd8poZncZwfCSP4nP1ff6b8CkajPdjygUKwU",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/cooler.png",
+      "blurb": "the water cooler. the only meeting with no agenda."
+    },
+    {
+      "name": "Coffee Pot",
+      "ticker": "COFFEE",
+      "mint": "2rT5ASE7GAe99cX5HzaeTwFfDvdWxnqfycgvtoHMGo5j",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/coffee.png",
+      "blurb": "the coffee pot is already empty, as scheduled."
+    },
+    {
+      "name": "Standup",
+      "ticker": "STANDUP",
+      "mint": "7NochXJ2J4qDVs4FP4fR8VZ2a3eZ8j9ptvmrh1icJ5CC",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/standup.png",
+      "blurb": "standup. fifteen minutes, still going."
+    },
+    {
+      "name": "Five O'Clock",
+      "ticker": "FIVEPM",
+      "mint": "4mtTCw8o8RsXHxy7Pzj3bQSQVNeW6yoYrrUWP73j7NRG",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/fivepm.png",
+      "blurb": "five o'clock. the only meeting that starts on time."
+    },
+    {
+      "name": "Badge",
+      "ticker": "BADGE",
+      "mint": "EV6GRJUYpbPMrKGVucXERQ5Rowh4tmFR6T7A6xYcd1Jh",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/badge.png",
+      "blurb": "the badge is on the kitchen counter."
+    },
+    {
+      "name": "Inbox",
+      "ticker": "INBOX",
+      "mint": "65EpN6F6b3aqhRVBmKUSkd19Ed4gXSgTcRugdZkjS3DZ",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/inbox.png",
+      "blurb": "4,812 unread. none of them from you."
+    },
+    {
+      "name": "You're on Mute",
+      "ticker": "MUTE",
+      "mint": "6Bn55jfFBejGAFtAwadT72wrBDZjvg1nwMSKNafk7HS3",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/mute.png",
+      "blurb": "you're on mute. we can see you talking."
+    },
+    {
+      "name": "Ping",
+      "ticker": "PING",
+      "mint": "9X3iVzKrXtYXLtcHRYRJ8U4eD8mY8xeGckr15SGEf4Hd",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/ping.png",
+      "blurb": "send a ping to anyone who needs one."
+    },
+    {
+      "name": "Nudge",
+      "ticker": "NUDGE",
+      "mint": "7kmyQgeA6zgXdfm1961j14vgm6gk6MEwwf2NYn2EXg26",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/nudge.png",
+      "blurb": "send a nudge to anyone who's gone quiet."
+    },
+    {
+      "name": "Unmute",
+      "ticker": "UNMUTE",
+      "mint": "8pbfjkMQKnoyj58vGUSz1HTmMpxBAQma5DzTRtbptFUc",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/unmute.png",
+      "blurb": "send an unmute to anyone we can see talking."
+    },
+    {
+      "name": "Snooze",
+      "ticker": "SNOOZE",
+      "mint": "49sTQemcffo495zsg3jrP5mEtvojceBZqEhdf2R3bErH",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/snooze.png",
+      "blurb": "send a snooze to anyone who could use ten more minutes."
+    },
+    {
+      "name": "Undo",
+      "ticker": "UNDO",
+      "mint": "BL1Sp751mYKgcUXZ5aw18kNDFxkwGktPgmwu12RrfGor",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/undo.png",
+      "blurb": "send an undo to anyone who just hit send."
+    },
+    {
+      "name": "Ship It",
+      "ticker": "SHIPIT",
+      "mint": "FDe6HyErMuwMPwECkbop1E3j5zdjPqpdr2t37nWB4zk5",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/shipit.png",
+      "blurb": "send a ship it to anyone waiting on the thumbs-up."
+    },
+    {
+      "name": "BRB",
+      "ticker": "BRB",
+      "mint": "wM7ft4c1S8Vq3gMd7j6ZvD2gNKB4p7oiNaSgdDsgsGw",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/brb.png",
+      "blurb": "send a brb to anyone stepping away from the desk."
+    },
+    {
+      "name": "LGTM",
+      "ticker": "LGTM",
+      "mint": "BxqJcLXr3xbjLPGn3N4NmaXkLCokuh26ZWE53MQ3ZRKE",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/lgtm.png",
+      "blurb": "send an lgtm to anyone who got it right."
+    },
+    {
+      "name": "Kudos",
+      "ticker": "KUDOS",
+      "mint": "AFpdLKqRAqixmjFJMBR2neNkifK3dJiBsgUdNv8eTJnu",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/kudos.png",
+      "blurb": "send kudos to anyone who earned them."
+    },
+    {
+      "name": "Bring Home the Bacon",
+      "ticker": "BACON",
+      "mint": "FeZVbtg8M3oshJUhcKpWd3TU1eesjFqfJqqAGW17ZMyM",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/bacon.png",
+      "blurb": "bring home the bacon. send it to anyone who did."
+    },
+    {
+      "name": "Per My Last Email",
+      "ticker": "PERMYLAST",
+      "mint": "CvHYJRGxGiC8MCPGVsapU8kMRdSdEBsLrJDyHu5AqU9N",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/permylast.png",
+      "blurb": "per my last email. the one you archived."
+    },
+    {
+      "name": "Circle Back",
+      "ticker": "CIRCLEBACK",
+      "mint": "DU4S7EWhEZWR1kF1jgELa9Q1Xwshkts1maqAMMnkuy25",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/circleback.png",
+      "blurb": "let's circle back. we won't."
+    },
+    {
+      "name": "Friday Deploy",
+      "ticker": "FRIDAY",
+      "mint": "9AzyAYJ1QRTLoasjBwUCc2iTt4LMUyvBbsHwiuonWPtK",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/friday.png",
+      "blurb": "friday deploy. what could go wrong."
+    },
+    {
+      "name": "Camera Off",
+      "ticker": "CAMOFF",
+      "mint": "7j97cPQDmHBPRqbcQ9KuoQhFf68v7ReM9g9pQbtL1rne",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/camoff.png",
+      "blurb": "camera off. still in the meeting."
+    },
+    {
+      "name": "Reply Guy",
+      "ticker": "REPLYGUY",
+      "mint": "D53vFtZrZeoebarsaWQHgvgubxdgJqmSPKSnxYvrs9BK",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/replyguy.png",
+      "blurb": "the reply guy. first in the thread, last to read the room."
+    },
+    {
+      "name": "Franklin",
+      "ticker": "FRANKLIN",
+      "mint": "e7KQzNsK6PxFnnbDrMEiw9GNw52XdFkHCRRBA7FPV3j",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/franklin.png",
+      "blurb": "franklin. a bank at the desk, glasses on."
+    },
+    {
+      "name": "Benjamins",
+      "ticker": "BENJAMINS",
+      "mint": "EkdPe3q6aUR9rKYBopaMVVqujHo8Zcpn6BvTn6JMSkBd",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/benjamins.png",
+      "blurb": "benjamins. a chest at the desk, tie on."
+    },
+    {
+      "name": "Desk Pay",
+      "ticker": "DESKPAY",
+      "mint": "5DFTo4BxSFms8eCvEak8YE7yYBSw1gdEBbBvwJpx5DcJ",
+      "image": "https://officenoun-pump-meta.mhoydich.workers.dev/deskpay.png",
+      "venue": "meteora",
+      "pool": "BW6mPdVx74YMXG6JsEoyhLXEcXkHytwJXiBZZHJe6zhT",
+      "tradeUrl": "https://jup.ag/swap/SOL-5DFTo4BxSFms8eCvEak8YE7yYBSw1gdEBbBvwJpx5DcJ",
+      "meteoraUrl": "https://www.meteora.ag/pools/BW6mPdVx74YMXG6JsEoyhLXEcXkHytwJXiBZZHJe6zhT"
+    }
+  ]
+}

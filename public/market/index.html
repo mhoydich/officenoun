@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#d5d7e1">
+  <meta name="description" content="thirty-four coins from the same desk. live prices, a trade window vs SOL, and a small clock-in game.">
+  <title>office noun market</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="https://plugin.jup.ag/plugin-v1.js" data-preload defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="mast">
+      <p class="eyebrow"><a href="https://officenoun.xyz">officenoun.xyz</a></p>
+      <div class="portrait">
+        <button id="clock-in" class="clock-in" type="button" aria-label="Clock in"><img src="https://officenoun-pump-meta.mhoydich.workers.dev/desk.jpg" alt="Office Noun" width="320" height="320"></button>
+        <div class="desk" aria-hidden="true"></div>
+      </div>
+      <div class="desk-game" aria-label="Desk game">
+        <p class="clock-label">↑ clock in · +1 hour</p>
+        <p id="desk-counts" role="status">0 hours · 0 memos</p>
+        <p class="game-note">a desk game. hours and memos stay on this device. they are not money, not tokens, and not a prize.</p>
+        <p id="desk-message" class="game-note" role="status"></p>
+        <div id="desk-items" class="desk-items" aria-label="Unlocked desk art"></div>
+        <details><summary>desk cupboard · cosmetic upgrades</summary><ul id="upgrades" class="upgrades"></ul></details>
+        <button id="desk-reset" class="quiet" type="button">Reset desk</button>
+      </div>
+      <h1>office noun market</h1>
+      <p class="lede">thirty-four coins from the same desk. live prices, a trade window vs SOL, and a small clock-in game. another day at the office.</p>
+      <p class="subline">made for fun, no promises, no roadmap. cc0.</p>
+    </header>
+    <section id="trade" class="trade-section" aria-labelledby="trade-heading">
+      <div class="trade-inner">
+        <h2 id="trade-heading">the trade desk</h2>
+        <label for="trade-coin">coin vs SOL</label>
+        <select id="trade-coin" disabled><option>loading coins…</option></select>
+        <p id="trade-status" class="status" role="status">loading trade desk…</p>
+        <p class="trade-note">connect your own wallet in the widget; we never hold funds or see your keys. if Jupiter cannot find a route for a new or illiquid coin, use the pump.fun link.</p>
+        <div id="jupiter-plugin"><p class="plugin-placeholder">waiting for Jupiter Plugin…</p></div>
+        <p><a id="trade-pump" hidden target="_blank" rel="noopener noreferrer">Buy on pump.fun</a></p>
+        <button id="trade-retry" type="button">Retry widget</button>
+      </div>
+    </section>
+    <section class="market" aria-labelledby="market-heading">
+      <div class="market-inner">
+        <div class="toolbar">
+          <div>
+            <h2 id="market-heading">the market</h2>
+            <p class="sort-note">market cap, highest first · USD</p>
+          </div>
+          <button id="refresh" type="button">Refresh</button>
+        </div>
+        <p id="status" class="status" role="status">loading coin list…</p>
+        <ul id="coins" class="grid" aria-label="Office Noun coins"></ul>
+        <noscript><p>Enable JavaScript to load the coin list and live market data.</p></noscript>
+        <p class="data-note">market cap uses FDV when a verified cap is unavailable. a price × supply estimate is marked when used. — means unavailable.</p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <span>made for fun, no promises, no roadmap. not financial advice.</span>
+    <a href="https://officenoun.xyz">officenoun.xyz</a>
+    <a href="https://x.com/officenoun">@officenoun</a>
+  </footer>
+</body>
+</html>

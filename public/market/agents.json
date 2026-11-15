@@ -1,0 +1,44 @@
+{
+  "name": "office noun market",
+  "purpose": "34 coins from the same desk: public live market data, visitor-directed trading and a local-only desk game.",
+  "coin_list_url": "./coins.json",
+  "canonical_coin_list_url": "https://officenoun.xyz/market/coins.json",
+  "coin_fields": [
+    "name",
+    "ticker",
+    "mint",
+    "image",
+    "blurb"
+  ],
+  "live_data_sources": {
+    "primary": "https://api.geckoterminal.com/api/v2/networks/solana/tokens/multi/{comma-separated-mints}",
+    "missing_price_fallback": "https://lite-api.jup.ag/price/v3?ids={comma-separated-mints}",
+    "primary_failure_fallback": "https://api.dexscreener.com/latest/dex/tokens/{comma-separated-mints}",
+    "pump_fun_frontend_api_used": false
+  },
+  "jupiter_plugin": {
+    "script": "https://plugin.jup.ag/plugin-v1.js",
+    "mode": "integrated",
+    "note": "Official Jupiter Plugin uses its own wallet adapter. Visitors connect their own wallet; no custody, private keys, server signing, referral fees or automatic wallet connection. Flip direction in the widget to sell.",
+    "routing_caveat": "Jupiter can route pump.fun bonding-curve coins, but quotes may fail for new or illiquid coins. Use pump.fun as a fallback."
+  },
+  "links": {
+    "buy": "https://jup.ag/swap?sell=So11111111111111111111111111111111111111112&buy={mint}",
+    "sell": "https://jup.ag/swap?sell={mint}&buy=So11111111111111111111111111111111111111112",
+    "pump_fun": "https://pump.fun/coin/{mint}",
+    "trade": "./?trade={ticker_or_mint}",
+    "trade_hash": "./#trade={ticker_or_mint}"
+  },
+  "game": {
+    "disclaimer": "a desk game. hours and memos stay on this device. they are not money, not tokens, and not a prize.",
+    "storage_key": "officenoun-desk-v1",
+    "rules": "Each clock-in earns one hour; every fifth files one memo. Hours unlock cosmetic coin art only. No idle accrual or offline rewards.",
+    "hook": {
+      "window.OfficeNounDesk.state()": "Returns a copy of { hours, memos, unlocked: string[] }; unlocked entries are tickers. Available after coins load.",
+      "window.OfficeNounDesk.clockIn()": "One clock-in; returns state. No transactions.",
+      "window.OfficeNounDesk.reset()": "Confirms with the visitor before removing the local save and resetting the desk."
+    },
+    "query": "?clockin=1 performs one clock-in per page load. Can combine with trade."
+  },
+  "transactions": "No bot API signs, spends tokens or executes swaps."
+}

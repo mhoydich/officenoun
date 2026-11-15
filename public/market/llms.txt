@@ -1,0 +1,30 @@
+# office noun market
+
+34 listed coins: ./coins.json (https://officenoun.xyz/market/coins.json).
+Fields: name, ticker, mint, image, blurb. No private financial data.
+Machine-readable guide: ./agents.json.
+
+Live data: GeckoTerminal primary (batches of 30); Jupiter v3 for missing
+prices; DexScreener when GeckoTerminal fails entirely. pump.fun frontend API
+is not used. Unknown fields remain unknown; estimated caps are marked.
+
+Trading: official Jupiter Plugin, https://plugin.jup.ag/plugin-v1.js,
+integrated with SOL as initial input and the selected coin as initial output
+and fixedMint. Flip direction to sell. Visitors connect their own wallet in
+the widget. No custody, keys, server signing, referral fee or auto-connect.
+Jupiter can route pump.fun bonding curves; new or illiquid coins may have no
+quote. The pump.fun link remains the fallback.
+Buy: https://jup.ag/swap?sell=So11111111111111111111111111111111111111112&buy={mint}
+Sell: https://jup.ag/swap?sell={mint}&buy=So11111111111111111111111111111111111111112
+Fallback: https://pump.fun/coin/{mint}
+Page selection: ./?trade=TICKER or ./?trade=MINT or ./#trade=TICKER.
+Use the full mint from coins.json in Jupiter links.
+
+Desk game: a desk game. hours and memos stay on this device. they are not
+money, not tokens, and not a prize. localStorage key: officenoun-desk-v1.
+One click earns one hour; every fifth files a memo. Hours unlock cosmetic
+coin art. No idle or offline accrual. ?clockin=1 clocks in once per load.
+After coins load, window.OfficeNounDesk.state() returns a copy of
+{ hours, memos, unlocked: string[] } (tickers); clockIn() clocks in once and
+returns state; reset() confirms before clearing the save and returns state.
+No API spends real tokens or signs transactions.
