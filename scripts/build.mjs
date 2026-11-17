@@ -2,6 +2,7 @@ import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { createCanvas, svgToGrid } from "./png.mjs";
+import { buildMarketAgents } from "./market-agents.mjs";
 import { renderCharterPage, renderDeskPage } from "./desk-pages.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -501,6 +502,7 @@ if (dashboardTemplate !== null) {
 await rm(distDir, { force: true, recursive: true });
 await mkdir(distDir, { recursive: true });
 await cp(publicDir, distDir, { recursive: true });
+await buildMarketAgents(publicDir, distDir);
 await writeFile(path.join(root, "index.html"), renderPage("./public", "./public/kit/index.html", "./public/today/index.html", "./public/org/index.html", "./public/dao/index.html", "./public/dashboard/index.html", "./public/badge/index.html"));
 await writeFile(path.join(distDir, "index.html"), renderPage(".", "./kit/", "./today/", "./org/", "./dao/", "./dashboard/", "./badge/"));
 

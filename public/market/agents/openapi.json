@@ -1,0 +1,89 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Office Noun Market read-only discovery",
+    "version": "1.0.0",
+    "description": "Static catalog only. No quotes, trading, signing, MCP, or authorization."
+  },
+  "servers": [
+    {
+      "url": "https://officenoun.xyz"
+    }
+  ],
+  "paths": {
+    "/market/api/v1/assets.json": {
+      "get": {
+        "operationId": "listAssets",
+        "description": "Catalog snapshot, not live pricing.",
+        "responses": {
+          "200": {
+            "description": "JSON document",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found. Host may return HTML; check status and Content-Type before parsing."
+          }
+        }
+      }
+    },
+    "/market/api/v1/assets/{mint}.json": {
+      "get": {
+        "operationId": "getAsset",
+        "description": "Exact listed mint. Decimals/tokenProgram may be null; onchainVerified false.",
+        "responses": {
+          "200": {
+            "description": "JSON document",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found. Host may return HTML; check status and Content-Type before parsing."
+          }
+        },
+        "parameters": [
+          {
+            "name": "mint",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+            }
+          }
+        ]
+      }
+    },
+    "/market/api/v1/capabilities.json": {
+      "get": {
+        "operationId": "getCapabilities",
+        "description": "Supported and explicitly unsupported capabilities.",
+        "responses": {
+          "200": {
+            "description": "JSON document",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found. Host may return HTML; check status and Content-Type before parsing."
+          }
+        }
+      }
+    }
+  }
+}

@@ -28,3 +28,9 @@ After coins load, window.OfficeNounDesk.state() returns a copy of
 { hours, memos, unlocked: string[] } (tickers); clockIn() clocks in once and
 returns state; reset() confirms before clearing the save and returns state.
 No API spends real tokens or signs transactions.
+
+Read-only agent entrance: https://officenoun.xyz/market/agents/
+Versioned catalog: https://officenoun.xyz/market/api/v1/assets.json
+Capabilities: https://officenoun.xyz/market/api/v1/capabilities.json
+OpenAPI: https://officenoun.xyz/market/agents/openapi.json
+Paper research tickets are local only, not executable quotes or approvals.
