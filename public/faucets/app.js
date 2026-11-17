@@ -15,8 +15,8 @@
     { slug: "stapler", name: "supreme stapler", ticker: "STAPLE", art: "./nouns/stapler.svg" },
     { slug: "mug", name: "supreme mug", ticker: "MUG", art: "./nouns/mug.svg" },
     { slug: "clip", name: "supreme clip", ticker: "CLIP", art: "./nouns/clip.svg" },
-    { slug: "couch", name: "supreme couch", ticker: "COUCH", art: "./nouns/couch.svg" },
-    { slug: "fax", name: "supreme fax", ticker: "FAX", art: "./nouns/fax.svg" }
+    { slug: "lamp", name: "supreme lamp", ticker: "LAMP", art: "./nouns/lamp.svg" },
+    { slug: "chair", name: "supreme chair", ticker: "CHAIR", art: "./nouns/chair.svg" }
   ];
   var $ = function (id) { return document.getElementById(id); };
   var el = function (tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
@@ -86,7 +86,7 @@
         b.classList.remove("pour"); void b.offsetWidth; b.classList.add("pour");
         plink(i); drawPicks(); b.setAttribute("aria-pressed", picked[f.slug] ? "true" : "false");
         b.setAttribute("aria-label", f.name + ", " + (picked[f.slug] ? "picked" : "not picked") + ". tap to pick and pour a drop");
-        $("tapHint").textContent = picked[f.slug] ? f.name + " picked. one " + f.ticker + " a day, once the water is on." : f.name + " unpicked.";
+        $("tapHint").textContent = picked[f.slug] ? f.name + " picked. one " + f.ticker + " a day, starting with the next drip." : f.name + " unpicked.";
       });
       li.appendChild(b); ul.appendChild(li);
     });
@@ -166,7 +166,7 @@
     if (!slugs.length) { say("pick at least one tap."); return; }
     var who = $("who").value.trim().replace(/\s+/g, " ").slice(0, 40) || "a visitor";
     var names = slugs.map(function (f) { return f.name; }).join(", ");
-    var body = "SIGN UP · " + names + " · to " + a + " · one a day each, when the water comes on. via officenoun.xyz/faucets";
+    var body = "SIGN UP · " + names + " · to " + a + " · one a day each. via officenoun.xyz/faucets";
     if (go.dataset.armed !== "1") {
       go.dataset.armed = "1"; go.textContent = "tap again to post";
       say("this posts in public, under “" + who + "”: " + body);
@@ -199,9 +199,9 @@
     try {
       var now = new Date(), parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", minute: "numeric", second: "numeric", hourCycle: "h23" }).formatToParts(now);
       var g = function (t) { return +parts.find(function (x) { return x.type === t; }).value; };
-      var left = 86400 - (g("hour") * 3600 + g("minute") * 60 + g("second"));
+      var left = (86400 + 600 - (g("hour") * 3600 + g("minute") * 60 + g("second"))) % 86400;
       var h = Math.floor(left / 3600), m = Math.floor(left % 3600 / 60);
-      $("countdown").textContent = h + "h " + (m < 10 ? "0" : "") + m + "m (midnight pacific)";
+      $("countdown").textContent = h + "h " + (m < 10 ? "0" : "") + m + "m (00:10 pacific)";
     } catch (e) {}
   }
   tick(); setInterval(tick, 30000);

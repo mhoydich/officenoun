@@ -6,12 +6,12 @@ const page = await readFile(new URL("../public/faucets/index.html", import.meta.
 const script = await readFile(new URL("../public/faucets/app.js", import.meta.url), "utf8");
 const data = JSON.parse(await readFile(new URL("../public/faucets/faucets.json", import.meta.url), "utf8"));
 
-test("five supreme office noun faucets on solana, one a day, mints not created yet", () => {
+test("five supreme office noun faucets on solana, one a day, mints live", () => {
   assert.equal(data.faucets.length, 5);
   assert.equal(data.chain.name, "solana");
   assert.equal(data.drip.amount, 1);
-  for (const f of data.faucets) assert.equal(f.mint, null, f.slug);
-  assert.deepEqual(data.faucets.map((f) => f.slug), ["stapler", "mug", "clip", "couch", "fax"]);
+  for (const f of data.faucets) assert.match(f.mint, /^[1-9A-HJ-NP-Za-km-z]{32,44}$/, f.slug);
+  assert.deepEqual(data.faucets.map((f) => f.slug), ["stapler", "mug", "clip", "lamp", "chair"]);
 });
 
 test("every noun has its art in the kit", async () => {
