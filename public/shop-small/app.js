@@ -56,12 +56,20 @@
     return t;
   }
 
-  // a first name or handle: letters, numbers, spaces and . ' _ - @ only, 18 at most
+  // the name shown on the loom: letters, numbers, spaces and . ' _ - @ only, 18 at most
   function cleanName(s) {
     var out = String(s || "");
     try { out = out.normalize("NFKC").replace(/[^\p{L}\p{N} .'_@-]/gu, ""); }
     catch (e) { out = out.replace(/[^A-Za-z0-9 .'_@-]/g, ""); }
     return out.replace(/\s+/g, " ").replace(/^[\s.'_-]+|[\s.'_-]+$/g, "").slice(0, 18).trim();
+  }
+
+  // the desk takes a handle of 2 to 32 letters, numbers, spaces, dots, underscores or hyphens
+  function deskName(name) {
+    var out = String(name || "");
+    try { out = out.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); } catch (e) {}
+    out = out.replace(/[^A-Za-z0-9 ._-]/g, "").replace(/\s+/g, " ").trim().slice(0, 18).trim();
+    return out.length >= 2 ? out : "neighbor";
   }
 
   function request(url, body) {
@@ -162,7 +170,7 @@
 
     go.disabled = true;
     say(status, "Checking in…");
-    var handle = (name || "neighbor") + " · sbs " + tag();
+    var handle = deskName(name) + " - sbs " + tag();
     var body = (name || "A neighbor") + " checked in at " + (shop.local ? "a local El Segundo shop" : shop.name) + " for Small Business Saturday in El Segundo.";
 
     request(DESK, { handle: handle, kind: "human", company: "" }).then(function (desk) {
@@ -183,6 +191,8 @@
           note = counted ? "Check-in " + count + " of 100 this week." : "One more toward 100 this week.";
         } else if (desk.ok) {
           note = "This phone is already in today's book, so this stop goes on the Loom.";
+        } else if (desk.status) {
+          note = "You're on the Loom. The front desk turned this one down, so it may not count yet.";
         } else {
           note = "You're on the Loom. The front desk didn't answer, so this one may not count yet.";
         }

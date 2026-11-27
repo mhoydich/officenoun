@@ -25,10 +25,15 @@ test("a check-in signs the front desk as a person and adds a human line to #shop
   assert.match(script, /from: \{ name: name \|\| "a neighbor", kind: "human" \}/);
 });
 
-test("the handle fits the desk's 32 characters", () => {
-  // name is cut to 18, then " · sbs " (7) and a 4-character tag
-  assert.match(script, /\.slice\(0, 18\)/);
-  assert.ok(18 + " · sbs ".length + 4 <= 32);
+test("the handle fits the desk's rule: 2 to 32 letters, numbers, spaces, dots, underscores or hyphens", () => {
+  // the desk name is cut to 18 and kept to that alphabet, then " - sbs " (7) and a 4-character tag from A-Z and 2-9
+  assert.match(script, /replace\(\/\[\^A-Za-z0-9 \._-\]\/g, ""\)/);
+  assert.match(script, /var handle = deskName\(name\) \+ " - sbs " \+ tag\(\);/);
+  assert.match(script, /\^\[A-Z2-9\]\{4\}\$/);
+  const longest = "x".repeat(18) + " - sbs " + "ABCD";
+  assert.ok(longest.length <= 32);
+  assert.match(longest, /^[A-Za-z0-9 ._-]{2,32}$/);
+  assert.match("neighbor - sbs 7K2Q", /^[A-Za-z0-9 ._-]{2,32}$/);
   assert.match(page, /maxlength="18"/);
 });
 
