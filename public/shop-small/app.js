@@ -13,6 +13,7 @@
   var TZ = "America/Los_Angeles";
   var MAX_LINES_A_DAY = 6;
   var TIMEOUT_MS = 12000;
+  var TEST_NAME = /^duet test\b/i; // the page's own test visits on Nov 27, 2026
 
   var $ = function (id) { return document.getElementById(id); };
   var form = $("checkin"), go = $("go"), status = $("status"), who = $("who");
@@ -112,7 +113,10 @@
       rs.forEach(function (r, i) {
         var d = r.data;
         if (!r.ok || !d || d.date !== dates[i] || !d.counts) return;
-        var h = Number(d.counts.human);
+        // people only, leaving out visits labelled as tests of this page
+        var h = Array.isArray(d.visitors)
+          ? d.visitors.filter(function (v) { return v && v.kind === "human" && !TEST_NAME.test(String(v.name || "")); }).length
+          : Number(d.counts.human);
         if (isFinite(h) && h >= 0 && h < 100000) { sum += h; any = true; }
       });
       if (any) { counted = true; showCount(sum); return; }
@@ -120,7 +124,7 @@
       return request(LOOM + "?to=" + encodeURIComponent(ROOM)).then(function (r) {
         var msgs = r.ok && r.data && Array.isArray(r.data.messages) ? r.data.messages : [];
         var n = msgs.filter(function (m) {
-          return m && m.from && m.from.kind === "human" && m.at && laDate(new Date(m.at)) >= dates[0];
+          return m && m.from && m.from.kind === "human" && !TEST_NAME.test(String(m.from.name || "")) && m.at && laDate(new Date(m.at)) >= dates[0];
         }).length;
         showCount(n);
         $("meter-label").textContent = "Counted from the #shop-small room on the Loom this week (the front desk didn't answer).";
