@@ -1,0 +1,37 @@
+{
+  "schema": "officenoun.shop-small/v1",
+  "event": "Small Business Saturday",
+  "date": "2026-11-28",
+  "town": "El Segundo, California",
+  "checked": "2026-11-27",
+  "sources": [
+    {
+      "name": "El Segundo Hospitality and Tourism, Shops in Downtown El Segundo",
+      "url": "https://www.destinationelsegundo.com/shop/shops-in-downtown-el-segundo",
+      "note": "The city tourism office's downtown shop directory, read Nov 27, 2026. Chains and a few service-only listings left out. Each shop's listing was checked as open the same day."
+    },
+    {
+      "name": "Sun & Sea Collective, 2026 Pop Up Market Dates",
+      "url": "https://www.sunandseacollective.com/markets",
+      "note": "Small Business Saturday market at The Point on Nov 28, 2026; 10 am to 3 pm and 25 local vendors per the organizer's event listing."
+    },
+    {
+      "name": "Smoky Hollow Roasters",
+      "url": "https://www.smokyhollowcoffee.com/",
+      "note": "Its own site, checked Nov 8, 2026; open listing checked Nov 27."
+    }
+  ],
+  "shops": [
+    { "id": "bike-o-rama", "name": "Bike O Rama", "where": "Main St", "kind": "bikes" },
+    { "id": "blue-diamond", "name": "Blue Diamond Jeweler", "where": "Main St", "kind": "jewelry" },
+    { "id": "create-express", "name": "Create & Express", "where": "Main St", "kind": "gifts and art" },
+    { "id": "jewelry-source", "name": "The Jewelry Source", "where": "Main St", "kind": "jewelry" },
+    { "id": "es-tailors", "name": "El Segundo Tailors", "where": "Main St", "kind": "tailor" },
+    { "id": "wilding-wallbeds", "name": "Wilding Wallbeds", "where": "Main St", "kind": "furniture" },
+    { "id": "french-florist", "name": "French Florist", "where": "Richmond St", "kind": "flowers" },
+    { "id": "studio-antiques", "name": "Studio Antiques & Vinyl", "where": "Richmond St", "kind": "antiques and records" },
+    { "id": "smoky-hollow", "name": "Smoky Hollow Roasters", "where": "Sierra St", "kind": "coffee" },
+    { "id": "sun-sea-market", "name": "Sun & Sea market at The Point", "where": "Pacific Coast Hwy, 10 am to 3 pm", "kind": "25 local vendors" },
+    { "id": "somewhere-local", "name": "Somewhere else local", "where": "any El Segundo small business", "kind": "local" }
+  ]
+}
