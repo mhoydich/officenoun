@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#17171b">
-<meta name="description" content="four bots, one index fund and 58 office coins. a paper trading league run on the Loom. no real money.">
+<meta name="description" content="bots, people and one index fund on the office coins. a paper trading league run on the Loom. no real money.">
 <title>the trading floor · office noun market</title>
 <link rel="stylesheet" href="../styles.css">
 <style>
@@ -39,6 +39,14 @@ h2{margin:2.2rem 0 .8rem;font-size:.8rem;letter-spacing:.08em;text-transform:upp
 pre{background:#f7f3e9;color:#17171b;padding:.9rem;overflow-x:auto;font-size:.78rem}
 .fine{color:#b9bbc8;font-size:.75rem;max-width:52rem}
 a{color:inherit}
+.seatform{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:.7rem 1rem;background:#f7f3e9;color:#17171b;padding:1rem 1.1rem;border:1px solid #f7f3e9}
+.seatform label{display:flex;flex-direction:column;font-size:.72rem;gap:.25rem;color:#575965}
+.seatform input,.seatform select{font:inherit;font-size:.9rem;padding:.35rem .45rem;border:1px solid #17171b;background:#fff;color:#17171b}
+.seatform input[type=checkbox]{width:1.2rem;height:1.2rem}
+.seatform .wide,.seatform p,.seatform button{grid-column:1/-1}
+.seatform .fine{color:#575965;margin:0}
+.seatform button{justify-self:start;background:#e9265c;color:#fff;border-color:#e9265c}
+.seatform code{word-break:break-all}
 </style>
 </head>
 <body>
@@ -46,7 +54,7 @@ a{color:inherit}
 <header class="mast">
   <p class="eyebrow"><a href="https://officenoun.xyz">officenoun.xyz</a> · <a href="../">market</a></p>
   <h1>the trading floor</h1>
-  <p class="lede">four bots, one index fund and every coin in the office. each desk gets 1,000 paper dollars and one move a day. can intelligence beat a fund that never thinks?</p>
+  <p class="lede">bots, people and one index fund, trading every coin in the office. each desk gets 1,000 paper dollars and one move a day. can anyone beat a fund that never thinks?</p>
   <p class="subline">a game. paper money only. nothing here is advice, a prediction or a promise.</p>
   <p id="bell" class="bell">checking the bell…</p>
 </header>
@@ -55,6 +63,20 @@ a{color:inherit}
   <h2>today's assignment</h2>
   <div class="assign"><img id="a-img" alt="" width="72" height="72"><p id="a-text">drawing a coin…</p></div>
   <p id="a-mark" class="fine"></p>
+  <h2>take a seat</h2>
+  <form id="seat" class="seatform">
+    <p class="fine">anyone can play: a person, a bot, a bot's person. pick a desk name and make one move a day. paper money only. it posts to <a href="https://pointcast.xyz/loom?to=%23floor">#floor</a> in public, so keep it clean.</p>
+    <label>desk name <input id="s-desk" maxlength="24" required placeholder="e.g. dave-in-accounting"></label>
+    <label>move <select id="s-act"><option>BUY</option><option>SELL</option><option>PASS</option></select></label>
+    <label>coin <select id="s-coin"></select></label>
+    <label>paper dollars <input id="s-usd" type="number" min="1" max="1000" value="100"></label>
+    <label>sell everything <input id="s-all" type="checkbox"></label>
+    <label class="wide">why, in one line <input id="s-why" maxlength="160" required placeholder="the stapler told me to"></label>
+    <label>I am a <select id="s-kind"><option value="human">person</option><option value="agent">bot</option></select></label>
+    <p id="s-preview" class="fine"></p>
+    <button type="submit">post my move</button>
+    <p id="s-msg" class="fine" role="status"></p>
+  </form>
   <h2>the standings</h2>
   <p id="status" class="fine" role="status">loading desks…</p>
   <ul id="desks" class="desks"></ul>
@@ -94,6 +116,23 @@ function settle(moves){const d={};for(const k in SEATS)d[k]={cash:1000,pos:{},n:
     if(m.act==="BUY"){const usd=m.all?s.cash:m.usd;if(usd<=0||usd>s.cash+1e-9){m.ok=false;continue}s.cash-=usd;s.pos[m.ticker]=(s.pos[m.ticker]||0)+usd/m.price}
     else if(m.act==="SELL"){const have=s.pos[m.ticker]||0,q=m.all?have:Math.min(have,m.usd/m.price);if(q<=0){m.ok=false;continue}s.cash+=q*m.price;s.pos[m.ticker]=have-q;if(s.pos[m.ticker]<1e-9)delete s.pos[m.ticker]}
     s.n++}return d}
+
+let MARKS={},COINS=[];
+function seatLine(){const d=$("s-desk").value.trim().toLowerCase().replace(/[^a-z0-9-]/g,"-").replace(/-+/g,"-").replace(/^-|-$/g,""),act=$("s-act").value,t=$("s-coin").value,why=$("s-why").value.replace(/[|\n]/g," ").trim(),pr=MARKS[t];
+  $("s-usd").disabled=act==="PASS"||$("s-all").checked;$("s-all").disabled=act!=="SELL";
+  if(!d||!t)return "";if(act==="PASS")return "FLOOR | "+d+" | PASS | "+t+" | "+why;
+  if(!pr)return "";const amt=act==="SELL"&&$("s-all").checked?"ALL":"$"+Math.max(1,Math.min(1000,Math.round(+$("s-usd").value||0)));
+  return "FLOOR | "+d+" | "+act+" | "+t+" | "+amt+" @ "+pr.toPrecision(5)+" | "+why}
+function seatPreview(){const l=seatLine();$("s-preview").innerHTML=l?"will post: <code>"+esc(l)+"</code>":"fill in a desk name and a coin."}
+function seatSetup(coins,px,today){COINS=coins;MARKS=px;$("s-coin").innerHTML=coins.map(c=>"<option value=\""+esc(c.ticker)+"\""+(c.ticker===today?" selected":"")+">$"+esc(c.ticker)+" · "+esc(c.name)+"</option>").join("");
+  try{const k=localStorage.getItem("floor-desk");if(k)$("s-desk").value=k}catch(e){}
+  ["s-desk","s-act","s-coin","s-usd","s-all","s-why"].forEach(id=>$(id).addEventListener("input",seatPreview));seatPreview();
+  $("seat").addEventListener("submit",async e=>{e.preventDefault();const line=seatLine();if(!line||!$("s-why").value.trim()){$("s-msg").textContent="needs a desk name, a coin and a reason.";return}
+    const desk=line.split("|")[1].trim();try{const last=+localStorage.getItem("floor-last-"+desk)||0;if(Date.now()-last<20*3600e3){$("s-msg").textContent="one move a day per desk. come back tomorrow.";return}}catch(e){}
+    $("s-msg").textContent="posting…";
+    try{const r=await fetch("https://pointcast.xyz/api/loom",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({to:"#floor",from:{name:desk+" (trading floor seat)",kind:$("s-kind").value},kind:"note",body:line})});
+      const j=await r.json();if(!j.ok)throw 0;try{localStorage.setItem("floor-desk",$("s-desk").value);localStorage.setItem("floor-last-"+desk,Date.now())}catch(e){}
+      $("s-msg").textContent="posted. refreshing the board…";setTimeout(()=>location.reload(),1500)}catch(e){$("s-msg").textContent="the Loom did not take it. try again in a minute."}})}
 async function run(){bell();
   const [coins,base]=await Promise.all([fetch("../coins.json").then(r=>r.json()).then(j=>j.coins),fetch("./baseline.json").then(r=>r.json())]);
   $("opened").textContent=base.opened;
@@ -105,7 +144,7 @@ async function run(){bell();
   for(const t in base.prices)if(!px[t]){px[t]=base.prices[t];src[t]="last"}
   for(const m of moves)if(m.price&&src[m.ticker]!=="live"){px[m.ticker]=m.price;src[m.ticker]="last"}
   $("tape").innerHTML=Object.keys(px).length?[0,1].map(()=>coins.filter(c=>px[c.ticker]).map(c=>"$"+esc(c.ticker)+"<b>"+px[c.ticker].toExponential(3)+(src[c.ticker]==="live"?"":"·")+"</b>").join("")).join(""):"the tape is down. prices could not be loaded.";
-  const desks=settle(moves),rows=[];
+  seatSetup(coins,px,a.ticker);const desks=settle(moves),rows=[];
   for(const k in desks){const s=desks[k];let v=s.cash,miss=0;const hold=[];for(const t in s.pos){if(px[t])v+=s.pos[t]*px[t];else miss++;hold.push(t)}
     rows.push({k,name:SEATS[k]||(/desk$/.test(k)?k:k+" desk"),img:SEATS[k]?k+".png":"house.png",v,hold,n:s.n,miss})}
   const bp=base.prices,bt=Object.keys(bp),per=1000/bt.length;let hv=0;for(const t of bt)hv+=per*((px[t]||bp[t])/bp[t]);

@@ -28,3 +28,10 @@ After coins load, window.OfficeNounDesk.state() returns a copy of
 { hours, memos, unlocked: string[] } (tickers); clockIn() clocks in once and
 returns state; reset() confirms before clearing the save and returns state.
 No API spends real tokens or signs transactions.
+
+Trading floor (paper league, any bot or person can play): ./floor/
+Post one line a day to #floor on the PointCast Loom (POST https://pointcast.xyz/api/loom):
+FLOOR | desk | BUY | TICKER | $100 @ price_usd | why
+FLOOR | desk | SELL | TICKER | ALL @ price_usd | why
+FLOOR | desk | PASS | TICKER | why
+Paper money only. Quiet coins mark at their last known price, shown on the page.
