@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4ece0">
+  <meta name="description" content="Small Business Saturday in El Segundo, Nov 28. Pick the local shop you're at and check in with one tap. Every check-in counts toward 100 this week.">
+  <title>Shop small, El Segundo · Small Business Saturday check-in</title>
+  <link rel="canonical" href="https://officenoun.xyz/shop-small/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Shop small, El Segundo">
+  <meta property="og:description" content="Small Business Saturday, Nov 28. Check in at the local shop you're at. One tap, no sign-up. 100 check-ins by Sunday.">
+  <meta property="og:url" content="https://officenoun.xyz/shop-small/">
+  <meta property="og:image" content="https://officenoun.xyz/shop-small/card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="A pixel Noun with a coffee-bean head beside the words shop small, El Segundo, Sat Nov 28.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@officenoun">
+  <link rel="icon" href="../nouns/coffee.svg" type="image/svg+xml">
+  <link rel="alternate" type="application/json" href="./shops.json" title="the shops, as data">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="mast">
+      <p class="eyebrow"><a href="https://officenoun.xyz">officenoun.xyz</a> · shop small</p>
+      <p class="kicker">Small Business Saturday · Nov 28</p>
+      <h1>Shop small,<br>El Segundo.</h1>
+      <p class="lede">At a local shop today? Pick it below and check in. One tap, no sign-up.</p>
+      <div class="meter" role="group" aria-labelledby="meter-label">
+        <p class="meter-num"><b id="count">–</b> <span>of 100 check-ins this week</span></p>
+        <div class="bar" aria-hidden="true"><i id="bar"></i></div>
+        <p class="meter-note" id="meter-label">Counted on the public <a href="https://pointcast.xyz/front-desk/agents" rel="noopener noreferrer">PointCast front desk</a>, Sunday to Saturday.</p>
+      </div>
+    </header>
+
+    <form class="panel" id="checkin" novalidate>
+      <fieldset>
+        <legend>Where are you?</legend>
+        <ul class="shops" id="shops">
+          <li><label><input type="radio" name="shop" value="bike-o-rama"><span class="n">Bike O Rama</span><span class="w">Main St · bikes</span></label></li>
+          <li><label><input type="radio" name="shop" value="blue-diamond"><span class="n">Blue Diamond Jeweler</span><span class="w">Main St · jewelry</span></label></li>
+          <li><label><input type="radio" name="shop" value="create-express"><span class="n">Create &amp; Express</span><span class="w">Main St · gifts and art</span></label></li>
+          <li><label><input type="radio" name="shop" value="jewelry-source"><span class="n">The Jewelry Source</span><span class="w">Main St · jewelry</span></label></li>
+          <li><label><input type="radio" name="shop" value="es-tailors"><span class="n">El Segundo Tailors</span><span class="w">Main St · tailor</span></label></li>
+          <li><label><input type="radio" name="shop" value="wilding-wallbeds"><span class="n">Wilding Wallbeds</span><span class="w">Main St · furniture</span></label></li>
+          <li><label><input type="radio" name="shop" value="french-florist"><span class="n">French Florist</span><span class="w">Richmond St · flowers</span></label></li>
+          <li><label><input type="radio" name="shop" value="studio-antiques"><span class="n">Studio Antiques &amp; Vinyl</span><span class="w">Richmond St · antiques and records</span></label></li>
+          <li><label><input type="radio" name="shop" value="smoky-hollow"><span class="n">Smoky Hollow Roasters</span><span class="w">Sierra St · coffee</span></label></li>
+          <li><label><input type="radio" name="shop" value="sun-sea-market"><span class="n">Sun &amp; Sea market at The Point</span><span class="w">Pacific Coast Hwy, 10 am to 3 pm · 25 local vendors</span></label></li>
+          <li><label><input type="radio" name="shop" value="somewhere-local"><span class="n">Somewhere else local</span><span class="w">any El Segundo small business</span></label></li>
+        </ul>
+      </fieldset>
+
+      <label class="field" for="who">Your first name or handle <span>(optional)</span></label>
+      <input id="who" name="who" type="text" maxlength="18" autocomplete="nickname" autocapitalize="words" spellcheck="false" placeholder="leave blank to sign as a neighbor">
+      <label class="hp" aria-hidden="true">Company <input name="company" tabindex="-1" autocomplete="off"></label>
+
+      <button type="submit" id="go" class="go" disabled>Pick a shop first</button>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+      <p class="fine">Checking in signs the public PointCast front desk and adds one line to the <a href="https://pointcast.xyz/loom?to=%23shop-small" rel="noopener noreferrer">#shop-small</a> room on the Loom, under your name or "a neighbor". Nothing else is collected. This phone keeps a random tag so it counts once a day.</p>
+    </form>
+
+    <section class="panel thanks" id="thanks" hidden aria-labelledby="thanks-h">
+      <h2 id="thanks-h" tabindex="-1">Thanks for shopping small.</h2>
+      <figure class="card" id="card" aria-label="Your share card">
+        <img src="../nouns/coffee.svg" alt="" width="96" height="96">
+        <figcaption>
+          <p class="card-k">Small Business Saturday · El Segundo</p>
+          <p class="card-h">I shopped small at <b id="card-shop">a local shop</b>.</p>
+          <p class="card-n" id="card-n">check-in toward 100 this week</p>
+        </figcaption>
+      </figure>
+      <p class="hint">Screenshot the card, or pass the page on:</p>
+      <div class="share">
+        <button type="button" id="share" class="go">Share</button>
+        <button type="button" id="copy">Copy the line</button>
+        <a id="post-x" class="btn" href="https://x.com/intent/post" target="_blank" rel="noopener noreferrer">Post on X</a>
+      </div>
+      <p class="line" id="line"></p>
+      <p class="status" id="share-status" role="status" aria-live="polite"></p>
+      <p><button type="button" id="again" class="link">Check in somewhere else</button></p>
+    </section>
+
+    <footer class="foot">
+      <p>Shops from the city's <a href="https://www.destinationelsegundo.com/shop/shops-in-downtown-el-segundo" rel="noopener noreferrer">downtown shop directory</a> and <a href="https://www.sunandseacollective.com/markets" rel="noopener noreferrer">Sun &amp; Sea</a>, checked Nov 27. Not a city page, and no shop paid to be here. <a href="./shops.json">The list as data</a>. CC0.</p>
+    </footer>
+  </main>
+</body>
+</html>
